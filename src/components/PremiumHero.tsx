@@ -26,8 +26,7 @@ const TYPEWRITER_TEXTS = [
   "Travel Beyond Boundaries"
 ];
 
-export const PremiumHero: React.FC<PremiumHeroProps> = (props) => {
-  const { onOpenBooking } = props;
+export const PremiumHero: React.FC<PremiumHeroProps> = () => {
 
   // Parallax Mouse Hover state
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
