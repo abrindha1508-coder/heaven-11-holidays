@@ -293,8 +293,8 @@ Please confirm availability and share details!`;
       </section>
 
       {/* ================= SECTION 5: STATS BANNER ================= */}
-      <section className="bg-gradient-premium text-white py-12">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center space-y-8">
+      <section className="py-12 bg-bg-canvas px-4">
+        <div className="mx-auto max-w-5xl rounded-3xl bg-gradient-premium p-8 md:p-12 text-center space-y-8 shadow-xl text-white">
           <motion.h2
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -305,7 +305,7 @@ Please confirm availability and share details!`;
             Why Choose Heaven11 Holidays?
           </motion.h2>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-3xl mx-auto">
             {[
               { icon: <Users className="h-6 w-6 text-accent" />, count: '1000+', label: 'Happy Travelers' },
               { icon: <Gift className="h-6 w-6 text-accent" />, count: '500+', label: 'Tour Packages' },
@@ -653,22 +653,26 @@ Please confirm availability and share details!`;
       {isSearchModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
           <div onClick={() => setIsSearchModalOpen(false)} className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm" />
-          <div className="relative z-10 w-full max-w-4xl transform rounded-2xl bg-white p-6 shadow-2xl transition-all overflow-y-auto max-h-[85vh] text-left">
-            <button
-              onClick={() => setIsSearchModalOpen(false)}
-              className="absolute top-4 right-4 rounded-full p-1.5 text-slate-400 hover:bg-slate-100"
-            >
-              <X className="h-5 w-5" />
-            </button>
-
-            <div className="mb-6">
-              <h3 className="font-display text-2xl font-bold text-primary-dark flex items-center gap-2">
-                <Compass className="h-6 w-6 text-accent fill-accent animate-spin" /> Search Match Results
+          <div className="relative z-10 w-full max-w-4xl transform rounded-2xl bg-white shadow-2xl transition-all flex flex-col max-h-[85vh] overflow-hidden text-left">
+            {/* Modal Header */}
+            <div className="flex items-center justify-between px-6 py-4 border-b border-slate-150 shrink-0 bg-slate-50/50">
+              <h3 className="font-display text-base sm:text-lg font-bold text-primary-dark truncate pr-4 text-left flex items-center gap-2">
+                <Compass className="h-5 w-5 text-[#1E8DC5] animate-spin" /> Search Match Results
               </h3>
-              <p className="text-xs text-slate-500 mt-1">
-                We found {searchResults.length} matching packages based on your search query preferences.
-              </p>
+              <button
+                onClick={() => setIsSearchModalOpen(false)}
+                className="rounded-full p-2 text-slate-500 hover:bg-slate-200 hover:text-slate-800 transition-all cursor-pointer border border-slate-200 shadow-xs bg-white flex items-center justify-center shrink-0"
+              >
+                <X className="h-4.5 w-4.5" />
+              </button>
             </div>
+
+            <div className="overflow-y-auto p-6 flex-1">
+              <div className="mb-6">
+                <p className="text-xs text-slate-500 mt-1">
+                  We found {searchResults.length} matching packages based on your search query preferences.
+                </p>
+              </div>
 
             {searchResults.length === 0 ? (
               <div className="text-center py-12 space-y-4">
@@ -730,6 +734,7 @@ Please confirm availability and share details!`;
                 ))}
               </div>
             )}
+            </div>
           </div>
         </div>
       )}
@@ -738,15 +743,21 @@ Please confirm availability and share details!`;
       {selectedPackage && !isBookingOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
           <div onClick={() => setSelectedPackage(null)} className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm" />
-          <div className="relative z-10 w-full max-w-3xl transform rounded-2xl bg-white p-6 shadow-2xl transition-all overflow-y-auto max-h-[90vh] md:p-8 text-left">
-            <button
-              onClick={() => setSelectedPackage(null)}
-              className="absolute top-4 right-4 rounded-full p-1.5 text-slate-400 hover:bg-slate-100"
-            >
-              <X className="h-5 w-5" />
-            </button>
+          <div className="relative z-10 w-full max-w-3xl transform rounded-2xl bg-white shadow-2xl transition-all flex flex-col max-h-[90vh] overflow-hidden text-left">
+            {/* Modal Header */}
+            <div className="flex items-center justify-between px-6 py-4 border-b border-slate-150 shrink-0 bg-slate-50/50">
+              <h3 className="font-display text-base sm:text-lg font-bold text-primary-dark truncate pr-4 text-left">
+                {selectedPackage.title}
+              </h3>
+              <button
+                onClick={() => setSelectedPackage(null)}
+                className="rounded-full p-2 text-slate-500 hover:bg-slate-200 hover:text-slate-800 transition-all cursor-pointer border border-slate-200 shadow-xs bg-white flex items-center justify-center shrink-0"
+              >
+                <X className="h-4.5 w-4.5" />
+              </button>
+            </div>
 
-            <div className="space-y-6">
+            <div className="overflow-y-auto p-6 md:p-8 space-y-6 flex-1">
               {/* Cover */}
               <div className="relative h-60 rounded-xl overflow-hidden shadow-inner">
                 <img src={selectedPackage.image} alt={selectedPackage.title} className="w-full h-full object-cover" />

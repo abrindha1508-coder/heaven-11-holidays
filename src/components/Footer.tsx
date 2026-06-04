@@ -1,21 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { Mail, Phone, MapPin } from 'lucide-react';
 import { Logo } from './Logo';
 
 export const Footer: React.FC = () => {
-  const [newsletterEmail, setNewsletterEmail] = useState('');
-  const [newsletterSubscribed, setNewsletterSubscribed] = useState(false);
-
-  const handleNewsletterSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!newsletterEmail) return;
-    setNewsletterSubscribed(true);
-    setTimeout(() => {
-      setNewsletterEmail('');
-      setNewsletterSubscribed(false);
-    }, 3500);
-  };
 
   const quickLinks = [
     { name: 'Home', path: '/' },
@@ -78,24 +66,6 @@ export const Footer: React.FC = () => {
           <path d="M12 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" />
         </svg>
       )
-    },
-    {
-      label: 'YouTube',
-      href: 'https://youtube.com/',
-      icon: (
-        <svg className="h-5 w-5 fill-current" viewBox="0 0 24 24" aria-hidden="true">
-          <path fillRule="evenodd" d="M19.615 3.184c-3.61-.215-11.62-.215-15.23 0-3.897.233-4.385 2.443-4.385 8.816 0 6.36.485 8.58 4.385 8.816 3.6.215 11.62.215 15.23 0 3.897-.233 4.385-2.443 4.385-8.816 0-6.36-.485-8.58-4.385-8.816zm-10.615 12.816v-8l8 4-8 4z" clipRule="evenodd" />
-        </svg>
-      )
-    },
-    {
-      label: 'LinkedIn',
-      href: 'https://linkedin.com/',
-      icon: (
-        <svg className="h-5 w-5 fill-current" viewBox="0 0 24 24" aria-hidden="true">
-          <path fillRule="evenodd" d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.779-1.75-1.75s.784-1.75 1.75-1.75 1.75.779 1.75 1.75-.784 1.75-1.75 1.75zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" clipRule="evenodd" />
-        </svg>
-      )
     }
   ];
 
@@ -117,75 +87,6 @@ export const Footer: React.FC = () => {
         <svg viewBox="0 0 24 24" className="w-[500px] h-[500px] fill-white">
           <path d="M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L14 19v-5.5l8 2.5z"/>
         </svg>
-      </div>
-
-      {/* ══════════════════════════════════════════════
-          SECTION 1 — NEWSLETTER BANNER
-      ══════════════════════════════════════════════ */}
-      <div className="relative z-10 border-b" style={{ borderColor: 'rgba(0,229,255,0.15)' }}>
-        {/* Inner banner glow */}
-        <div className="absolute inset-0 pointer-events-none" style={{ background: 'linear-gradient(135deg, rgba(0,229,255,0.07) 0%, transparent 60%)' }} />
-        <div className="absolute inset-x-0 bottom-0 h-px" style={{ background: 'linear-gradient(90deg, transparent, rgba(0,229,255,0.5), transparent)' }} />
-
-        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10">
-          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-8">
-            {/* Text */}
-            <div className="space-y-2 max-w-lg">
-              <span className="inline-block text-[10px] font-black tracking-[0.25em] uppercase mb-1" style={{ color: '#00E5FF', textShadow: '0 0 12px rgba(0,229,255,0.7)' }}>
-                ✦ Exclusive Members Only
-              </span>
-              <h3 className="font-display text-xl sm:text-2xl font-extrabold text-white uppercase tracking-tight leading-tight"
-                style={{ textShadow: '0 2px 0 rgba(0,0,0,0.4), 0 4px 16px rgba(0,0,0,0.3), 0 0 40px rgba(0,229,255,0.12)' }}>
-                Get Best Travel Deals &amp; Offers
-              </h3>
-              <p className="text-[13px] font-semibold tracking-wide" style={{ color: '#00E5FF', textShadow: '0 1px 8px rgba(0,229,255,0.5)' }}>
-                Subscribe to Our Newsletter
-              </p>
-              <p className="text-xs text-white/70 leading-relaxed max-w-sm">
-                Stay ahead with customized packages, exclusive flash airfares, and direct guides delivered to your inbox weekly.
-              </p>
-            </div>
-            {/* Form */}
-            <div className="shrink-0 w-full md:w-auto">
-              {newsletterSubscribed ? (
-                <div className="flex items-center gap-3 rounded-2xl px-6 py-4 text-sm font-bold"
-                  style={{ color: '#00E5FF', background: 'rgba(0,229,255,0.08)', border: '1px solid rgba(0,229,255,0.3)', boxShadow: '0 0 24px rgba(0,229,255,0.15), inset 0 1px 0 rgba(255,255,255,0.08)' }}>
-                  <span className="text-xl">✓</span> Subscribed! Check your inbox.
-                </div>
-              ) : (
-                <form onSubmit={handleNewsletterSubmit} className="flex gap-2 w-full md:w-[420px]">
-                  <input
-                    type="email" required value={newsletterEmail}
-                    onChange={(e) => setNewsletterEmail(e.target.value)}
-                    placeholder="Enter your email"
-                    className="flex-1 rounded-xl text-slate-800 text-sm px-5 py-3 focus:outline-none placeholder-slate-400"
-                    style={{
-                      background: 'rgba(255,255,255,0.96)',
-                      boxShadow: '0 4px 0 rgba(0,0,0,0.22), 0 8px 24px rgba(0,0,0,0.18), inset 0 1px 0 rgba(255,255,255,0.9)',
-                      border: '1px solid rgba(255,255,255,0.9)'
-                    }}
-                  />
-                  <button type="submit"
-                    className="shrink-0 px-6 py-3 rounded-xl font-black text-sm uppercase tracking-wider text-slate-900 cursor-pointer transition-all duration-200 active:translate-y-0.5"
-                    style={{
-                      background: 'linear-gradient(180deg, #00E5FF 0%, #00b8d4 50%, #00a3bb 100%)',
-                      boxShadow: '0 4px 0 #005f75, 0 8px 20px rgba(0,229,255,0.35)',
-                      textShadow: '0 1px 0 rgba(0,0,0,0.1)'
-                    }}
-                    onMouseEnter={e => {
-                      (e.currentTarget as HTMLButtonElement).style.boxShadow = '0 4px 0 #005f75, 0 14px 32px rgba(0,229,255,0.55)';
-                    }}
-                    onMouseLeave={e => {
-                      (e.currentTarget as HTMLButtonElement).style.boxShadow = '0 4px 0 #005f75, 0 8px 20px rgba(0,229,255,0.35)';
-                    }}
-                  >
-                    Subscribe
-                  </button>
-                </form>
-              )}
-            </div>
-          </div>
-        </div>
       </div>
 
       {/* ══════════════════════════════════════════════

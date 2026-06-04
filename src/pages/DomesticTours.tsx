@@ -163,28 +163,210 @@ export const DomesticTours: React.FC = () => {
       {activeDestinationId && activeDestination && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
           <div onClick={() => setSearchParams({})} className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm" />
-          <div className="relative z-10 w-full max-w-4xl transform rounded-2xl bg-white p-6 shadow-2xl transition-all overflow-y-auto max-h-[85vh]">
-            <button
-              onClick={() => setSearchParams({})}
-              className="absolute top-4 right-4 rounded-full p-1.5 text-slate-400 hover:bg-slate-100"
-            >
-              <X className="h-5 w-5" />
-            </button>
+          <div className="relative z-10 w-full max-w-4xl transform rounded-2xl bg-white shadow-2xl transition-all flex flex-col max-h-[85vh] overflow-hidden">
+            {/* Modal Header */}
+            <div className="flex items-center justify-between px-6 py-4 border-b border-slate-150 shrink-0 bg-slate-50/50">
+              <h3 className="font-display text-base sm:text-lg font-bold text-primary-dark truncate pr-4 text-left">
+                {displayPackages.length === 1 ? displayPackages[0].title : `Tour Packages in ${activeDestination.name}`}
+              </h3>
+              <button
+                onClick={() => setSearchParams({})}
+                className="rounded-full p-2 text-slate-500 hover:bg-slate-200 hover:text-slate-800 transition-all cursor-pointer border border-slate-200 shadow-xs bg-white flex items-center justify-center shrink-0"
+              >
+                <X className="h-4.5 w-4.5" />
+              </button>
+            </div>
 
-            {displayPackages.length === 1 ? (
-              // DIRECT FULL DETAILS VIEW FOR SINGLE PACKAGE
+            <div className="overflow-y-auto p-6 flex-1">
+              {displayPackages.length === 1 ? (
+                // DIRECT FULL DETAILS VIEW FOR SINGLE PACKAGE
+                <div className="space-y-6 text-left">
+                  {/* Hero Image Banner */}
+                  <div className="relative h-60 w-full overflow-hidden rounded-xl">
+                    <img
+                      src={displayPackages[0].image || activeDestination.image}
+                      alt={displayPackages[0].title}
+                      className="h-full w-full object-cover"
+                    />
+                    <div className="absolute inset-0 bg-linear-to-t from-slate-950/60 to-transparent" />
+                    <div className="absolute bottom-4 left-4">
+                      <span className="text-[10px] font-bold text-accent tracking-widest uppercase bg-slate-950/40 backdrop-blur-xs px-2.5 py-1 rounded-md border border-white/10">
+                        {activeDestination.type === 'domestic' ? 'Domestic Tour' : 'International Tour'}
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Header Section */}
+                  <div className="border-b border-slate-100 pb-4">
+                    <h3 className="font-display text-2xl font-bold text-primary-dark mt-0.5">
+                      {displayPackages[0].title}
+                    </h3>
+                    <div className="flex flex-wrap items-center gap-4 mt-3 text-xs text-slate-500">
+                      <span className="flex items-center gap-1.5 bg-slate-50 px-2.5 py-1 rounded-lg">
+                        <Clock className="h-3.5 w-3.5 text-primary-light" /> {displayPackages[0].duration}
+                      </span>
+                      <span className="flex items-center gap-1 bg-slate-50 px-2.5 py-1 rounded-lg">
+                        <Star className="h-3.5 w-3.5 text-amber-500 fill-current" /> {displayPackages[0].rating} ({displayPackages[0].reviewsCount} Reviews)
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Content Body Grid */}
+                  <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                    {/* Left Side: Highlights, Inclusions, Exclusions */}
+                    <div className="lg:col-span-5 space-y-6">
+                      <div className="space-y-2">
+                        <h4 className="text-xs font-bold text-slate-800 uppercase tracking-wider">Tour Highlights</h4>
+                        <div className="flex flex-wrap gap-1.5">
+                          {displayPackages[0].highlights.map((h, i) => (
+                            <span key={i} className="text-[10px] font-semibold bg-primary-light/5 text-primary-light border border-primary-light/10 px-2.5 py-1 rounded-lg">
+                              {h}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+
+                      {displayPackages[0].inclusions && displayPackages[0].inclusions.length > 0 && (
+                        <div className="space-y-2">
+                          <h4 className="text-xs font-bold text-slate-800 uppercase tracking-wider">Inclusions</h4>
+                          <ul className="space-y-1.5">
+                            {displayPackages[0].inclusions.map((inc, i) => (
+                              <li key={i} className="flex items-start gap-2 text-xs text-slate-600">
+                                <Check className="h-4 w-4 text-emerald-500 shrink-0 mt-0.5" />
+                                <span>{inc}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
+
+                      {displayPackages[0].exclusions && displayPackages[0].exclusions.length > 0 && (
+                        <div className="space-y-2">
+                          <h4 className="text-xs font-bold text-slate-800 uppercase tracking-wider">Exclusions</h4>
+                          <ul className="space-y-1.5">
+                            {displayPackages[0].exclusions.map((exc, i) => (
+                              <li key={i} className="flex items-start gap-2 text-xs text-slate-600">
+                                <X className="h-4 w-4 text-rose-500 shrink-0 mt-0.5" />
+                                <span>{exc}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
+
+                      <button
+                        onClick={() => handleOpenBooking(displayPackages[0])}
+                        className="w-full py-3.5 rounded-xl bg-gradient-premium text-white font-bold text-xs uppercase tracking-wider shadow-md hover:shadow-lg transition-all cursor-pointer mt-4"
+                      >
+                        Book Tour Package
+                      </button>
+                    </div>
+
+                    {/* Right Side: Itinerary */}
+                    <div className="lg:col-span-7 space-y-3">
+                      <h4 className="text-xs font-bold text-slate-800 uppercase tracking-wider mb-2">Detailed Itinerary</h4>
+                      <div className="space-y-3.5 max-h-[360px] overflow-y-auto pl-3 pr-3">
+                        {displayPackages[0].itinerary.map((dayObj) => (
+                          <div key={dayObj.day} className="relative pl-6 pb-2 border-l border-slate-100 last:border-0 last:pb-0">
+                            <span className="absolute left-[-5px] top-1.5 h-2.5 w-2.5 rounded-full bg-primary-light" />
+                            <div>
+                              <span className="text-[10px] font-bold text-primary-light uppercase tracking-wider">
+                                Day {dayObj.day}: {dayObj.title}
+                              </span>
+                              <p className="text-xs text-slate-600 mt-1 leading-relaxed">
+                                {dayObj.description}
+                              </p>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ) : (
+                // MULTIPLE PACKAGES LIST VIEW
+                <>
+                  <div className="mb-6 space-y-1.5 text-left">
+                    <span className="text-xs font-bold text-primary-light tracking-widest uppercase">Select Tour Plan</span>
+                    <h3 className="font-display text-2xl font-bold text-primary-dark">
+                      Packages in {activeDestination.name}
+                    </h3>
+                    <p className="text-xs text-slate-500">
+                      Found {displayPackages.length} luxury tours for {activeDestination.name}. Select a tour to view itinerary or secure bookings.
+                    </p>
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    {displayPackages.map((pkg) => (
+                      <div key={pkg.id} className="rounded-xl border border-slate-100 p-5 bg-slate-50/50 flex flex-col justify-between h-[280px] text-left">
+                        <div className="space-y-2">
+                          <div className="flex items-center justify-between text-xs text-slate-400">
+                            <span className="flex items-center gap-1"><Clock className="h-3.5 w-3.5" /> {pkg.duration}</span>
+                            <span className="flex items-center gap-0.5 text-amber-500 font-bold"><Star className="h-3.5 w-3.5 fill-current" /> {pkg.rating}</span>
+                          </div>
+                          <h4 className="font-display font-bold text-slate-800 text-base leading-snug line-clamp-1">{pkg.title}</h4>
+                          <p className="text-xs text-slate-500 line-clamp-2 leading-relaxed">
+                            Highlights: {pkg.highlights.join(', ')}
+                          </p>
+                        </div>
+
+                        <div className="pt-4 border-t border-slate-150 flex items-center justify-end mt-4">
+                          <div className="flex gap-2">
+                            <button
+                              onClick={() => setSelectedPkg(pkg)}
+                              className="rounded-lg bg-white border border-slate-200 text-slate-700 px-3.5 py-2 text-xs font-semibold hover:bg-slate-100 cursor-pointer"
+                            >
+                              Itinerary
+                            </button>
+                            <button
+                              onClick={() => handleOpenBooking(pkg)}
+                              className="rounded-lg bg-gradient-premium text-white px-4 py-2 text-xs font-semibold shadow-xs hover:shadow-md cursor-pointer"
+                            >
+                              Book Tour
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* DETAILED PACKAGE DETAILS VIEW (used when a package is selected from a multi-package list) */}
+      {selectedPkg && !isBookingOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+          <div onClick={() => setSelectedPkg(null)} className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm" />
+          <div className="relative z-10 w-full max-w-4xl transform rounded-2xl bg-white shadow-2xl transition-all flex flex-col max-h-[85vh] overflow-hidden">
+            {/* Modal Header */}
+            <div className="flex items-center justify-between px-6 py-4 border-b border-slate-150 shrink-0 bg-slate-50/50">
+              <h3 className="font-display text-base sm:text-lg font-bold text-primary-dark truncate pr-4 text-left">
+                {selectedPkg.title}
+              </h3>
+              <button
+                onClick={() => setSelectedPkg(null)}
+                className="rounded-full p-2 text-slate-500 hover:bg-slate-200 hover:text-slate-800 transition-all cursor-pointer border border-slate-200 shadow-xs bg-white flex items-center justify-center shrink-0"
+              >
+                <X className="h-4.5 w-4.5" />
+              </button>
+            </div>
+            
+            <div className="overflow-y-auto p-6 flex-1">
               <div className="space-y-6 text-left">
                 {/* Hero Image Banner */}
                 <div className="relative h-60 w-full overflow-hidden rounded-xl">
                   <img
-                    src={displayPackages[0].image || activeDestination.image}
-                    alt={displayPackages[0].title}
+                    src={selectedPkg.image || activeDestination?.image || ''}
+                    alt={selectedPkg.title}
                     className="h-full w-full object-cover"
                   />
                   <div className="absolute inset-0 bg-linear-to-t from-slate-950/60 to-transparent" />
                   <div className="absolute bottom-4 left-4">
                     <span className="text-[10px] font-bold text-accent tracking-widest uppercase bg-slate-950/40 backdrop-blur-xs px-2.5 py-1 rounded-md border border-white/10">
-                      {activeDestination.type === 'domestic' ? 'Domestic Tour' : 'International Tour'}
+                      {selectedPkg.type === 'domestic' ? 'Domestic Tour' : 'International Tour'}
                     </span>
                   </div>
                 </div>
@@ -192,26 +374,26 @@ export const DomesticTours: React.FC = () => {
                 {/* Header Section */}
                 <div className="border-b border-slate-100 pb-4">
                   <h3 className="font-display text-2xl font-bold text-primary-dark mt-0.5">
-                    {displayPackages[0].title}
+                    {selectedPkg.title}
                   </h3>
                   <div className="flex flex-wrap items-center gap-4 mt-3 text-xs text-slate-500">
                     <span className="flex items-center gap-1.5 bg-slate-50 px-2.5 py-1 rounded-lg">
-                      <Clock className="h-3.5 w-3.5 text-primary-light" /> {displayPackages[0].duration}
+                      <Clock className="h-3.5 w-3.5 text-primary-light" /> {selectedPkg.duration}
                     </span>
                     <span className="flex items-center gap-1 bg-slate-50 px-2.5 py-1 rounded-lg">
-                      <Star className="h-3.5 w-3.5 text-amber-500 fill-current" /> {displayPackages[0].rating} ({displayPackages[0].reviewsCount} Reviews)
+                      <Star className="h-3.5 w-3.5 text-amber-500 fill-current" /> {selectedPkg.rating} ({selectedPkg.reviewsCount} Reviews)
                     </span>
                   </div>
                 </div>
 
                 {/* Content Body Grid */}
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-                  {/* Left Side: Highlights, Inclusions, Exclusions */}
+                  {/* Left Side */}
                   <div className="lg:col-span-5 space-y-6">
                     <div className="space-y-2">
                       <h4 className="text-xs font-bold text-slate-800 uppercase tracking-wider">Tour Highlights</h4>
                       <div className="flex flex-wrap gap-1.5">
-                        {displayPackages[0].highlights.map((h, i) => (
+                        {selectedPkg.highlights.map((h, i) => (
                           <span key={i} className="text-[10px] font-semibold bg-primary-light/5 text-primary-light border border-primary-light/10 px-2.5 py-1 rounded-lg">
                             {h}
                           </span>
@@ -219,11 +401,11 @@ export const DomesticTours: React.FC = () => {
                       </div>
                     </div>
 
-                    {displayPackages[0].inclusions && displayPackages[0].inclusions.length > 0 && (
+                    {selectedPkg.inclusions && selectedPkg.inclusions.length > 0 && (
                       <div className="space-y-2">
                         <h4 className="text-xs font-bold text-slate-800 uppercase tracking-wider">Inclusions</h4>
                         <ul className="space-y-1.5">
-                          {displayPackages[0].inclusions.map((inc, i) => (
+                          {selectedPkg.inclusions.map((inc, i) => (
                             <li key={i} className="flex items-start gap-2 text-xs text-slate-600">
                               <Check className="h-4 w-4 text-emerald-500 shrink-0 mt-0.5" />
                               <span>{inc}</span>
@@ -233,11 +415,11 @@ export const DomesticTours: React.FC = () => {
                       </div>
                     )}
 
-                    {displayPackages[0].exclusions && displayPackages[0].exclusions.length > 0 && (
+                    {selectedPkg.exclusions && selectedPkg.exclusions.length > 0 && (
                       <div className="space-y-2">
                         <h4 className="text-xs font-bold text-slate-800 uppercase tracking-wider">Exclusions</h4>
                         <ul className="space-y-1.5">
-                          {displayPackages[0].exclusions.map((exc, i) => (
+                          {selectedPkg.exclusions.map((exc, i) => (
                             <li key={i} className="flex items-start gap-2 text-xs text-slate-600">
                               <X className="h-4 w-4 text-rose-500 shrink-0 mt-0.5" />
                               <span>{exc}</span>
@@ -248,18 +430,18 @@ export const DomesticTours: React.FC = () => {
                     )}
 
                     <button
-                      onClick={() => handleOpenBooking(displayPackages[0])}
+                      onClick={() => handleOpenBooking(selectedPkg)}
                       className="w-full py-3.5 rounded-xl bg-gradient-premium text-white font-bold text-xs uppercase tracking-wider shadow-md hover:shadow-lg transition-all cursor-pointer mt-4"
                     >
                       Book Tour Package
                     </button>
                   </div>
 
-                  {/* Right Side: Itinerary */}
+                  {/* Right Side */}
                   <div className="lg:col-span-7 space-y-3">
                     <h4 className="text-xs font-bold text-slate-800 uppercase tracking-wider mb-2">Detailed Itinerary</h4>
                     <div className="space-y-3.5 max-h-[360px] overflow-y-auto pl-3 pr-3">
-                      {displayPackages[0].itinerary.map((dayObj) => (
+                      {selectedPkg.itinerary.map((dayObj) => (
                         <div key={dayObj.day} className="relative pl-6 pb-2 border-l border-slate-100 last:border-0 last:pb-0">
                           <span className="absolute left-[-5px] top-1.5 h-2.5 w-2.5 rounded-full bg-primary-light" />
                           <div>
@@ -273,167 +455,6 @@ export const DomesticTours: React.FC = () => {
                         </div>
                       ))}
                     </div>
-                  </div>
-                </div>
-              </div>
-            ) : (
-              // MULTIPLE PACKAGES LIST VIEW
-              <>
-                <div className="mb-6 space-y-1.5 text-left">
-                  <span className="text-xs font-bold text-primary-light tracking-widest uppercase">Select Tour Plan</span>
-                  <h3 className="font-display text-2xl font-bold text-primary-dark">
-                    Packages in {activeDestination.name}
-                  </h3>
-                  <p className="text-xs text-slate-500">
-                    Found {displayPackages.length} luxury tours for {activeDestination.name}. Select a tour to view itinerary or secure bookings.
-                  </p>
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  {displayPackages.map((pkg) => (
-                    <div key={pkg.id} className="rounded-xl border border-slate-100 p-5 bg-slate-50/50 flex flex-col justify-between h-[280px] text-left">
-                      <div className="space-y-2">
-                        <div className="flex items-center justify-between text-xs text-slate-400">
-                          <span className="flex items-center gap-1"><Clock className="h-3.5 w-3.5" /> {pkg.duration}</span>
-                          <span className="flex items-center gap-0.5 text-amber-500 font-bold"><Star className="h-3.5 w-3.5 fill-current" /> {pkg.rating}</span>
-                        </div>
-                        <h4 className="font-display font-bold text-slate-800 text-base leading-snug line-clamp-1">{pkg.title}</h4>
-                        <p className="text-xs text-slate-500 line-clamp-2 leading-relaxed">
-                          Highlights: {pkg.highlights.join(', ')}
-                        </p>
-                      </div>
-
-                      <div className="pt-4 border-t border-slate-150 flex items-center justify-end mt-4">
-                        <div className="flex gap-2">
-                          <button
-                            onClick={() => setSelectedPkg(pkg)}
-                            className="rounded-lg bg-white border border-slate-200 text-slate-700 px-3.5 py-2 text-xs font-semibold hover:bg-slate-100 cursor-pointer"
-                          >
-                            Itinerary
-                          </button>
-                          <button
-                            onClick={() => handleOpenBooking(pkg)}
-                            className="rounded-lg bg-gradient-premium text-white px-4 py-2 text-xs font-semibold shadow-xs hover:shadow-md cursor-pointer"
-                          >
-                            Book Tour
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </>
-            )}
-          </div>
-        </div>
-      )}
-
-      {/* DETAILED PACKAGE DETAILS VIEW (used when a package is selected from a multi-package list) */}
-      {selectedPkg && !isBookingOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-          <div onClick={() => setSelectedPkg(null)} className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm" />
-          <div className="relative z-10 w-full max-w-4xl transform rounded-2xl bg-white p-6 shadow-2xl transition-all overflow-y-auto max-h-[85vh]">
-            <button onClick={() => setSelectedPkg(null)} className="absolute top-4 right-4 rounded-full p-1.5 text-slate-400 hover:bg-slate-100"><X className="h-5 w-5" /></button>
-            
-            <div className="space-y-6 text-left">
-              {/* Hero Image Banner */}
-              <div className="relative h-60 w-full overflow-hidden rounded-xl">
-                <img
-                  src={selectedPkg.image || activeDestination?.image || ''}
-                  alt={selectedPkg.title}
-                  className="h-full w-full object-cover"
-                />
-                <div className="absolute inset-0 bg-linear-to-t from-slate-950/60 to-transparent" />
-                <div className="absolute bottom-4 left-4">
-                  <span className="text-[10px] font-bold text-accent tracking-widest uppercase bg-slate-950/40 backdrop-blur-xs px-2.5 py-1 rounded-md border border-white/10">
-                    {selectedPkg.type === 'domestic' ? 'Domestic Tour' : 'International Tour'}
-                  </span>
-                </div>
-              </div>
-
-              {/* Header Section */}
-              <div className="border-b border-slate-100 pb-4">
-                <h3 className="font-display text-2xl font-bold text-primary-dark mt-0.5">
-                  {selectedPkg.title}
-                </h3>
-                <div className="flex flex-wrap items-center gap-4 mt-3 text-xs text-slate-500">
-                  <span className="flex items-center gap-1.5 bg-slate-50 px-2.5 py-1 rounded-lg">
-                    <Clock className="h-3.5 w-3.5 text-primary-light" /> {selectedPkg.duration}
-                  </span>
-                  <span className="flex items-center gap-1 bg-slate-50 px-2.5 py-1 rounded-lg">
-                    <Star className="h-3.5 w-3.5 text-amber-500 fill-current" /> {selectedPkg.rating} ({selectedPkg.reviewsCount} Reviews)
-                  </span>
-                </div>
-              </div>
-
-              {/* Content Body Grid */}
-              <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-                {/* Left Side */}
-                <div className="lg:col-span-5 space-y-6">
-                  <div className="space-y-2">
-                    <h4 className="text-xs font-bold text-slate-800 uppercase tracking-wider">Tour Highlights</h4>
-                    <div className="flex flex-wrap gap-1.5">
-                      {selectedPkg.highlights.map((h, i) => (
-                        <span key={i} className="text-[10px] font-semibold bg-primary-light/5 text-primary-light border border-primary-light/10 px-2.5 py-1 rounded-lg">
-                          {h}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-
-                  {selectedPkg.inclusions && selectedPkg.inclusions.length > 0 && (
-                    <div className="space-y-2">
-                      <h4 className="text-xs font-bold text-slate-800 uppercase tracking-wider">Inclusions</h4>
-                      <ul className="space-y-1.5">
-                        {selectedPkg.inclusions.map((inc, i) => (
-                          <li key={i} className="flex items-start gap-2 text-xs text-slate-600">
-                            <Check className="h-4 w-4 text-emerald-500 shrink-0 mt-0.5" />
-                            <span>{inc}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  )}
-
-                  {selectedPkg.exclusions && selectedPkg.exclusions.length > 0 && (
-                    <div className="space-y-2">
-                      <h4 className="text-xs font-bold text-slate-800 uppercase tracking-wider">Exclusions</h4>
-                      <ul className="space-y-1.5">
-                        {selectedPkg.exclusions.map((exc, i) => (
-                          <li key={i} className="flex items-start gap-2 text-xs text-slate-600">
-                            <X className="h-4 w-4 text-rose-500 shrink-0 mt-0.5" />
-                            <span>{exc}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  )}
-
-                  <button
-                    onClick={() => handleOpenBooking(selectedPkg)}
-                    className="w-full py-3.5 rounded-xl bg-gradient-premium text-white font-bold text-xs uppercase tracking-wider shadow-md hover:shadow-lg transition-all cursor-pointer mt-4"
-                  >
-                    Book Tour Package
-                  </button>
-                </div>
-
-                {/* Right Side */}
-                <div className="lg:col-span-7 space-y-3">
-                  <h4 className="text-xs font-bold text-slate-800 uppercase tracking-wider mb-2">Detailed Itinerary</h4>
-                  <div className="space-y-3.5 max-h-[360px] overflow-y-auto pl-3 pr-3">
-                    {selectedPkg.itinerary.map((dayObj) => (
-                      <div key={dayObj.day} className="relative pl-6 pb-2 border-l border-slate-100 last:border-0 last:pb-0">
-                        <span className="absolute left-[-5px] top-1.5 h-2.5 w-2.5 rounded-full bg-primary-light" />
-                        <div>
-                          <span className="text-[10px] font-bold text-primary-light uppercase tracking-wider">
-                            Day {dayObj.day}: {dayObj.title}
-                          </span>
-                          <p className="text-xs text-slate-600 mt-1 leading-relaxed">
-                            {dayObj.description}
-                          </p>
-                        </div>
-                      </div>
-                    ))}
                   </div>
                 </div>
               </div>
