@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { 
-  Shield, Gift, BadgePercent, Headset, 
-  MapPin, Clock, Star, Eye, Check, 
+import {
+  Shield, Gift, BadgePercent, Headset,
+  MapPin, Clock, Star, Eye, Check,
   X, MessageSquare, Compass, Mail, Users, Phone,
   Sparkles
 } from 'lucide-react';
@@ -184,11 +184,11 @@ Please confirm availability and share details!`;
               { icon: <Gift className="h-5 w-5 text-[#1E8DC5]" />, title: 'Customized Packages', subtitle: 'Tailor-made tours for you' },
               { icon: <Shield className="h-5 w-5 text-[#1E8DC5]" />, title: 'Visa Assistance', subtitle: 'Hassle free visa support' },
               { icon: <Headset className="h-5 w-5 text-[#1E8DC5]" />, title: '24x7 Support', subtitle: 'We are always here' },
-              { icon: <Users className="h-5 w-5 text-[#1E8DC5]" />, title: 'Trusted Travel Partner', subtitle: '10,000+ happy travelers' },
+              { icon: <Users className="h-5 w-5 text-[#1E8DC5]" />, title: 'Trusted Travel Partner', subtitle: '1000+ happy travelers' },
               { icon: <Shield className="h-5 w-5 text-[#1E8DC5]" />, title: 'Secure Booking', subtitle: 'Safe & secure payments' }
             ].map((item, index) => (
-              <motion.div 
-                key={index} 
+              <motion.div
+                key={index}
                 whileHover={{ scale: 1.05 }}
                 className="flex items-center gap-3.5 px-3 py-2 lg:py-0 text-left first:pl-0 cursor-pointer"
               >
@@ -208,7 +208,7 @@ Please confirm availability and share details!`;
       {/* ================= SECTION 3: POPULAR INTERNATIONAL DESTINATIONS ================= */}
       <section className="py-16 bg-[#F8FBFF]">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -216,7 +216,7 @@ Please confirm availability and share details!`;
             className="flex items-center justify-between mb-8"
           >
             <h2 className="font-display text-2xl font-bold text-slate-800 tracking-tight">Popular International Destinations</h2>
-            <button 
+            <button
               onClick={() => navigate('/international-tours')}
               className="px-4 py-2 text-xs font-bold text-white bg-primary-dark hover:bg-primary-light transition-all cursor-pointer rounded-lg shadow-sm hover:shadow-md"
             >
@@ -226,7 +226,7 @@ Please confirm availability and share details!`;
 
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             {popularIntl.slice(0, 8).map((dest, index) => (
-              <motion.div 
+              <motion.div
                 key={dest.id}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -257,7 +257,7 @@ Please confirm availability and share details!`;
       {/* ================= SECTION 4: POPULAR DOMESTIC DESTINATIONS ================= */}
       <section className="py-8 bg-[#F8FBFF] border-b border-slate-150/40">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -265,7 +265,7 @@ Please confirm availability and share details!`;
             className="flex items-center justify-between mb-8"
           >
             <h2 className="font-display text-2xl font-bold text-slate-800 tracking-tight">Popular Domestic Destinations</h2>
-            <button 
+            <button
               onClick={() => navigate('/domestic-tours')}
               className="px-4 py-2 text-xs font-bold text-white bg-primary-dark hover:bg-primary-light transition-all cursor-pointer rounded-lg shadow-sm hover:shadow-md"
             >
@@ -275,7 +275,7 @@ Please confirm availability and share details!`;
 
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             {popularDom.slice(0, 8).map((dest, index) => (
-              <motion.div 
+              <motion.div
                 key={dest.id}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -306,7 +306,7 @@ Please confirm availability and share details!`;
       {/* ================= SECTION 5: STATS BANNER ================= */}
       <section className="bg-gradient-premium text-white py-12">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center space-y-8">
-          <motion.h2 
+          <motion.h2
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -315,16 +315,16 @@ Please confirm availability and share details!`;
           >
             Why Choose Heaven11 Holidays?
           </motion.h2>
-          
+
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
             {[
-              { icon: <Users className="h-6 w-6 text-[#00E5FF]" />, count: '10,000+', label: 'Happy Travelers' },
+              { icon: <Users className="h-6 w-6 text-[#00E5FF]" />, count: '1000+', label: 'Happy Travelers' },
               { icon: <Gift className="h-6 w-6 text-[#00E5FF]" />, count: '500+', label: 'Tour Packages' },
               { icon: <Compass className="h-6 w-6 text-[#00E5FF]" />, count: '100+', label: 'Destinations' },
               { icon: <Headset className="h-6 w-6 text-[#00E5FF]" />, count: '24/7', label: 'Customer Support' }
             ].map((stat, index) => (
-              <motion.div 
-                key={index} 
+              <motion.div
+                key={index}
                 initial={{ opacity: 0, scale: 0.9 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
@@ -348,7 +348,7 @@ Please confirm availability and share details!`;
       {/* ================= SECTION 6: TRENDING TOUR PACKAGES ================= */}
       <section id="trending-section" className="py-16 bg-white">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -358,7 +358,7 @@ Please confirm availability and share details!`;
             <div>
               <h2 className="font-display text-2xl font-bold text-slate-800 tracking-tight">Trending Tour Packages</h2>
             </div>
-            <button 
+            <button
               onClick={() => navigate('/international-tours')}
               className="px-4 py-2 text-xs font-bold text-white bg-primary-dark hover:bg-primary-light transition-all cursor-pointer rounded-lg shadow-sm hover:shadow-md"
             >
@@ -368,8 +368,8 @@ Please confirm availability and share details!`;
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {trendingPackages.map((pkg, index) => (
-              <motion.div 
-                key={pkg.id} 
+              <motion.div
+                key={pkg.id}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -392,7 +392,7 @@ Please confirm availability and share details!`;
 
                 <div className="p-4 flex-1 flex flex-col justify-between">
                   <div className="space-y-1.5">
-                    <h3 
+                    <h3
                       onClick={() => setSelectedPackage(pkg)}
                       className="font-display font-bold text-slate-800 text-sm leading-snug hover:text-[#1E8DC5] transition-all cursor-pointer line-clamp-1"
                     >
@@ -438,7 +438,7 @@ Please confirm availability and share details!`;
         <div className="mx-auto max-w-5xl px-4 sm:px-6">
           <div className="flex items-center justify-between mb-8">
             <h2 className="font-display text-2xl font-bold text-slate-800 tracking-tight">Travel Gallery</h2>
-            <button 
+            <button
               onClick={() => navigate('/about')}
               className="px-4 py-2 text-xs font-bold text-white bg-primary-dark hover:bg-primary-light transition-all cursor-pointer"
             >
@@ -453,8 +453,8 @@ Please confirm availability and share details!`;
               { img: '/kashmir.jpg', label: 'Kashmir' },
               { img: 'https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=600&q=80', label: 'Dubai' }
             ].map((item, index) => (
-              <div 
-                key={index} 
+              <div
+                key={index}
                 className="relative overflow-hidden rounded-xl h-56 shadow-xs group cursor-pointer hover:shadow-md transition-all duration-300"
               >
                 <img
@@ -473,62 +473,12 @@ Please confirm availability and share details!`;
         </div>
       </section>
 
-      {/* ================= SECTION 11: CUSTOMER TESTIMONIALS ================= */}
-      <section className="py-16 bg-[#F8FBFF]">
-        <div className="mx-auto max-w-5xl px-4 sm:px-6">
-          <div className="flex items-center justify-between mb-8">
-            <h2 className="font-display text-2xl font-bold text-slate-800 tracking-tight">Customer Testimonials</h2>
-            <button 
-              onClick={() => navigate('/about')}
-              className="px-4 py-2 text-xs font-bold text-white bg-primary-dark hover:bg-primary-light transition-all cursor-pointer"
-            >
-              View All
-            </button>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {testimonials.slice(0, 3).map((test) => (
-              <div key={test.id} className="rounded-2xl bg-white p-6 shadow-xs border border-slate-100 flex flex-col justify-between text-left hover:shadow-md transition-all">
-                <div>
-                  <div className="flex items-center gap-3">
-                    <img
-                      src={test.avatar}
-                      alt={test.name}
-                      className="h-10 w-10 rounded-full object-cover border border-slate-100"
-                    />
-                    <div>
-                      <h4 className="font-display font-bold text-slate-800 text-xs">{test.name}</h4>
-                      <span className="text-[9px] font-semibold text-slate-400 uppercase">{test.role}</span>
-                    </div>
-                  </div>
-
-                  <div className="flex gap-0.5 text-amber-500 mt-4">
-                    {[...Array(test.rating)].map((_, i) => (
-                      <Star key={i} className="h-3 w-3 fill-current" />
-                    ))}
-                  </div>
-
-                  <p className="text-xs text-slate-500 leading-relaxed italic mt-3">
-                    "{test.comment}"
-                  </p>
-                </div>
-
-                <div className="pt-4 border-t border-slate-50 mt-4 flex items-center justify-between text-[9px] font-bold text-slate-400 uppercase">
-                  <span>Google Review</span>
-                  <span className="text-[#1E8DC5]">{test.tourName}</span>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* ================= SECTION 11.5: CTA BANNER SECTION ================= */}
       <section className="py-16 bg-[#F8FBFF] px-4">
         <div className="mx-auto max-w-5xl rounded-3xl bg-gradient-premium p-8 md:p-14 shadow-2xl relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-8 text-white text-left group">
           {/* Animated luxury background particles / lights */}
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,rgba(0,229,255,0.15),transparent_50%)] pointer-events-none" />
-          
+
           <div className="space-y-3 relative z-10 max-w-xl">
             <span className="rounded-full bg-white/10 border border-white/20 px-3 py-1 text-[10px] font-bold text-[#00E5FF] uppercase tracking-widest inline-flex items-center gap-1.5">
               <Sparkles className="h-3 w-3 text-[#00E5FF]" /> Luxury Travel
@@ -542,7 +492,7 @@ Please confirm availability and share details!`;
           </div>
 
           <div className="shrink-0 relative z-10 w-full md:w-auto">
-            <button 
+            <button
               onClick={() => setIsBookingOpen(true)}
               className="w-full md:w-auto px-8 py-4 rounded-full bg-[#00E5FF] hover:bg-white text-primary-dark font-bold text-sm tracking-wide shadow-xl hover:shadow-[#00E5FF]/20 transition-all duration-300 transform hover:scale-105 cursor-pointer flex items-center justify-center gap-2"
             >
@@ -553,56 +503,11 @@ Please confirm availability and share details!`;
         </div>
       </section>
 
-      {/* ================= SECTION 12: GET BEST TRAVEL DEALS / NEWSLETTER ================= */}
-      <section className="py-16 bg-[#F8FBFF] px-4">
-        <div className="mx-auto max-w-5xl rounded-3xl bg-gradient-premium p-8 md:p-12 shadow-xl relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-8 text-white">
-          {/* Plane Flying Graphic overlay */}
-          <div className="absolute right-[-20px] top-[-10px] opacity-10 rotate-12">
-            <svg className="h-72 w-72 fill-white" viewBox="0 0 24 24">
-              <path d="M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L14 19v-5.5l8 2.5z" />
-            </svg>
-          </div>
-
-          <div className="space-y-2 text-left relative z-10 max-w-md">
-            <h3 className="font-display text-xl font-bold tracking-tight text-white uppercase">Get Best Travel Deals & Offers</h3>
-            <p className="text-sm font-semibold text-[#00E5FF]">Subscribe to Our Newsletter</p>
-            <p className="text-xs text-white/80 leading-relaxed mt-2">
-              Stay ahead with customized packages, exclusive flash airfares, and direct guides delivered to your inbox weekly.
-            </p>
-          </div>
-
-          <div className="w-full md:w-auto shrink-0 relative z-10">
-            {newsletterSubscribed ? (
-              <div className="bg-white/10 border border-white/20 p-3.5 rounded-xl text-xs font-bold text-[#00E5FF]">
-                ✓ Subscribed Successfully! Check your inbox.
-              </div>
-            ) : (
-              <form onSubmit={handleNewsletterSubmit} className="flex gap-2 w-full md:w-80">
-                <input
-                  type="email"
-                  required
-                  value={newsletterEmail}
-                  onChange={(e) => setNewsletterEmail(e.target.value)}
-                  placeholder="Enter your email"
-                  className="flex-1 rounded-xl bg-white border border-slate-200 px-4 py-2.5 text-xs text-slate-700 placeholder-slate-400 focus:outline-none focus:ring-1 focus:ring-[#00E5FF]"
-                />
-                <button
-                  type="submit"
-                  className="px-5 py-2.5 rounded-xl bg-[#00E5FF] hover:bg-white text-primary-dark font-bold text-xs shadow-md transition-all cursor-pointer"
-                >
-                  Subscribe
-                </button>
-              </form>
-            )}
-          </div>
-        </div>
-      </section>
-
       {/* ================= SECTION 13: LOWER SIDEBAR & FOOTER LAYOUT ================= */}
       <section className="py-16 bg-white border-t border-slate-100">
         <div className="mx-auto max-w-5xl px-4 sm:px-6">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 text-left">
-            
+
             {/* COLUMN 1: LATEST TRAVEL BLOGS */}
             <div className="lg:col-span-1 space-y-6">
               <div className="flex items-center justify-between border-b border-slate-100 pb-3">
@@ -611,13 +516,13 @@ Please confirm availability and share details!`;
 
               <div className="space-y-4">
                 {blogs.slice(0, 4).map((art) => (
-                  <div 
+                  <div
                     key={art.id}
                     className="flex gap-4 group"
                   >
-                    <img 
-                      src={art.image} 
-                      alt={art.title} 
+                    <img
+                      src={art.image}
+                      alt={art.title}
                       className="h-16 w-16 rounded-lg object-cover shrink-0 border border-slate-100"
                     />
                     <div className="space-y-1">
@@ -645,15 +550,15 @@ Please confirm availability and share details!`;
 
                 {/* Curved boat graphic mockup frame (Curved corners tl & br) */}
                 <div className="relative overflow-hidden rounded-tl-[60px] rounded-br-[60px] border border-slate-200 shadow-md h-36">
-                  <img 
-                    src="https://images.unsplash.com/photo-1514282401047-d79a71a590e8?auto=format&fit=crop&w=600&q=80" 
-                    alt="Scenic boat view" 
+                  <img
+                    src="https://images.unsplash.com/photo-1514282401047-d79a71a590e8?auto=format&fit=crop&w=600&q=80"
+                    alt="Scenic boat view"
                     className="w-full h-full object-cover"
                   />
                   <div className="absolute inset-0 bg-slate-900/10" />
                 </div>
 
-                <button 
+                <button
                   onClick={() => navigate('/about')}
                   className="px-5 py-2 rounded-xl border border-[#1E8DC5] text-[#1E8DC5] hover:bg-[#1E8DC5] hover:text-white transition-all text-xs font-bold w-full cursor-pointer"
                 >
@@ -693,41 +598,41 @@ Please confirm availability and share details!`;
                   </div>
                 ) : (
                   <form onSubmit={handleContactSubmit} className="space-y-3">
-                    <input 
-                      type="text" 
+                    <input
+                      type="text"
                       required
-                      placeholder="Your Name" 
+                      placeholder="Your Name"
                       value={contactFormData.name}
                       onChange={(e) => setContactFormData({ ...contactFormData, name: e.target.value })}
                       className="w-full rounded-lg border border-slate-200 px-3 py-2 focus:outline-none focus:ring-1 focus:ring-[#1E8DC5]"
                     />
-                    <input 
-                      type="tel" 
+                    <input
+                      type="tel"
                       required
-                      placeholder="Phone Number" 
+                      placeholder="Phone Number"
                       value={contactFormData.phone}
                       onChange={(e) => setContactFormData({ ...contactFormData, phone: e.target.value })}
                       className="w-full rounded-lg border border-slate-200 px-3 py-2 focus:outline-none focus:ring-1 focus:ring-[#1E8DC5]"
                     />
-                    <input 
-                      type="email" 
+                    <input
+                      type="email"
                       required
-                      placeholder="Email Address" 
+                      placeholder="Email Address"
                       value={contactFormData.email}
                       onChange={(e) => setContactFormData({ ...contactFormData, email: e.target.value })}
                       className="w-full rounded-lg border border-slate-200 px-3 py-2 focus:outline-none focus:ring-1 focus:ring-[#1E8DC5]"
                     />
-                    <textarea 
-                      rows={2} 
+                    <textarea
+                      rows={2}
                       required
-                      placeholder="Your Message" 
+                      placeholder="Your Message"
                       value={contactFormData.message}
                       onChange={(e) => setContactFormData({ ...contactFormData, message: e.target.value })}
                       className="w-full rounded-lg border border-slate-200 px-3 py-2 focus:outline-none focus:ring-1 focus:ring-[#1E8DC5]"
                     />
                     <div className="flex gap-2">
-                      <button 
-                        type="submit" 
+                      <button
+                        type="submit"
                         className="flex-1 py-2.5 rounded-xl bg-primary-light hover:bg-primary-dark font-bold text-white shadow-xs transition-all cursor-pointer"
                       >
                         Send Message
@@ -743,35 +648,6 @@ Please confirm availability and share details!`;
                     </div>
                   </form>
                 )}
-
-                {/* Google Map mock coordinate */}
-                <div className="rounded-xl overflow-hidden border border-slate-200 h-28 relative shadow-inner">
-                  {/* Visual map coordinate layout */}
-                  <div className="absolute inset-0 bg-[#E0ECE4] flex items-center justify-center">
-                    {/* Simulated street lines */}
-                    <div className="absolute inset-x-0 top-1/2 h-[2px] bg-white" />
-                    <div className="absolute inset-y-0 left-1/3 w-[2px] bg-white" />
-                    <div className="absolute inset-y-0 left-2/3 w-[2px] bg-white" />
-                    <div className="absolute top-1/4 left-1/2 h-12 w-12 rounded-full border border-sky-500/10 bg-sky-500/15 animate-ping" />
-                    
-                    {/* Location marker pin */}
-                    <div className="relative z-10 flex flex-col items-center">
-                      <MapPin className="h-6 w-6 text-rose-500 fill-rose-500 drop-shadow-sm" />
-                      <div className="rounded-md bg-white px-2 py-0.5 text-[8px] font-bold text-slate-800 shadow-sm border border-slate-100 mt-1 whitespace-nowrap">
-                        Heaven11 Holidays
-                      </div>
-                    </div>
-                  </div>
-                  {/* Launch map button */}
-                  <a 
-                    href="https://maps.google.com/?q=Anna+Nagar+Trichy+620017"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="absolute bottom-2 right-2 rounded bg-white px-2 py-0.5 text-[8px] font-bold text-slate-600 shadow-sm hover:text-[#1E8DC5] transition-all border border-slate-150"
-                  >
-                    Open Map
-                  </a>
-                </div>
 
               </div>
             </div>
@@ -837,7 +713,7 @@ Please confirm availability and share details!`;
                         <span className="flex items-center gap-1"><Clock className="h-3 w-3" /> {pkg.duration}</span>
                       </div>
                       <h4 className="font-display font-bold text-slate-800 text-sm leading-snug line-clamp-1">{pkg.title}</h4>
-                      
+
                       <div className="flex items-center justify-between pt-3 border-t border-slate-100 mt-2">
                         <div className="flex gap-2">
                           <button
@@ -980,7 +856,7 @@ Please confirm availability and share details!`;
       {isBookingOpen && selectedPackage && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
           <div onClick={() => setIsBookingOpen(false)} className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm" />
-          
+
           <div className="relative z-10 w-full max-w-md transform rounded-2xl bg-white p-6 shadow-2xl transition-all text-left">
             <button
               onClick={() => setIsBookingOpen(false)}

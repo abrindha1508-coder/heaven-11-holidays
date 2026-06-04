@@ -34,7 +34,7 @@ export const About: React.FC = () => {
           </div>
           <div className="rounded-3xl overflow-hidden shadow-md h-80">
             <img 
-              src="https://images.unsplash.com/photo-1488646953014-85cb44e25828?auto=format&fit=crop&w=800&q=80" 
+              src="/travel_curation.png" 
               alt="About Travel Curation" 
               className="w-full h-full object-cover" 
             />
