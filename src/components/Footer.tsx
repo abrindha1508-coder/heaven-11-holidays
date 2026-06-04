@@ -105,14 +105,7 @@ export const Footer: React.FC = () => {
       style={{ background: 'linear-gradient(160deg, #071d52 0%, #0d2b7a 20%, #1a4fa0 45%, #1E8DC5 72%, #0ea5e9 100%)' }}
     >
       {/* ── Shared 3D background decorations ── */}
-      {/* Grid overlay */}
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          backgroundImage: 'linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px)',
-          backgroundSize: '48px 48px'
-        }}
-      />
+      {/* Grid overlay removed */}
       {/* Top-left radial glow */}
       <div className="absolute -top-32 -left-32 w-[500px] h-[500px] rounded-full pointer-events-none" style={{ background: 'radial-gradient(circle, rgba(0,229,255,0.12) 0%, transparent 70%)' }} />
       {/* Bottom-right dark pool */}
