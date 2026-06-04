@@ -1,4 +1,5 @@
 import { Shield, Sparkles, Compass, Check } from 'lucide-react';
+import { motion } from 'framer-motion';
 import { PageHero } from '../components/PageHero';
 
 export const About: React.FC = () => {
@@ -14,7 +15,13 @@ export const About: React.FC = () => {
 
       <div id="about-content" className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 mt-16 pt-8 space-y-20">
         {/* Intro */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center"
+        >
           <div className="space-y-6">
             <span className="text-xs font-bold tracking-widest text-primary-light uppercase">Who We Are</span>
             <h2 className="font-display text-3xl font-extrabold text-primary-dark">Fulfilling Extraordinary Journeys</h2>
@@ -32,7 +39,7 @@ export const About: React.FC = () => {
               className="w-full h-full object-cover" 
             />
           </div>
-        </div>
+        </motion.div>
 
         {/* Mission, Vision, Values */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -53,18 +60,32 @@ export const About: React.FC = () => {
               desc: 'Pristine transparency (no hidden markups), safety-first chauffeured transport, strict quality audits, and 24x7 guest support.'
             }
           ].map((val, idx) => (
-            <div key={idx} className="rounded-2xl bg-white p-6 shadow-xs border border-slate-100 space-y-4">
+            <motion.div 
+              key={idx} 
+              initial={{ opacity: 0, y: 25 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: idx * 0.1 }}
+              whileHover={{ y: -5 }}
+              className="rounded-2xl bg-white p-6 shadow-xs border border-slate-100 space-y-4"
+            >
               <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary-dark/5 text-primary-dark">
                 {val.icon}
               </div>
               <h3 className="font-display font-bold text-slate-800 text-lg">{val.title}</h3>
               <p className="text-xs text-slate-500 leading-relaxed">{val.desc}</p>
-            </div>
+            </motion.div>
           ))}
         </div>
 
         {/* Why Trust Us Factors */}
-        <div className="rounded-3xl bg-slate-900 p-8 md:p-12 text-white relative overflow-hidden">
+        <motion.div 
+          initial={{ opacity: 0, scale: 0.95 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="rounded-3xl bg-slate-900 p-8 md:p-12 text-white relative overflow-hidden"
+        >
           <div className="absolute inset-0 bg-cover bg-center opacity-5" style={{ backgroundImage: `url('https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=1920&q=80')` }} />
           <div className="mx-auto max-w-4xl text-center space-y-12 relative z-10">
             <div className="space-y-3">
@@ -103,7 +124,7 @@ export const About: React.FC = () => {
               ))}
             </div>
           </div>
-        </div>
+        </motion.div>
       </div>
     </div>
   );

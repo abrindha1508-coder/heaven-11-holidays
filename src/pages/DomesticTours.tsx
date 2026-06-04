@@ -1,13 +1,25 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useSearchParams } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import { Clock, Star, Search, ChevronRight, X, MessageSquare, Check } from 'lucide-react';
 import { destinations } from '../data/destinations';
 import { packages } from '../data/packages';
 import type { TourPackage } from '../types/package';
 import { PageHero } from '../components/PageHero';
+
 export const DomesticTours: React.FC = () => {
+  const [searchParams] = useSearchParams();
+  const destParam = searchParams.get('dest');
+  
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedSeason, setSelectedSeason] = useState('');
   const [activeDestinationId, setActiveDestinationId] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (destParam) {
+      setActiveDestinationId(destParam);
+    }
+  }, [destParam]);
 
   // Selected package modal state
   const [selectedPkg, setSelectedPkg] = useState<TourPackage | null>(null);
@@ -49,7 +61,7 @@ export const DomesticTours: React.FC = () => {
 - *Name*: ${bookingFormData.name || 'Client'}
 - *Date*: ${bookingFormData.date || 'Flexible'}
 - *Travelers*: ${bookingFormData.travelers}`;
-    window.open(`https://wa.me/918148604780?text=${encodeURIComponent(text)}`, '_blank');
+    window.open(`https://wa.me/919159996556?text=${encodeURIComponent(text)}`, '_blank');
   };
 
   return (
@@ -65,7 +77,12 @@ export const DomesticTours: React.FC = () => {
       {/* Main Content */}
       <div id="domestic-content" className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 mt-12 pt-8">
         {/* Filters Panel */}
-        <div className="rounded-2xl bg-white p-5 shadow-xs border border-slate-100 flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-8">
+        <motion.div 
+          initial={{ opacity: 0, y: -15 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4 }}
+          className="rounded-2xl bg-white p-5 shadow-xs border border-slate-100 flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-8"
+        >
           <div className="relative flex-1">
             <Search className="absolute left-4 top-3 h-4 w-4 text-slate-400" />
             <input
@@ -91,15 +108,19 @@ export const DomesticTours: React.FC = () => {
               </button>
             ))}
           </div>
-        </div>
+        </motion.div>
 
         {/* Grid List */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {domesticDestinations.map((dest) => {
+          {domesticDestinations.map((dest, index) => {
             const destPackages = packages.filter(p => p.destinationId === dest.id);
             return (
-              <div
+              <motion.div
                 key={dest.id}
+                initial={{ opacity: 0, y: 25 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4, delay: index * 0.05 }}
+                whileHover={{ y: -6 }}
                 onClick={() => setActiveDestinationId(dest.id)}
                 className="group rounded-2xl bg-white overflow-hidden shadow-xs hover:shadow-lg border border-slate-100 cursor-pointer transition-all duration-300 flex flex-col h-[380px]"
               >
@@ -130,7 +151,7 @@ export const DomesticTours: React.FC = () => {
                     </span>
                   </div>
                 </div>
-              </div>
+              </motion.div>
             );
           })}
         </div>

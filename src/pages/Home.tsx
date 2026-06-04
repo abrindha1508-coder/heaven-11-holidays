@@ -6,6 +6,7 @@ import {
   X, MessageSquare, Compass, Mail, Users, Phone,
   Sparkles
 } from 'lucide-react';
+import { motion } from 'framer-motion';
 import { PremiumHero } from '../components/PremiumHero';
 
 // Import databases
@@ -137,7 +138,7 @@ export const Home: React.FC = () => {
 - *Travel Date*: ${bookingFormData.date || 'Flexible'}
 - *Travelers*: ${bookingFormData.travelers}
 Please confirm availability and share details!`;
-    const url = `https://wa.me/918148604780?text=${encodeURIComponent(text)}`;
+    const url = `https://wa.me/919159996556?text=${encodeURIComponent(text)}`;
     window.open(url, '_blank');
   };
 
@@ -147,7 +148,7 @@ Please confirm availability and share details!`;
 - *Phone*: ${contactFormData.phone || 'N/A'}
 - *Email*: ${contactFormData.email || 'N/A'}
 - *Message*: ${contactFormData.message || 'General Inquiry'}`;
-    const url = `https://wa.me/918148604780?text=${encodeURIComponent(text)}`;
+    const url = `https://wa.me/919159996556?text=${encodeURIComponent(text)}`;
     window.open(url, '_blank');
   };
 
@@ -171,7 +172,13 @@ Please confirm availability and share details!`;
       {/* ================= SECTION 2: TRUST FEATURES ROW ================= */}
       <section className="bg-white border-b border-slate-100 py-6 lg:pt-14 shadow-xs">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 items-center divide-y lg:divide-y-0 lg:divide-x divide-slate-100">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 items-center divide-y lg:divide-y-0 lg:divide-x divide-slate-100"
+          >
             {[
               { icon: <BadgePercent className="h-5 w-5 text-[#1E8DC5]" />, title: 'Best Price Guarantee', subtitle: 'Get the best price' },
               { icon: <Gift className="h-5 w-5 text-[#1E8DC5]" />, title: 'Customized Packages', subtitle: 'Tailor-made tours for you' },
@@ -180,7 +187,11 @@ Please confirm availability and share details!`;
               { icon: <Users className="h-5 w-5 text-[#1E8DC5]" />, title: 'Trusted Travel Partner', subtitle: '10,000+ happy travelers' },
               { icon: <Shield className="h-5 w-5 text-[#1E8DC5]" />, title: 'Secure Booking', subtitle: 'Safe & secure payments' }
             ].map((item, index) => (
-              <div key={index} className="flex items-center gap-3.5 px-3 py-2 lg:py-0 text-left first:pl-0">
+              <motion.div 
+                key={index} 
+                whileHover={{ scale: 1.05 }}
+                className="flex items-center gap-3.5 px-3 py-2 lg:py-0 text-left first:pl-0 cursor-pointer"
+              >
                 <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#1E8DC5]/10 text-[#1E8DC5]">
                   {item.icon}
                 </div>
@@ -188,31 +199,42 @@ Please confirm availability and share details!`;
                   <h4 className="text-xs font-bold text-slate-800">{item.title}</h4>
                   <span className="text-[10px] text-slate-400 font-medium">{item.subtitle}</span>
                 </div>
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
       {/* ================= SECTION 3: POPULAR INTERNATIONAL DESTINATIONS ================= */}
       <section className="py-16 bg-[#F8FBFF]">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between mb-8">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="flex items-center justify-between mb-8"
+          >
             <h2 className="font-display text-2xl font-bold text-slate-800 tracking-tight">Popular International Destinations</h2>
             <button 
               onClick={() => navigate('/international-tours')}
-              className="px-4 py-2 text-xs font-bold text-white bg-primary-dark hover:bg-primary-light transition-all cursor-pointer"
+              className="px-4 py-2 text-xs font-bold text-white bg-primary-dark hover:bg-primary-light transition-all cursor-pointer rounded-lg shadow-sm hover:shadow-md"
             >
               View All
             </button>
-          </div>
+          </motion.div>
 
-          <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-4">
-            {popularIntl.slice(0, 8).map((dest) => (
-              <div 
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            {popularIntl.slice(0, 8).map((dest, index) => (
+              <motion.div 
                 key={dest.id}
-                onClick={() => navigate('/international-tours')}
-                className="group relative h-48 rounded-xl overflow-hidden shadow-xs cursor-pointer hover:shadow-lg transition-all duration-300 border border-slate-100 bg-white"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.05 }}
+                whileHover={{ y: -6, scale: 1.02 }}
+                onClick={() => navigate(`/international-tours?dest=${dest.id}`)}
+                className="group relative h-56 rounded-2xl overflow-hidden shadow-xs cursor-pointer hover:shadow-xl transition-all duration-300 border border-slate-100 bg-white"
               >
                 <img
                   src={dest.image}
@@ -220,10 +242,13 @@ Please confirm availability and share details!`;
                   className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/10 to-transparent" />
-                <div className="absolute bottom-3 left-3 right-3 text-white text-left">
-                  <h3 className="text-sm font-bold tracking-tight">{dest.name}</h3>
+                <div className="absolute bottom-4 left-4 right-4 text-white text-left">
+                  <h3 className="text-base font-bold tracking-tight">{dest.name}</h3>
+                  <span className="text-[10px] text-accent font-semibold flex items-center gap-1 mt-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    Explore Packages →
+                  </span>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
@@ -232,22 +257,33 @@ Please confirm availability and share details!`;
       {/* ================= SECTION 4: POPULAR DOMESTIC DESTINATIONS ================= */}
       <section className="py-8 bg-[#F8FBFF] border-b border-slate-150/40">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between mb-8">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="flex items-center justify-between mb-8"
+          >
             <h2 className="font-display text-2xl font-bold text-slate-800 tracking-tight">Popular Domestic Destinations</h2>
             <button 
               onClick={() => navigate('/domestic-tours')}
-              className="px-4 py-2 text-xs font-bold text-white bg-primary-dark hover:bg-primary-light transition-all cursor-pointer"
+              className="px-4 py-2 text-xs font-bold text-white bg-primary-dark hover:bg-primary-light transition-all cursor-pointer rounded-lg shadow-sm hover:shadow-md"
             >
               View All
             </button>
-          </div>
+          </motion.div>
 
-          <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-4">
-            {popularDom.slice(0, 8).map((dest) => (
-              <div 
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            {popularDom.slice(0, 8).map((dest, index) => (
+              <motion.div 
                 key={dest.id}
-                onClick={() => navigate('/domestic-tours')}
-                className="group relative h-48 rounded-xl overflow-hidden shadow-xs cursor-pointer hover:shadow-lg transition-all duration-300 border border-slate-100 bg-white"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.05 }}
+                whileHover={{ y: -6, scale: 1.02 }}
+                onClick={() => navigate(`/domestic-tours?dest=${dest.id}`)}
+                className="group relative h-56 rounded-2xl overflow-hidden shadow-xs cursor-pointer hover:shadow-xl transition-all duration-300 border border-slate-100 bg-white"
               >
                 <img
                   src={dest.image}
@@ -255,10 +291,13 @@ Please confirm availability and share details!`;
                   className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/10 to-transparent" />
-                <div className="absolute bottom-3 left-3 right-3 text-white text-left">
-                  <h3 className="text-sm font-bold tracking-tight">{dest.name}</h3>
+                <div className="absolute bottom-4 left-4 right-4 text-white text-left">
+                  <h3 className="text-base font-bold tracking-tight">{dest.name}</h3>
+                  <span className="text-[10px] text-accent font-semibold flex items-center gap-1 mt-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    Explore Packages →
+                  </span>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
@@ -267,7 +306,15 @@ Please confirm availability and share details!`;
       {/* ================= SECTION 5: STATS BANNER ================= */}
       <section className="bg-gradient-premium text-white py-12">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center space-y-8">
-          <h2 className="font-display text-2xl font-bold tracking-tight text-white">Why Choose Heaven11 Holidays?</h2>
+          <motion.h2 
+            initial={{ opacity: 0, y: 15 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="font-display text-2xl font-bold tracking-tight text-white"
+          >
+            Why Choose Heaven11 Holidays?
+          </motion.h2>
           
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
             {[
@@ -276,7 +323,15 @@ Please confirm availability and share details!`;
               { icon: <Compass className="h-6 w-6 text-[#00E5FF]" />, count: '100+', label: 'Destinations' },
               { icon: <Headset className="h-6 w-6 text-[#00E5FF]" />, count: '24/7', label: 'Customer Support' }
             ].map((stat, index) => (
-              <div key={index} className="flex items-center justify-center gap-4 bg-white/5 border border-white/10 rounded-2xl p-5 backdrop-blur-xs">
+              <motion.div 
+                key={index} 
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: index * 0.08 }}
+                whileHover={{ y: -4, backgroundColor: 'rgba(255,255,255,0.08)' }}
+                className="flex items-center justify-center gap-4 bg-white/5 border border-white/10 rounded-2xl p-5 backdrop-blur-xs cursor-pointer"
+              >
                 <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-white/10">
                   {stat.icon}
                 </div>
@@ -284,7 +339,7 @@ Please confirm availability and share details!`;
                   <div className="font-display text-xl font-extrabold text-[#00E5FF]">{stat.count}</div>
                   <div className="text-[10px] font-bold text-slate-350 uppercase tracking-wider">{stat.label}</div>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
@@ -293,29 +348,40 @@ Please confirm availability and share details!`;
       {/* ================= SECTION 6: TRENDING TOUR PACKAGES ================= */}
       <section id="trending-section" className="py-16 bg-white">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between mb-10">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="flex items-center justify-between mb-10"
+          >
             <div>
               <h2 className="font-display text-2xl font-bold text-slate-800 tracking-tight">Trending Tour Packages</h2>
             </div>
             <button 
               onClick={() => navigate('/international-tours')}
-              className="px-4 py-2 text-xs font-bold text-white bg-primary-dark hover:bg-primary-light transition-all cursor-pointer"
+              className="px-4 py-2 text-xs font-bold text-white bg-primary-dark hover:bg-primary-light transition-all cursor-pointer rounded-lg shadow-sm hover:shadow-md"
             >
               View All Packages
             </button>
-          </div>
+          </motion.div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {trendingPackages.map((pkg) => (
-              <div 
+            {trendingPackages.map((pkg, index) => (
+              <motion.div 
                 key={pkg.id} 
-                className="rounded-2xl bg-white overflow-hidden shadow-xs hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border border-slate-100 flex flex-col h-[350px] text-left group"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.05 }}
+                whileHover={{ y: -6 }}
+                className="rounded-2xl bg-white overflow-hidden shadow-xs hover:shadow-xl transition-all duration-300 border border-slate-100 flex flex-col h-[350px] text-left group"
               >
                 <div className="relative h-48 overflow-hidden">
                   <img
                     src={pkg.image}
                     alt={pkg.title}
-                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-103"
+                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                   />
                   <div className="absolute top-3 left-3">
                     <span className="rounded-lg bg-slate-900/80 backdrop-blur-xs px-2.5 py-1 text-[9px] font-bold text-white uppercase tracking-wide">
@@ -360,7 +426,7 @@ Please confirm availability and share details!`;
                     </div>
                   </div>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
@@ -607,7 +673,7 @@ Please confirm availability and share details!`;
                 <div className="space-y-2 border-b border-slate-100 pb-4">
                   <div className="flex items-center gap-2 text-slate-600">
                     <Phone className="h-4 w-4 text-[#1E8DC5]" />
-                    <span className="font-bold">+91 81486 04780 / 081486 04780</span>
+                    <span className="font-bold">+91 91599 96556 / +91 81486 04780</span>
                   </div>
                   <div className="flex items-center gap-2 text-slate-600">
                     <Mail className="h-4 w-4 text-[#1E8DC5]" />
@@ -749,7 +815,7 @@ Please confirm availability and share details!`;
                   Don't worry! We design bespoke itineraries. Let our travel specialist craft a custom tour for you.
                 </p>
                 <a
-                  href="https://wa.me/918148604780?text=Hi%20Heaven11!%20I'm%20looking%20for%20a%20custom%20holiday%20quote."
+                  href="https://wa.me/919159996556?text=Hi%20Heaven11!%20I'm%20looking%20for%20a%20custom%20holiday%20quote."
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 rounded-xl bg-emerald-500 text-white px-5 py-2.5 text-xs font-semibold shadow-md hover:bg-emerald-600 transition-all cursor-pointer"
@@ -890,7 +956,7 @@ Please confirm availability and share details!`;
                 <div className="flex gap-3">
                   <button
                     onClick={() => {
-                      const url = `https://wa.me/918148604780?text=Hi%20Heaven11%20Holidays!%20I'm%20interested%20in%20the%20package:%20${selectedPackage.title}`;
+                      const url = `https://wa.me/919159996556?text=Hi%20Heaven11%20Holidays!%20I'm%20interested%20in%20the%20package:%20${selectedPackage.title}`;
                       window.open(url, '_blank');
                     }}
                     className="flex items-center justify-center gap-2 rounded-xl border border-emerald-500 bg-emerald-50 text-emerald-600 px-5 py-3 text-xs font-semibold hover:bg-emerald-500 hover:text-white transition-all cursor-pointer"

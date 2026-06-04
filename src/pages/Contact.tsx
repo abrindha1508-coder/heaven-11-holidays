@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { motion } from 'framer-motion';
 import { Mail, Phone, MapPin, CheckCircle, Clock, Sparkles, MessageSquare } from 'lucide-react';
 import { PageHero } from '../components/PageHero';
 
@@ -32,7 +33,7 @@ export const Contact: React.FC = () => {
 - *Phone*: ${formData.phone || 'N/A'}
 - *Destination*: ${formData.destination || 'N/A'}
 - *Message*: ${formData.message || 'Need consulting'}`;
-    window.open(`https://wa.me/918148604780?text=${encodeURIComponent(text)}`, '_blank');
+    window.open(`https://wa.me/919159996556?text=${encodeURIComponent(text)}`, '_blank');
   };
 
   return (
@@ -47,7 +48,13 @@ export const Contact: React.FC = () => {
 
       <div id="contact-content" className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 mt-12 pt-8 grid grid-cols-1 lg:grid-cols-3 gap-8">
         {/* Contact info cards (Col 1) */}
-        <div className="lg:col-span-1 space-y-6">
+        <motion.div 
+          initial={{ opacity: 0, x: -30 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="lg:col-span-1 space-y-6"
+        >
           {[
             {
               icon: <MapPin className="h-6 w-6 text-accent" />,
@@ -62,8 +69,8 @@ export const Contact: React.FC = () => {
               icon: <Phone className="h-6 w-6 text-accent" />,
               title: 'Direct Call Desk',
               lines: [
-                'Primary: +91 81486 04780',
-                'On-Tour Hotline: 081486 04780',
+                'Primary: +91 91599 96556',
+                'Alternative: +91 81486 04780',
                 'Toll-Free: 1800 123 4567'
               ]
             },
@@ -102,10 +109,14 @@ export const Contact: React.FC = () => {
               </p>
             </div>
           </div>
-        </div>
-
-        {/* Lead Form (Col 2) */}
-        <div className="lg:col-span-2 space-y-6">
+        </motion.div>        {/* Lead Form (Col 2) */}
+        <motion.div 
+          initial={{ opacity: 0, x: 30 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="lg:col-span-2 space-y-6"
+        >
           <div className="rounded-3xl bg-white p-6 md:p-8 shadow-xs border border-slate-100">
             {submitted ? (
               <div className="text-center py-16 space-y-4">
@@ -126,7 +137,7 @@ export const Contact: React.FC = () => {
             ) : (
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div>
-                  <h3 className="font-display font-extrabold text-primary-dark text-xl flex items-center gap-2">
+                  <h3 className="font-display text-xl font-bold text-primary-dark flex items-center gap-2">
                     <Sparkles className="h-6 w-6 text-accent fill-accent" /> Custom Quote Inquiry
                   </h3>
                   <p className="text-xs text-slate-500 mt-1">
@@ -219,9 +230,7 @@ export const Contact: React.FC = () => {
               </form>
             )}
           </div>
-
-
-        </div>
+        </motion.div>
       </div>
     </div>
   );

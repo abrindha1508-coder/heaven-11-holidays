@@ -12,8 +12,8 @@ export const FloatingElements: React.FC = () => {
     });
   };
 
-  const whatsappNumber = '918148604780';
-  const callNumber = '918148604780';
+  const whatsappNumber = '919159996556';
+  const callNumber = '919159996556';
   const whatsappUrl = `https://wa.me/${whatsappNumber}?text=Hi%20Heaven11%20Holidays!%20I'm%20interested%20in%20booking%20a%20luxury%20holiday%20package.`;
 
   return (
