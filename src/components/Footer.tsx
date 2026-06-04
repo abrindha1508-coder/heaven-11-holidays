@@ -113,7 +113,7 @@ export const Footer: React.FC = () => {
       {/* Centre glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] rounded-full pointer-events-none opacity-30" style={{ background: 'radial-gradient(ellipse, rgba(30,141,197,0.4) 0%, transparent 70%)' }} />
       {/* Big airplane watermark */}
-      <div className="absolute right-0 bottom-0 opacity-[0.04] pointer-events-none select-none rotate-[20deg] translate-x-16 translate-y-16">
+      <div className="absolute right-0 bottom-0 opacity-[0.04] pointer-events-none select-none rotate-20 translate-x-16 translate-y-16">
         <svg viewBox="0 0 24 24" className="w-[500px] h-[500px] fill-white">
           <path d="M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L14 19v-5.5l8 2.5z"/>
         </svg>
@@ -290,7 +290,7 @@ export const Footer: React.FC = () => {
                     onMouseEnter={e => (e.currentTarget as HTMLAnchorElement).style.color = '#00E5FF'}
                     onMouseLeave={e => (e.currentTarget as HTMLAnchorElement).style.color = 'rgba(255,255,255,0.6)'}
                   >
-                    <span className="text-[#00E5FF] opacity-50 group-hover:opacity-100 transition-opacity">›</span>
+                    <span className="text-accent opacity-50 group-hover:opacity-100 transition-opacity">›</span>
                     {link.name}
                   </Link>
                 </li>
@@ -313,7 +313,7 @@ export const Footer: React.FC = () => {
                     onMouseEnter={e => (e.currentTarget as HTMLAnchorElement).style.color = '#00E5FF'}
                     onMouseLeave={e => (e.currentTarget as HTMLAnchorElement).style.color = 'rgba(255,255,255,0.6)'}
                   >
-                    <span className="text-[#00E5FF] opacity-50 group-hover:opacity-100 transition-opacity">›</span>
+                    <span className="text-accent opacity-50 group-hover:opacity-100 transition-opacity">›</span>
                     {dest.name} Packages
                   </Link>
                 </li>
