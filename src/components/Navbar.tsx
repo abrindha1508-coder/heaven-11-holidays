@@ -8,19 +8,43 @@ import { Logo } from './Logo';
 const domesticSubmenu = [
   { name: 'Kashmir', path: '/domestic-tours?dest=kashmir', description: 'Paradise on Earth' },
   { name: 'Kerala', path: '/domestic-tours?dest=kerala', description: 'God\'s Own Country' },
-  { name: 'Ooty & Kodaikanal', path: '/domestic-tours?dest=ooty', description: 'Queen of Hills' },
+  { name: 'Ooty', path: '/domestic-tours?dest=ooty', description: 'Queen of Hill Stations' },
+  { name: 'Kodaikanal', path: '/domestic-tours?dest=kodaikanal', description: 'Gift of the Forest' },
   { name: 'Goa', path: '/domestic-tours?dest=goa', description: 'Sun, Sand & Spices' },
   { name: 'Andaman', path: '/domestic-tours?dest=andaman', description: 'Tropical Paradise' },
-  { name: 'Himachal', path: '/domestic-tours?dest=himachal', description: 'Snowy Splendors' }
+  { name: 'Rajasthan', path: '/domestic-tours?dest=rajasthan', description: 'Land of Kings' },
+  { name: 'Himachal', path: '/domestic-tours?dest=himachal', description: 'Snowy Splendors' },
+  { name: 'Agra', path: '/domestic-tours?dest=agra', description: 'Home of the Taj Mahal' },
+  { name: 'Alleppey', path: '/domestic-tours?dest=alleppey', description: 'Venice of the East' },
+  { name: 'Amritsar', path: '/domestic-tours?dest=amritsar', description: 'The Spiritual Hub' },
+  { name: 'Coorg', path: '/domestic-tours?dest=coorg', description: 'The Scotland of India' },
+  { name: 'Delhi', path: '/domestic-tours?dest=delhi', description: 'The Historic Capital' },
+  { name: 'Hampi', path: '/domestic-tours?dest=hampi', description: 'Ruins of Vijayanagara' },
+  { name: 'Kanyakumari', path: '/domestic-tours?dest=kanyakumari', description: 'The Southernmost Tip' },
+  { name: 'Leh Ladakh', path: '/domestic-tours?dest=leh-ladakh', description: 'Land of High Passes' },
+  { name: 'Manali', path: '/domestic-tours?dest=manali', description: 'The Adventure Haven' },
+  { name: 'Munnar', path: '/domestic-tours?dest=munnar', description: 'The Tea Paradise' },
+  { name: 'Mysore', path: '/domestic-tours?dest=mysore', description: 'The Palace City' },
+  { name: 'Pondicherry', path: '/domestic-tours?dest=pondicherry', description: 'French Riviera of the East' },
+  { name: 'Rameswaram', path: '/domestic-tours?dest=rameswaram', description: 'The Sacred Island' },
+  { name: 'Rishikesh', path: '/domestic-tours?dest=rishikesh', description: 'Yoga Capital of the World' },
+  { name: 'Varanasi', path: '/domestic-tours?dest=varanasi', description: 'The Eternal Holy City' },
+  { name: 'Wayanad', path: '/domestic-tours?dest=wayanad', description: 'The Green Retreat' },
+  { name: 'Yercaud', path: '/domestic-tours?dest=yercaud', description: 'Jewel of the South' }
 ];
 
 const internationalSubmenu = [
   { name: 'Dubai', path: '/international-tours?dest=dubai', description: 'The Golden City' },
+  { name: 'Thailand', path: '/international-tours?dest=thailand', description: 'Land of Smiles' },
+  { name: 'Singapore', path: '/international-tours?dest=singapore', description: 'The Garden City' },
+  { name: 'Malaysia', path: '/international-tours?dest=malaysia', description: 'Truly Asia' },
   { name: 'Bali', path: '/international-tours?dest=bali', description: 'Island of Gods' },
   { name: 'Maldives', path: '/international-tours?dest=maldives', description: 'Luxury Lagoon Escape' },
-  { name: 'Thailand & Singapore', path: '/international-tours?dest=thailand', description: 'Vibrant Cities & Beaches' },
-  { name: 'Malaysia', path: '/international-tours?dest=malaysia', description: 'Colonial & Islands' },
-  { name: 'Vietnam', path: '/international-tours?dest=vietnam', description: 'Timeless Charm & History' }
+  { name: 'Vietnam', path: '/international-tours?dest=vietnam', description: 'Timeless Charm & History' },
+  { name: 'Europe', path: '/international-tours?dest=europe', description: 'Dream Continent Tour' },
+  { name: 'Sri Lanka', path: '/international-tours?dest=sri-lanka', description: 'Pearl of the Indian Ocean' },
+  { name: 'Switzerland', path: '/international-tours?dest=switzerland', description: 'The Alpine Paradise' },
+  { name: 'Turkey', path: '/international-tours?dest=turkey', description: 'Where East Meets West' }
 ];
 
 export const Navbar: React.FC = () => {
@@ -110,7 +134,7 @@ export const Navbar: React.FC = () => {
         >
           <div className="flex h-10 sm:h-11 items-center justify-between">
             {/* Logo */}
-            <div className="flex-shrink-0">
+            <div className="shrink-0">
               <Link to="/" className="flex items-center" title="Heaven11 Holidays">
                 <div className="bg-gradient-premium px-2 sm:px-3.5 py-0.5 rounded-lg border border-white/15 shadow-md flex items-center justify-center">
                   <Logo className="h-7 sm:h-8.5 w-auto" />
@@ -144,14 +168,14 @@ export const Navbar: React.FC = () => {
                           to={item.path}
                           className={`relative px-2.5 py-1.5 text-xs font-semibold rounded-lg transition-all duration-300 flex items-center gap-1 ${
                             isActive
-                              ? 'text-[#00E5FF] font-bold'
+                              ? 'text-accent font-bold'
                               : 'text-white/85 hover:text-white hover:bg-white/5'
                           }`}
                         >
                           {item.name}
                           <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-chevron-down opacity-70 group-hover:rotate-180 transition-transform duration-300"><path d="m6 9 6 6 6-6"/></svg>
                           {isActive && (
-                            <span className="absolute bottom-0 left-2.5 right-2.5 h-0.5 bg-[#00E5FF] rounded-full shadow-[0_0_8px_rgba(0,229,255,0.8)]" />
+                            <span className="absolute bottom-0 left-2.5 right-2.5 h-0.5 bg-accent rounded-full shadow-[0_0_8px_rgba(0,229,255,0.8)]" />
                           )}
                         </Link>
                         
@@ -162,7 +186,11 @@ export const Navbar: React.FC = () => {
                               animate={{ opacity: 1, y: 0, scale: 1 }}
                               exit={{ opacity: 0, y: 8, scale: 0.95 }}
                               transition={{ duration: 0.15, ease: 'easeOut' }}
-                              className="absolute top-full left-1/2 -translate-x-1/2 mt-1 w-[260px] rounded-xl border border-white/10 bg-slate-950/95 backdrop-blur-xl shadow-2xl p-2.5 z-50 flex flex-col gap-0.5"
+                              className={`absolute top-full right-0 mt-1 rounded-xl border border-white/10 bg-slate-950/95 backdrop-blur-xl shadow-2xl p-3 z-50 grid gap-1 ${
+                                item.type === 'domestic'
+                                  ? 'w-[780px] grid-cols-3'
+                                  : 'w-[520px] grid-cols-2'
+                              }`}
                             >
                               {submenuItems.map((sub) => (
                                 <Link
@@ -170,17 +198,19 @@ export const Navbar: React.FC = () => {
                                   to={sub.path}
                                   className="group/sub flex flex-col px-3 py-1.5 rounded-lg text-left hover:bg-white/5 transition-all duration-200"
                                 >
-                                  <span className="text-xs font-bold text-white group-hover/sub:text-[#00E5FF] transition-colors flex items-center justify-between">
+                                  <span className="text-xs font-bold text-white group-hover/sub:text-accent transition-colors flex items-center justify-between">
                                     {sub.name}
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-arrow-right opacity-0 -translate-x-1 group-hover/sub:opacity-100 group-hover/sub:translate-x-0 transition-all duration-250 text-[#00E5FF]"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-arrow-right opacity-0 -translate-x-1 group-hover/sub:opacity-100 group-hover/sub:translate-x-0 transition-all duration-250 text-accent"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
                                   </span>
                                   <span className="text-[10px] text-slate-400 mt-0.5 leading-none">{sub.description}</span>
                                 </Link>
                               ))}
-                              <div className="h-px bg-white/10 my-1.5" />
+                              <div className={`h-px bg-white/10 my-1.5 ${item.type === 'domestic' ? 'col-span-3' : 'col-span-2'}`} />
                               <Link
                                 to={item.path}
-                                className="px-3 py-1.5 text-center text-[10px] font-bold tracking-wider text-[#00E5FF] uppercase hover:underline flex items-center justify-center gap-1"
+                                className={`px-3 py-1.5 text-center text-[10px] font-bold tracking-wider text-accent uppercase hover:underline flex items-center justify-center gap-1 ${
+                                  item.type === 'domestic' ? 'col-span-3' : 'col-span-2'
+                                }`}
                               >
                                 View All {item.name}
                               </Link>
@@ -197,13 +227,13 @@ export const Navbar: React.FC = () => {
                       to={item.path}
                       className={`relative px-2.5 py-1.5 text-xs font-semibold rounded-lg transition-all duration-300 ${
                         isActive
-                          ? 'text-[#00E5FF] font-bold'
+                          ? 'text-accent font-bold'
                           : 'text-white/85 hover:text-white hover:bg-white/5'
                       }`}
                     >
                       {item.name}
                       {isActive && (
-                        <span className="absolute bottom-0 left-2.5 right-2.5 h-0.5 bg-[#00E5FF] rounded-full shadow-[0_0_8px_rgba(0,229,255,0.8)]" />
+                        <span className="absolute bottom-0 left-2.5 right-2.5 h-0.5 bg-accent rounded-full shadow-[0_0_8px_rgba(0,229,255,0.8)]" />
                       )}
                     </Link>
                   );
@@ -217,16 +247,16 @@ export const Navbar: React.FC = () => {
                   className="flex items-center gap-1.5 group text-left mr-1"
                   title="Call: +91 91599 96556"
                 >
-                  <div className="flex h-8 w-8 items-center justify-center rounded-full bg-white/15 group-hover:bg-[#00E5FF]/20 text-[#00E5FF] transition-all duration-300">
+                  <div className="flex h-8 w-8 items-center justify-center rounded-full bg-white/15 group-hover:bg-accent/20 text-accent transition-all duration-300">
                     <Phone className="h-3.5 w-3.5" />
                   </div>
                   <div className="flex flex-col leading-none">
-                    <span className="text-[11px] font-bold text-white group-hover:text-[#00E5FF] transition-colors">Call Now</span>
+                    <span className="text-[11px] font-bold text-white group-hover:text-accent transition-colors">Call Now</span>
                   </div>
                 </a>
                 <button
                   onClick={() => setIsQuoteOpen(true)}
-                  className="px-4 py-2 text-[11px] font-black text-slate-900 bg-[#00E5FF] hover:bg-white hover:text-slate-900 rounded-full shadow-lg shadow-[#00E5FF]/10 hover:shadow-[#00E5FF]/20 transition-all duration-300 cursor-pointer"
+                  className="px-4 py-2 text-[11px] font-black text-slate-900 bg-accent hover:bg-white hover:text-slate-900 rounded-full shadow-lg shadow-accent/10 hover:shadow-accent/20 transition-all duration-300 cursor-pointer"
                 >
                   Get a Free Quote
                 </button>
@@ -237,7 +267,7 @@ export const Navbar: React.FC = () => {
             <div className="xl:hidden flex items-center gap-1.5">
               <button
                 onClick={() => setIsQuoteOpen(true)}
-                className="px-3 py-1.5 text-[11px] font-extrabold text-slate-900 bg-[#00E5FF] rounded-full shadow-md cursor-pointer"
+                className="px-3 py-1.5 text-[11px] font-extrabold text-slate-900 bg-accent rounded-full shadow-md cursor-pointer"
               >
                 Quote
               </button>
@@ -285,7 +315,7 @@ export const Navbar: React.FC = () => {
                       onClick={toggleSubmenu}
                       className={`w-full flex items-center justify-between px-4 py-2.5 text-base font-semibold rounded-xl transition-all text-left ${
                         isActive || isSubmenuOpen
-                          ? 'bg-[#00E5FF]/10 text-[#00E5FF] font-bold'
+                          ? 'bg-accent/10 text-accent font-bold'
                           : 'text-white/80 hover:text-white hover:bg-white/5'
                       }`}
                     >
@@ -320,7 +350,7 @@ export const Navbar: React.FC = () => {
                           <Link
                             to={item.path}
                             onClick={() => setIsOpen(false)}
-                            className="px-4 py-2 text-sm font-bold text-[#00E5FF] hover:underline"
+                            className="px-4 py-2 text-sm font-bold text-accent hover:underline"
                           >
                             View All {item.name}
                           </Link>
@@ -349,7 +379,7 @@ export const Navbar: React.FC = () => {
                   onClick={() => setIsOpen(false)}
                   className={`px-4 py-2.5 text-base font-semibold rounded-xl transition-all ${
                     isActive
-                      ? 'bg-[#00E5FF]/10 text-[#00E5FF] font-bold'
+                      ? 'bg-accent/10 text-accent font-bold'
                       : 'text-white/80 hover:text-white hover:bg-white/5'
                   }`}
                 >
@@ -365,13 +395,13 @@ export const Navbar: React.FC = () => {
                   href="tel:+919159996556"
                   className="flex items-center justify-center gap-2 rounded-xl bg-white/5 border border-white/10 py-2.5 font-semibold text-white hover:bg-white/10 transition-all text-xs"
                 >
-                  <Phone className="h-4 w-4 text-[#00E5FF]" /> +91 91599 96556
+                  <Phone className="h-4 w-4 text-accent" /> +91 91599 96556
                 </a>
                 <a
                   href="tel:+918148604780"
                   className="flex items-center justify-center gap-2 rounded-xl bg-white/5 border border-white/10 py-2.5 font-semibold text-white hover:bg-white/10 transition-all text-xs"
                 >
-                  <Phone className="h-4 w-4 text-[#00E5FF]" /> +91 81486 04780
+                  <Phone className="h-4 w-4 text-accent" /> +91 81486 04780
                 </a>
               </div>
               
@@ -399,7 +429,7 @@ export const Navbar: React.FC = () => {
                   setIsOpen(false);
                   setIsQuoteOpen(true);
                 }}
-                className="rounded-xl bg-gradient-to-r from-[#00E5FF] to-[#1E8DC5] py-3 font-extrabold text-slate-900 shadow-md hover:shadow-lg transition-all cursor-pointer text-xs tracking-wider"
+                className="rounded-xl bg-linear-to-r from-accent to-[#1E8DC5] py-3 font-extrabold text-slate-900 shadow-md hover:shadow-lg transition-all cursor-pointer text-xs tracking-wider"
               >
                 REQUEST FREE QUOTE
               </button>

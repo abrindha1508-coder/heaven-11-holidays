@@ -1,12 +1,52 @@
 import type { Destination } from '../types/destination';
 
+// Domestic Tour Images
+import kashmirImg from '../assets/domestic tour Packages/Kashmir/srinagar.jpeg';
+import keralaImg from '../assets/domestic tour Packages/Alleppey/Houseboat.jpg';
+import ootyImg from '../assets/domestic tour Packages/ooty/Ooty Lake.jpg';
+import kodaikanalImg from '../assets/domestic tour Packages/Kodaikanal/Kodai Lake.jpg';
+import goaImg from '../assets/domestic tour Packages/Goa/Calangute Beach.webp';
+import andamanImg from '../assets/domestic tour Packages/Andaman/Radhanagar Beach.jpg';
+import rajasthanImg from '../assets/domestic tour Packages/Jaipur/Hawa Mahal.jpg';
+import himachalImg from '../assets/domestic tour Packages/Shimla/Shimla.jpg';
+
+import agraImg from '../assets/domestic tour Packages/Agra/Taj Mahal.jpeg';
+import alleppeyImg from '../assets/domestic tour Packages/Alleppey/Houseboat.jpg';
+import amritsarImg from '../assets/domestic tour Packages/Amritsar/Golden Temple.avif';
+import coorgImg from '../assets/domestic tour Packages/Coorg/Abbey Falls.jpg';
+import delhiImg from '../assets/domestic tour Packages/Delhi/India Gate.avif';
+import hampiImg from '../assets/domestic tour Packages/Hampi/Stone Chariot.jpg';
+import kanyakumariImg from '../assets/domestic tour Packages/Kanyakumari/Vivekananda Rock.jpeg';
+import lehLadakhImg from '../assets/domestic tour Packages/Leh Ladakh/Pangong Lake.jpg';
+import manaliImg from '../assets/domestic tour Packages/Manali/Solang Valley.jpg';
+import munnarImg from '../assets/domestic tour Packages/Munnar/Tea Gardens.jpg';
+import mysoreImg from '../assets/domestic tour Packages/Mysore/Mysore Palace.jpg';
+import pondicherryImg from '../assets/domestic tour Packages/Pondicherry/Rock Beach.jpg';
+import rameswaramImg from '../assets/domestic tour Packages/Rameswaram/Dhanushkodi.jpg';
+import rishikeshImg from '../assets/domestic tour Packages/Rishikesh/Ram Jhula.jpeg';
+import varanasiImg from '../assets/domestic tour Packages/Varanasi/Varanasi.jpg';
+import wayanadImg from '../assets/domestic tour Packages/Wayanad/Edakkal Caves.webp';
+import yercaudImg from '../assets/domestic tour Packages/Yercaud/Yercaud - Yercaud Lake.jpg';
+
+// International Tour Images
+import dubaiImg from '../assets/International Tour Packages/Dubai/Burj Khalifa.jpg';
+import thailandImg from '../assets/International Tour Packages/Thailand/Phuket-1.jpg';
+import singaporeImg from '../assets/International Tour Packages/Singapore/Marina Bay Sands.jpg';
+import malaysiaImg from '../assets/International Tour Packages/Malaysia/Petronas Towers.jpg';
+import baliImg from '../assets/International Tour Packages/Bali/Nusa Penida.jpeg';
+import maldivesImg from '../assets/International Tour Packages/Maldives/Water Villas.jpg';
+import vietnamImg from '../assets/International Tour Packages/Vietnam/Halong Bay1.jpg';
+import europeImg from '../assets/International Tour Packages/Paris/Eiffel Tower.jpeg';
+import sriLankaImg from '../assets/International Tour Packages/Sri Lanka/Sigiriya.jpg';
+import switzerlandImg from '../assets/International Tour Packages/Switzerland/Interlaken.jpg';
+import turkeyImg from '../assets/International Tour Packages/Turkey/Cappadocia.jpeg';
+
 export const destinations: Destination[] = [
   // Domestic Destinations
   {
     id: 'kashmir',
     name: 'Kashmir',
-    // Dal Lake with snow-capped mountains, Kashmir
-    image: '/kashmir.jpg',
+    image: kashmirImg,
     description: 'The Paradise on Earth. Experience snow-capped mountains, Shikara rides on Dal Lake, and breathtaking valleys.',
     type: 'domestic',
     isHoneymoon: true,
@@ -22,8 +62,7 @@ export const destinations: Destination[] = [
   {
     id: 'kerala',
     name: 'Kerala',
-    // Alleppey backwaters houseboat Kerala
-    image: 'https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?auto=format&fit=crop&w=800&q=80',
+    image: keralaImg,
     description: 'God\'s Own Country. Famous for serene backwaters, houseboats, spice plantations, and lush tea gardens.',
     type: 'domestic',
     isHoneymoon: true,
@@ -39,8 +78,7 @@ export const destinations: Destination[] = [
   {
     id: 'ooty',
     name: 'Ooty',
-    // Nilgiri hills green tea estates Ooty
-    image: '/ooty.jpg',
+    image: ootyImg,
     description: 'The Queen of Hill Stations. Nested in Nilgiri Hills, offering panoramic views, botanical gardens, and toy train rides.',
     type: 'domestic',
     isHoneymoon: false,
@@ -56,8 +94,7 @@ export const destinations: Destination[] = [
   {
     id: 'kodaikanal',
     name: 'Kodaikanal',
-    // Kodaikanal lake misty hills
-    image: 'https://images.unsplash.com/photo-1501854140801-50d01698950b?auto=format&fit=crop&w=800&q=80',
+    image: kodaikanalImg,
     description: 'The Gift of the Forest. Beautiful misty hills, pine forests, pristine lakes, and tranquil walking trails.',
     type: 'domestic',
     isHoneymoon: true,
@@ -73,8 +110,7 @@ export const destinations: Destination[] = [
   {
     id: 'goa',
     name: 'Goa',
-    // Goa beach golden sand blue sea
-    image: 'https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?auto=format&fit=crop&w=800&q=80',
+    image: goaImg,
     description: 'The Land of Sun, Sand, and Spices. Famous for golden sand beaches, historic churches, and thrilling water sports.',
     type: 'domestic',
     isHoneymoon: false,
@@ -90,8 +126,7 @@ export const destinations: Destination[] = [
   {
     id: 'andaman',
     name: 'Andaman & Nicobar',
-    // Andaman crystal clear blue water beach
-    image: 'https://images.unsplash.com/photo-1559128010-7c1ad6e1b6a5?auto=format&fit=crop&w=800&q=80',
+    image: andamanImg,
     description: 'Tropical Paradise. Crystal clear blue waters, exquisite coral reefs, and tranquil private beaches.',
     type: 'domestic',
     isHoneymoon: true,
@@ -107,8 +142,7 @@ export const destinations: Destination[] = [
   {
     id: 'rajasthan',
     name: 'Rajasthan',
-    // Hawa Mahal palace Jaipur Rajasthan
-    image: 'https://images.unsplash.com/photo-1599661046289-e31897846e41?auto=format&fit=crop&w=800&q=80',
+    image: rajasthanImg,
     description: 'The Land of Kings. Explore glorious heritage palaces, golden desert safaris, and colorful cultural festivals.',
     type: 'domestic',
     isHoneymoon: false,
@@ -124,8 +158,7 @@ export const destinations: Destination[] = [
   {
     id: 'himachal',
     name: 'Himachal Pradesh',
-    // Manali snow mountains Rohtang Pass
-    image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=800&q=80',
+    image: himachalImg,
     description: 'The Snowy Splendor. Magnificent valleys, adventure sports, paragliding in Solang Valley, and spiritual retreats.',
     type: 'domestic',
     isHoneymoon: false,
@@ -138,13 +171,284 @@ export const destinations: Destination[] = [
     bestTime: 'March to June & Oct to Dec',
     weather: '5°C - 20°C'
   },
+  {
+    id: 'agra',
+    name: 'Agra',
+    image: agraImg,
+    description: 'Home of the Taj Mahal. Witness the grand Mughal architecture, historic Agra Fort, and the rich legacy of historic India.',
+    type: 'domestic',
+    isHoneymoon: false,
+    price: 7999,
+    rating: 4.8,
+    duration: '2 Nights / 3 Days',
+    highlights: ['Taj Mahal', 'Agra Fort', 'Fatehpur Sikri', 'Mehtab Bagh'],
+    popular: false,
+    country: 'India',
+    bestTime: 'October to March',
+    weather: '12°C - 28°C'
+  },
+  {
+    id: 'alleppey',
+    name: 'Alleppey',
+    image: alleppeyImg,
+    description: 'Venice of the East. Float along palm-fringed backwaters in luxury houseboats and see scenic village life.',
+    type: 'domestic',
+    isHoneymoon: true,
+    price: 10999,
+    rating: 4.8,
+    duration: '3 Nights / 4 Days',
+    highlights: ['Backwater Cruise', 'Houseboat Stay', 'Alappuzha Beach', 'Kuttanad Paddy Fields'],
+    popular: true,
+    country: 'India',
+    bestTime: 'September to March',
+    weather: '22°C - 32°C'
+  },
+  {
+    id: 'amritsar',
+    name: 'Amritsar',
+    image: amritsarImg,
+    description: 'The Spiritual Hub. Visit the majestic Golden Temple, witness the Wagah Border Ceremony, and taste Punjabi cuisine.',
+    type: 'domestic',
+    isHoneymoon: false,
+    price: 8999,
+    rating: 4.9,
+    duration: '3 Nights / 4 Days',
+    highlights: ['Golden Temple', 'Wagah Border Ceremony', 'Jallianwala Bagh', 'Partition Museum'],
+    popular: false,
+    country: 'India',
+    bestTime: 'October to March',
+    weather: '10°C - 26°C'
+  },
+  {
+    id: 'coorg',
+    name: 'Coorg',
+    image: coorgImg,
+    description: 'The Scotland of India. Rich coffee plantations, mist-covered green hills, cascading waterfalls, and scenic trails.',
+    type: 'domestic',
+    isHoneymoon: true,
+    price: 9999,
+    rating: 4.7,
+    duration: '3 Nights / 4 Days',
+    highlights: ['Abbey Falls', 'Raja\'s Seat', 'Dubare Elephant Camp', 'Namdroling Monastery'],
+    popular: false,
+    country: 'India',
+    bestTime: 'October to March',
+    weather: '15°C - 25°C'
+  },
+  {
+    id: 'delhi',
+    name: 'Delhi',
+    image: delhiImg,
+    description: 'The Historic Capital. Explore the blend of old and new: historic red sandstone monuments, bazaars, and modern structures.',
+    type: 'domestic',
+    isHoneymoon: false,
+    price: 6999,
+    rating: 4.6,
+    duration: '3 Nights / 4 Days',
+    highlights: ['India Gate', 'Qutub Minar', 'Red Fort', 'Lotus Temple'],
+    popular: false,
+    country: 'India',
+    bestTime: 'October to March',
+    weather: '15°C - 30°C'
+  },
+  {
+    id: 'hampi',
+    name: 'Hampi',
+    image: hampiImg,
+    description: 'Ruins of Vijayanagara. Step back in time among ancient stone temples, rock-cut monuments, and bouldered valleys.',
+    type: 'domestic',
+    isHoneymoon: false,
+    price: 8999,
+    rating: 4.8,
+    duration: '3 Nights / 4 Days',
+    highlights: ['Virupaksha Temple', 'Stone Chariot', 'Vithala Temple Complex', 'Hampi Bazaar'],
+    popular: false,
+    country: 'India',
+    bestTime: 'October to March',
+    weather: '18°C - 32°C'
+  },
+  {
+    id: 'kanyakumari',
+    name: 'Kanyakumari',
+    image: kanyakumariImg,
+    description: 'The Lands End. See the spectacular sunset and sunrise over the confluence of three oceans at India\'s southern tip.',
+    type: 'domestic',
+    isHoneymoon: false,
+    price: 5999,
+    rating: 4.7,
+    duration: '2 Nights / 3 Days',
+    highlights: ['Vivekananda Rock Memorial', 'Thiruvalluvar Statue', 'Kanyakumari Beach', 'Sunset View Point'],
+    popular: false,
+    country: 'India',
+    bestTime: 'October to March',
+    weather: '22°C - 32°C'
+  },
+  {
+    id: 'leh-ladakh',
+    name: 'Leh Ladakh',
+    image: lehLadakhImg,
+    description: 'Land of High Passes. Stunning blue lakes, cold desert landscapes, ancient monasteries, and thrill-seeking motor tracks.',
+    type: 'domestic',
+    isHoneymoon: false,
+    price: 24999,
+    rating: 4.9,
+    duration: '6 Nights / 7 Days',
+    highlights: ['Pangong Tso Lake', 'Nubra Valley', 'Magnetic Hill', 'Khardung La Pass'],
+    popular: true,
+    country: 'India',
+    bestTime: 'May to September',
+    weather: '5°C - 20°C'
+  },
+  {
+    id: 'manali',
+    name: 'Manali',
+    image: manaliImg,
+    description: 'The Adventure Haven. Snow-capped valleys, river rafting, paragliding in Solang, and majestic Himalayan views.',
+    type: 'domestic',
+    isHoneymoon: true,
+    price: 11999,
+    rating: 4.8,
+    duration: '4 Nights / 5 Days',
+    highlights: ['Solang Valley paragliding', 'Rohtang Pass Snow Tour', 'Hadimba Temple', 'Jogini Waterfalls'],
+    popular: true,
+    country: 'India',
+    bestTime: 'March to June & Oct to Dec',
+    weather: '5°C - 20°C'
+  },
+  {
+    id: 'munnar',
+    name: 'Munnar',
+    image: munnarImg,
+    description: 'The Tea Paradise. Vast rolling green tea plantations, misty valleys, scenic lakes, and refreshing cool breeze.',
+    type: 'domestic',
+    isHoneymoon: true,
+    price: 9999,
+    rating: 4.8,
+    duration: '3 Nights / 4 Days',
+    highlights: ['Munnar Tea Gardens', 'Echo Point boating', 'Eravikulam National Park', 'Mattupetty Dam'],
+    popular: true,
+    country: 'India',
+    bestTime: 'September to May',
+    weather: '12°C - 25°C'
+  },
+  {
+    id: 'mysore',
+    name: 'Mysore',
+    image: mysoreImg,
+    description: 'The Palace City. Witness the grand heritage of Mysore Palace, explore Chamundi Hills, and buy royal sandalwood products.',
+    type: 'domestic',
+    isHoneymoon: false,
+    price: 6999,
+    rating: 4.7,
+    duration: '2 Nights / 3 Days',
+    highlights: ['Mysore Palace', 'Chamundi Hills Temple', 'Brindavan Gardens', 'Mysore Zoo'],
+    popular: false,
+    country: 'India',
+    bestTime: 'October to March',
+    weather: '18°C - 30°C'
+  },
+  {
+    id: 'pondicherry',
+    name: 'Pondicherry',
+    image: pondicherryImg,
+    description: 'French Riviera of India. Enjoy relaxing Rock Beach, stroll French Quarter lanes, and experience spiritual Auroville.',
+    type: 'domestic',
+    isHoneymoon: false,
+    price: 7999,
+    rating: 4.7,
+    duration: '3 Nights / 4 Days',
+    highlights: ['Auroville Ashram', 'Rock Beach walking', 'French Colony tour', 'Paradise Beach'],
+    popular: false,
+    country: 'India',
+    bestTime: 'October to March',
+    weather: '22°C - 32°C'
+  },
+  {
+    id: 'rameswaram',
+    name: 'Rameswaram',
+    image: rameswaramImg,
+    description: 'The Sacred Island. Stroll through the corridors of Ramanathaswamy Temple, view Pamban Bridge, and visit ghost town Dhanushkodi.',
+    type: 'domestic',
+    isHoneymoon: false,
+    price: 6999,
+    rating: 4.8,
+    duration: '2 Nights / 3 Days',
+    highlights: ['Ramanathaswamy Temple', 'Dhanushkodi Beach', 'Pamban Bridge', 'Agni Theertham'],
+    popular: false,
+    country: 'India',
+    bestTime: 'October to March',
+    weather: '22°C - 32°C'
+  },
+  {
+    id: 'rishikesh',
+    name: 'Rishikesh',
+    image: rishikeshImg,
+    description: 'Yoga Capital of the World. Go river rafting, visit ancient ashrams, and watch Ganga Aarti at Triveni Ghat.',
+    type: 'domestic',
+    isHoneymoon: false,
+    price: 9999,
+    rating: 4.8,
+    duration: '3 Nights / 4 Days',
+    highlights: ['River Rafting', 'Ram Jhula & Laxman Jhula', 'Triveni Ghat Ganga Aarti', 'Beatles Ashram'],
+    popular: false,
+    country: 'India',
+    bestTime: 'September to April',
+    weather: '12°C - 30°C'
+  },
+  {
+    id: 'varanasi',
+    name: 'Varanasi',
+    image: varanasiImg,
+    description: 'The Eternal Holy City. Spiritual morning boat rides, grand Ganga Aarti rituals, and ancient riverbank temples.',
+    type: 'domestic',
+    isHoneymoon: false,
+    price: 8999,
+    rating: 4.9,
+    duration: '3 Nights / 4 Days',
+    highlights: ['Kashi Vishwanath Temple', 'Dashashwamedh Ghat Aarti', 'Morning Ganges Boat Ride', 'Sarnath Ruins'],
+    popular: false,
+    country: 'India',
+    bestTime: 'October to March',
+    weather: '10°C - 28°C'
+  },
+  {
+    id: 'wayanad',
+    name: 'Wayanad',
+    image: wayanadImg,
+    description: 'The Green Retreat. Hike up to ancient Edakkal Caves, see waterfalls, and explore cardamom forests.',
+    type: 'domestic',
+    isHoneymoon: true,
+    price: 8999,
+    rating: 4.7,
+    duration: '3 Nights / 4 Days',
+    highlights: ['Edakkal Caves', 'Soochipara Waterfalls', 'Banasura Sagar Dam', 'Wayanad Wildlife Sanctuary'],
+    popular: false,
+    country: 'India',
+    bestTime: 'October to May',
+    weather: '15°C - 28°C'
+  },
+  {
+    id: 'yercaud',
+    name: 'Yercaud',
+    image: yercaudImg,
+    description: 'Jewel of the South. Serene Eastern Ghats hill station famous for orange orchards, lakes, and panoramic viewpoints.',
+    type: 'domestic',
+    isHoneymoon: false,
+    price: 5999,
+    rating: 4.5,
+    duration: '2 Nights / 3 Days',
+    highlights: ['Yercaud Lake boating', 'Pagoda Point', 'Lady\'s Seat', 'Killiyur Falls'],
+    popular: false,
+    country: 'India',
+    bestTime: 'October to June',
+    weather: '15°C - 25°C'
+  },
 
   // International Destinations
   {
     id: 'dubai',
     name: 'Dubai',
-    // Burj Khalifa Dubai city skyline
-    image: 'https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=800&q=80',
+    image: dubaiImg,
     description: 'The Golden City. Ultramodern skyscrapers, luxury shopping, thrilling desert safaris, and futuristic attractions.',
     type: 'international',
     isHoneymoon: false,
@@ -160,8 +464,7 @@ export const destinations: Destination[] = [
   {
     id: 'thailand',
     name: 'Thailand',
-    // Wat Arun temple Bangkok river Thailand
-    image: 'https://images.unsplash.com/photo-1555400038-63f5ba517a47?auto=format&fit=crop&w=800&q=80',
+    image: thailandImg,
     description: 'The Land of Smiles. Glittering Buddhist temples, vibrant street markets, tropical beaches, and active nightlife.',
     type: 'international',
     isHoneymoon: false,
@@ -177,8 +480,7 @@ export const destinations: Destination[] = [
   {
     id: 'singapore',
     name: 'Singapore',
-    // Marina Bay Sands Singapore at night
-    image: 'https://images.unsplash.com/photo-1525625293386-3f8f99389edd?auto=format&fit=crop&w=800&q=80',
+    image: singaporeImg,
     description: 'The Garden City. Futuristic supertrees, top-notch amusement parks, and multi-cultural gourmet dining.',
     type: 'international',
     isHoneymoon: false,
@@ -194,8 +496,7 @@ export const destinations: Destination[] = [
   {
     id: 'malaysia',
     name: 'Malaysia',
-    // Petronas Twin Towers KL Malaysia night
-    image: 'https://images.unsplash.com/photo-1596422846543-75c6fc197f07?auto=format&fit=crop&w=800&q=80',
+    image: malaysiaImg,
     description: 'Truly Asia. Iconic Petronas twin towers, colonial architecture, rainforests, and stunning tropical islands.',
     type: 'international',
     isHoneymoon: false,
@@ -211,8 +512,7 @@ export const destinations: Destination[] = [
   {
     id: 'bali',
     name: 'Bali',
-    // Kelingking Beach cliffs Nusa Penida Bali
-    image: 'https://images.unsplash.com/photo-1573790387438-4da905039392?auto=format&fit=crop&w=800&q=80',
+    image: baliImg,
     description: 'The Island of Gods. A magical mix of volcanic mountains, sandy beaches, cliffside temples, and rice terraces.',
     type: 'international',
     isHoneymoon: true,
@@ -228,8 +528,7 @@ export const destinations: Destination[] = [
   {
     id: 'maldives',
     name: 'Maldives',
-    // Maldives overwater villas turquoise lagoon
-    image: 'https://images.unsplash.com/photo-1514282401047-d79a71a590e8?auto=format&fit=crop&w=800&q=80',
+    image: maldivesImg,
     description: 'The Ultimate Luxury Escape. Secluded overwater villas, gorgeous coral reefs, private white-sand lagoons.',
     type: 'international',
     isHoneymoon: true,
@@ -245,8 +544,7 @@ export const destinations: Destination[] = [
   {
     id: 'vietnam',
     name: 'Vietnam',
-    // Ha Long Bay limestone karsts cruise boats Vietnam
-    image: 'https://images.unsplash.com/photo-1528360983277-13d401cdc186?auto=format&fit=crop&w=800&q=80',
+    image: vietnamImg,
     description: 'Timeless Charm. Cruising Halong Bay, traversing French-colonial lanes in Hanoi, and tasting delectable street food.',
     type: 'international',
     isHoneymoon: false,
@@ -262,8 +560,7 @@ export const destinations: Destination[] = [
   {
     id: 'europe',
     name: 'Europe Scenic Highlights',
-    // Eiffel Tower Paris France at sunset
-    image: 'https://images.unsplash.com/photo-1499856871958-5b9627545d1a?auto=format&fit=crop&w=800&q=80',
+    image: europeImg,
     description: 'Dream Continent Tour. Experience the Eiffel Tower in Paris, scenic Swiss Alps train rides, and canals of Venice.',
     type: 'international',
     isHoneymoon: true,
@@ -275,5 +572,53 @@ export const destinations: Destination[] = [
     country: 'France, Switzerland, Italy',
     bestTime: 'May to September',
     weather: '12°C - 24°C'
+  },
+  {
+    id: 'sri-lanka',
+    name: 'Sri Lanka',
+    image: sriLankaImg,
+    description: 'The Pearl of the Indian Ocean. Beautiful golden beaches, historic Sigiriya rock fortress, and lush tea estates in Ella.',
+    type: 'international',
+    isHoneymoon: true,
+    price: 24999,
+    rating: 4.7,
+    duration: '4 Nights / 5 Days',
+    highlights: ['Sigiriya Rock Fortress', 'Ella Train Ride', 'Temple of the Tooth', 'Mirissa Beach'],
+    popular: false,
+    country: 'Sri Lanka',
+    bestTime: 'December to April',
+    weather: '22°C - 30°C'
+  },
+  {
+    id: 'switzerland',
+    name: 'Switzerland',
+    image: switzerlandImg,
+    description: 'The Alpine Paradise. Ride scenic trains through snow-capped Swiss Alps, explore Interlaken, and view Zurich lakes.',
+    type: 'international',
+    isHoneymoon: true,
+    price: 99999,
+    rating: 4.9,
+    duration: '6 Nights / 7 Days',
+    highlights: ['Mt. Titlis Cable Car', 'Interlaken Chalet Stay', 'Lucerne Lake Cruise', 'Scenic Bernina Express'],
+    popular: true,
+    country: 'Switzerland',
+    bestTime: 'June to September & Dec to Mar',
+    weather: '-2°C - 18°C'
+  },
+  {
+    id: 'turkey',
+    name: 'Turkey',
+    image: turkeyImg,
+    description: 'Where East Meets West. Fly in a hot air balloon over Cappadocia, visit historic Istanbul mosques, and explore ancient ruins.',
+    type: 'international',
+    isHoneymoon: false,
+    price: 45999,
+    rating: 4.8,
+    duration: '5 Nights / 6 Days',
+    highlights: ['Cappadocia Hot Air Balloon', 'Hagia Sophia Istanbul', 'Pamukkale Thermal Pools', 'Ephesus Ancient City'],
+    popular: false,
+    country: 'Turkey',
+    bestTime: 'April to May & Sept to Oct',
+    weather: '12°C - 26°C'
   }
 ];

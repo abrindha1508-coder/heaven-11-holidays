@@ -1,5 +1,21 @@
 import type { TourPackage } from '../types/package';
 
+// Import local assets for packages
+import dubaiPkgImg from '../assets/International Tour Packages/Dubai/Burj Khalifa.jpg';
+import thailandPkgImg from '../assets/International Tour Packages/Thailand/Pattaya.jpg';
+import singaporePkgImg from '../assets/International Tour Packages/Singapore/Marina Bay Sands.jpg';
+import baliPkgImg from '../assets/International Tour Packages/Bali/Nusa Penida.jpeg';
+import maldivesPkgImg from '../assets/International Tour Packages/Maldives/Water Villas.jpg';
+import europePkgImg from '../assets/International Tour Packages/Paris/Eiffel Tower.jpeg';
+import vietnamPkgImg from '../assets/International Tour Packages/Vietnam/Halong Bay1.jpg';
+import malaysiaPkgImg from '../assets/International Tour Packages/Malaysia/Petronas Towers.jpg';
+
+// Honeymoon package assets
+import maldivesHoneyImg from '../assets/International Tour Packages/Maldives/Water Villas.jpeg';
+import baliHoneyImg from '../assets/International Tour Packages/Bali/Ubud.jpeg';
+import kashmirHoneyImg from '../assets/domestic tour Packages/Kashmir/srinagar.jpeg';
+import switzerlandHoneyImg from '../assets/International Tour Packages/Switzerland/Interlaken.jpg';
+
 export const packages: TourPackage[] = [
   // Trending Tour Packages
   {
@@ -12,8 +28,7 @@ export const packages: TourPackage[] = [
     discountPrice: 49999,
     rating: 4.9,
     reviewsCount: 182,
-    // Burj Khalifa Dubai skyline
-    image: 'https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=800&q=80',
+    image: dubaiPkgImg,
     highlights: ['Burj Khalifa 124th Floor', 'Desert Safari with BBQ Dinner', 'Dhow Cruise Marina', 'Dubai Mall & Aquarium'],
     inclusions: ['4-Star Deluxe Stays', 'Daily Breakfast & Dinner', 'Desert Safari Tour', 'Direct Airport Transfers'],
     exclusions: ['International Flights', 'Dirham Tourism Tax', 'Lunches & Personal expenses'],
@@ -34,8 +49,7 @@ export const packages: TourPackage[] = [
     discountPrice: 34999,
     rating: 4.7,
     reviewsCount: 156,
-    // Wat Arun temple Bangkok Thailand
-    image: 'https://images.unsplash.com/photo-1555400038-63f5ba517a47?auto=format&fit=crop&w=800&q=80',
+    image: thailandPkgImg,
     highlights: ['Pattaya Coral Island Speedboat', 'Bangkok Reclining Buddha', 'Safari World & Marine Park'],
     inclusions: ['3-Star Premium Stays', 'Daily Breakfast & Lunch', 'Speedboat Transfers', 'Accredited Local Guides'],
     exclusions: ['Airfare & Visa Fees', 'Personal expenses'],
@@ -56,8 +70,7 @@ export const packages: TourPackage[] = [
     discountPrice: 42999,
     rating: 4.8,
     reviewsCount: 165,
-    // Gardens by the Bay supertrees Singapore
-    image: 'https://images.unsplash.com/photo-1525625293386-3f8f99389edd?auto=format&fit=crop&w=800&q=80',
+    image: singaporePkgImg,
     highlights: ['Universal Studios Singapore', 'Gardens by the Bay Double Conservatories', 'Sentosa Cable Car'],
     inclusions: ['4-Star City Hotels', 'Daily Buffet Breakfast', 'Universal Studios Passes', 'Sling Transits'],
     exclusions: ['Airfare & Visa fees', 'Lunches & Dinners'],
@@ -78,8 +91,7 @@ export const packages: TourPackage[] = [
     discountPrice: 38999,
     rating: 4.9,
     reviewsCount: 194,
-    // Kelingking Beach Nusa Penida Bali
-    image: 'https://images.unsplash.com/photo-1573790387438-4da905039392?auto=format&fit=crop&w=800&q=80',
+    image: baliPkgImg,
     highlights: ['Ubud Rice Terraces & Swing', 'Tanah Lot Cliff Temple', 'Kelingking Beach Nusa Penida'],
     inclusions: ['Private Pool Villa Stay', 'Daily Breakfast', 'Nusa Penida Boat tickets', 'Private AC Sedan Transfers'],
     exclusions: ['Flights & Personal Tips'],
@@ -100,8 +112,7 @@ export const packages: TourPackage[] = [
     discountPrice: 75000,
     rating: 4.9,
     reviewsCount: 112,
-    // Maldives overwater bungalows crystal blue lagoon
-    image: 'https://images.unsplash.com/photo-1514282401047-d79a71a590e8?auto=format&fit=crop&w=800&q=80',
+    image: maldivesPkgImg,
     highlights: ['Luxury Water Villa with slide', 'Speedboat Airport Transfers', 'All-Inclusive Dine Around Plan'],
     inclusions: ['Luxury Water Villa Stays', 'All Meals & Premium Beverages', 'Roundtrip Speedboat Transfers'],
     exclusions: ['Airfare & Green Taxes'],
@@ -122,8 +133,7 @@ export const packages: TourPackage[] = [
     discountPrice: 99999,
     rating: 4.9,
     reviewsCount: 94,
-    // Eiffel Tower Paris at sunset
-    image: 'https://images.unsplash.com/photo-1499856871958-5b9627545d1a?auto=format&fit=crop&w=800&q=80',
+    image: europePkgImg,
     highlights: ['Eiffel Tower Level 3 Entry', 'Seine River Cruise tickets', 'Swiss Alps Mountain Cogwheel Train'],
     inclusions: ['Premium Scenic Hotel stays', 'European Daily Breakfasts', 'Inter-city Eurail passes'],
     exclusions: ['Airfare & VFS visa fees'],
@@ -144,8 +154,7 @@ export const packages: TourPackage[] = [
     discountPrice: 32999,
     rating: 4.8,
     reviewsCount: 88,
-    // Ha Long Bay cruise limestone islands Vietnam
-    image: 'https://images.unsplash.com/photo-1528360983277-13d401cdc186?auto=format&fit=crop&w=800&q=80',
+    image: vietnamPkgImg,
     highlights: ['Halong Bay Overnight Cruise', 'Hanoi Old Quarter tour', 'Golden Bridge Ba Na Hills'],
     inclusions: ['4-Star Hotel Stays', 'Daily Breakfast & Cruise meals', 'English-speaking tour guides'],
     exclusions: ['Visa & Flight charges'],
@@ -166,8 +175,7 @@ export const packages: TourPackage[] = [
     discountPrice: 29999,
     rating: 4.6,
     reviewsCount: 78,
-    // Petronas Twin Towers Kuala Lumpur Malaysia
-    image: 'https://images.unsplash.com/photo-1596422846543-75c6fc197f07?auto=format&fit=crop&w=800&q=80',
+    image: malaysiaPkgImg,
     highlights: ['Petronas Twin Towers photo op', 'Batu Caves golden statue', 'Genting Cable Car Ride'],
     inclusions: ['Premium City Hotels', 'Daily Breakfasts', 'Return Cable Car booking'],
     exclusions: ['Visa & International Airfare'],
@@ -190,8 +198,7 @@ export const packages: TourPackage[] = [
     discountPrice: 59999,
     rating: 4.9,
     reviewsCount: 142,
-    // Maldives private beach sunset overwater villa
-    image: 'https://images.unsplash.com/photo-1573843981267-be1fb9b73556?auto=format&fit=crop&w=800&q=80',
+    image: maldivesHoneyImg,
     highlights: ['Private Overwater Villa Stay', 'Speedboat Transfers', 'Romantic Floating Breakfast'],
     inclusions: ['Romantic Villa Decor', 'Complimentary Champagne & Cake', 'Beachfront Candlelit Dinner'],
     exclusions: ['Airfare'],
@@ -212,8 +219,7 @@ export const packages: TourPackage[] = [
     discountPrice: 28999,
     rating: 4.9,
     reviewsCount: 164,
-    // Tanah Lot sea temple Bali romantic sunset
-    image: 'https://images.unsplash.com/photo-1552733407-5d5c46c3bb3b?auto=format&fit=crop&w=800&q=80',
+    image: baliHoneyImg,
     highlights: ['Seminyak Pool Villa', 'Ubud Jungle Swing couple pass', 'Jimbaran Candlelight BBQ'],
     inclusions: ['Couple Floating Breakfast', 'Complimentary Honeymoon Cake', 'All entry fees'],
     exclusions: ['Airfare & Personal expenses'],
@@ -234,8 +240,7 @@ export const packages: TourPackage[] = [
     discountPrice: 21999,
     rating: 4.9,
     reviewsCount: 96,
-    // Dal Lake shikara romantic Kashmir mountains
-    image: '/kashmir.jpg',
+    image: kashmirHoneyImg,
     highlights: ['Dal Lake Houseboat night', 'Gulmarg Snow Gondola Ride', 'Betaab Valley Couple Safari'],
     inclusions: ['1 Night Luxury Houseboat', 'Shikara Ride flowers block', 'AC Vehicle with Driver'],
     exclusions: ['Airfare'],
@@ -249,15 +254,14 @@ export const packages: TourPackage[] = [
   {
     id: 'switzerland-honeymoon',
     title: 'Switzerland Honeymoon',
-    destinationId: 'europe',
+    destinationId: 'switzerland',
     destinationName: 'Switzerland',
     duration: '6 Days / 5 Nights',
     price: 118999,
     discountPrice: 129999,
     rating: 4.9,
     reviewsCount: 84,
-    // Swiss Alps Interlaken snow mountains lake
-    image: 'https://images.unsplash.com/photo-1531366936337-7c912a4589a7?auto=format&fit=crop&w=800&q=80',
+    image: switzerlandHoneyImg,
     highlights: ['Lucerne Lake Cruise couple pass', 'Interlaken Chalet stay', 'Mount Titlis Snow Gondola'],
     inclusions: ['Alpine Scenic Resorts', 'Eurail Passes', 'Cable car tickets'],
     exclusions: ['Schengen Visa fees & Flights'],

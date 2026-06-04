@@ -12,7 +12,6 @@ import { PremiumHero } from '../components/PremiumHero';
 // Import databases
 import { packages } from '../data/packages';
 import { destinations } from '../data/destinations';
-import { testimonials } from '../data/testimonials';
 import { blogs } from '../data/blogs';
 import type { TourPackage } from '../types/package';
 
@@ -52,9 +51,7 @@ export const Home: React.FC = () => {
   });
   const [contactSubmitted, setContactSubmitted] = useState(false);
 
-  // Newsletter state
-  const [newsletterEmail, setNewsletterEmail] = useState('');
-  const [newsletterSubscribed, setNewsletterSubscribed] = useState(false);
+
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -118,15 +115,7 @@ export const Home: React.FC = () => {
     }, 3000);
   };
 
-  const handleNewsletterSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!newsletterEmail) return;
-    setNewsletterSubscribed(true);
-    setTimeout(() => {
-      setNewsletterEmail('');
-      setNewsletterSubscribed(false);
-    }, 3000);
-  };
+
 
   const triggerWhatsAppBooking = () => {
     if (!selectedPackage) return;
@@ -160,7 +149,7 @@ Please confirm availability and share details!`;
   const trendingPackages = packages.filter(p => p.type === 'international').slice(0, 8);
 
   return (
-    <div className="relative bg-[#F8FBFF] overflow-x-hidden">
+    <div className="relative bg-bg-canvas overflow-x-hidden">
       {/* ================= SECTION 1: PREMIUM DYNAMIC HERO SECTION ================= */}
       <PremiumHero
         searchParams={searchParams}
@@ -206,7 +195,7 @@ Please confirm availability and share details!`;
       </section>
 
       {/* ================= SECTION 3: POPULAR INTERNATIONAL DESTINATIONS ================= */}
-      <section className="py-16 bg-[#F8FBFF]">
+      <section className="py-16 bg-bg-canvas">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -241,7 +230,7 @@ Please confirm availability and share details!`;
                   alt={dest.name}
                   className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/10 to-transparent" />
+                <div className="absolute inset-0 bg-linear-to-t from-slate-900/90 via-slate-900/10 to-transparent" />
                 <div className="absolute bottom-4 left-4 right-4 text-white text-left">
                   <h3 className="text-base font-bold tracking-tight">{dest.name}</h3>
                   <span className="text-[10px] text-accent font-semibold flex items-center gap-1 mt-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
@@ -255,7 +244,7 @@ Please confirm availability and share details!`;
       </section>
 
       {/* ================= SECTION 4: POPULAR DOMESTIC DESTINATIONS ================= */}
-      <section className="py-8 bg-[#F8FBFF] border-b border-slate-150/40">
+      <section className="py-8 bg-bg-canvas border-b border-slate-150/40">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -290,7 +279,7 @@ Please confirm availability and share details!`;
                   alt={dest.name}
                   className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/10 to-transparent" />
+                <div className="absolute inset-0 bg-linear-to-t from-slate-900/90 via-slate-900/10 to-transparent" />
                 <div className="absolute bottom-4 left-4 right-4 text-white text-left">
                   <h3 className="text-base font-bold tracking-tight">{dest.name}</h3>
                   <span className="text-[10px] text-accent font-semibold flex items-center gap-1 mt-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
@@ -318,10 +307,10 @@ Please confirm availability and share details!`;
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
             {[
-              { icon: <Users className="h-6 w-6 text-[#00E5FF]" />, count: '1000+', label: 'Happy Travelers' },
-              { icon: <Gift className="h-6 w-6 text-[#00E5FF]" />, count: '500+', label: 'Tour Packages' },
-              { icon: <Compass className="h-6 w-6 text-[#00E5FF]" />, count: '100+', label: 'Destinations' },
-              { icon: <Headset className="h-6 w-6 text-[#00E5FF]" />, count: '24/7', label: 'Customer Support' }
+              { icon: <Users className="h-6 w-6 text-accent" />, count: '1000+', label: 'Happy Travelers' },
+              { icon: <Gift className="h-6 w-6 text-accent" />, count: '500+', label: 'Tour Packages' },
+              { icon: <Compass className="h-6 w-6 text-accent" />, count: '100+', label: 'Destinations' },
+              { icon: <Headset className="h-6 w-6 text-accent" />, count: '24/7', label: 'Customer Support' }
             ].map((stat, index) => (
               <motion.div
                 key={index}
@@ -336,7 +325,7 @@ Please confirm availability and share details!`;
                   {stat.icon}
                 </div>
                 <div className="text-left">
-                  <div className="font-display text-xl font-extrabold text-[#00E5FF]">{stat.count}</div>
+                  <div className="font-display text-xl font-extrabold text-accent">{stat.count}</div>
                   <div className="text-[10px] font-bold text-slate-350 uppercase tracking-wider">{stat.label}</div>
                 </div>
               </motion.div>
@@ -462,9 +451,9 @@ Please confirm availability and share details!`;
                   alt={item.label}
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-all flex items-end p-4">
+                <div className="absolute inset-0 bg-linear-to-t from-slate-950/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-all flex items-end p-4">
                   <span className="text-xs font-bold text-white tracking-widest uppercase flex items-center gap-1">
-                    <Compass className="h-4 w-4 text-[#00E5FF]" /> {item.label}
+                    <Compass className="h-4 w-4 text-accent" /> {item.label}
                   </span>
                 </div>
               </div>
@@ -474,14 +463,14 @@ Please confirm availability and share details!`;
       </section>
 
       {/* ================= SECTION 11.5: CTA BANNER SECTION ================= */}
-      <section className="py-16 bg-[#F8FBFF] px-4">
+      <section className="py-16 bg-bg-canvas px-4">
         <div className="mx-auto max-w-5xl rounded-3xl bg-gradient-premium p-8 md:p-14 shadow-2xl relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-8 text-white text-left group">
           {/* Animated luxury background particles / lights */}
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,rgba(0,229,255,0.15),transparent_50%)] pointer-events-none" />
 
           <div className="space-y-3 relative z-10 max-w-xl">
-            <span className="rounded-full bg-white/10 border border-white/20 px-3 py-1 text-[10px] font-bold text-[#00E5FF] uppercase tracking-widest inline-flex items-center gap-1.5">
-              <Sparkles className="h-3 w-3 text-[#00E5FF]" /> Luxury Travel
+            <span className="rounded-full bg-white/10 border border-white/20 px-3 py-1 text-[10px] font-bold text-accent uppercase tracking-widest inline-flex items-center gap-1.5">
+              <Sparkles className="h-3 w-3 text-accent" /> Luxury Travel
             </span>
             <h2 className="font-display text-2xl md:text-4xl font-extrabold tracking-tight text-white uppercase leading-tight">
               Your Dream Journey <br />Starts Here
@@ -494,7 +483,7 @@ Please confirm availability and share details!`;
           <div className="shrink-0 relative z-10 w-full md:w-auto">
             <button
               onClick={() => setIsBookingOpen(true)}
-              className="w-full md:w-auto px-8 py-4 rounded-full bg-[#00E5FF] hover:bg-white text-primary-dark font-bold text-sm tracking-wide shadow-xl hover:shadow-[#00E5FF]/20 transition-all duration-300 transform hover:scale-105 cursor-pointer flex items-center justify-center gap-2"
+              className="w-full md:w-auto px-8 py-4 rounded-full bg-accent hover:bg-white text-primary-dark font-bold text-sm tracking-wide shadow-xl hover:shadow-accent/20 transition-all duration-300 transform hover:scale-105 cursor-pointer flex items-center justify-center gap-2"
             >
               Book Your Trip
               <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
@@ -674,7 +663,7 @@ Please confirm availability and share details!`;
 
             <div className="mb-6">
               <h3 className="font-display text-2xl font-bold text-primary-dark flex items-center gap-2">
-                <Compass className="h-6 w-6 text-[#00E5FF] fill-[#00E5FF] animate-spin" /> Search Match Results
+                <Compass className="h-6 w-6 text-accent fill-accent animate-spin" /> Search Match Results
               </h3>
               <p className="text-xs text-slate-500 mt-1">
                 We found {searchResults.length} matching packages based on your search query preferences.
@@ -761,9 +750,9 @@ Please confirm availability and share details!`;
               {/* Cover */}
               <div className="relative h-60 rounded-xl overflow-hidden shadow-inner">
                 <img src={selectedPackage.image} alt={selectedPackage.title} className="w-full h-full object-cover" />
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-900/30 to-transparent" />
+                <div className="absolute inset-0 bg-linear-to-t from-slate-950 via-slate-900/30 to-transparent" />
                 <div className="absolute bottom-5 left-5 right-5 text-white">
-                  <span className="text-[10px] uppercase font-bold text-[#00E5FF] tracking-widest">{selectedPackage.type} Tour</span>
+                  <span className="text-[10px] uppercase font-bold text-accent tracking-widest">{selectedPackage.type} Tour</span>
                   <h3 className="font-display text-2xl font-bold mt-1 leading-snug">{selectedPackage.title}</h3>
                 </div>
               </div>
@@ -787,7 +776,7 @@ Please confirm availability and share details!`;
 
               {/* Tabs / Itinerary */}
               <div className="space-y-4">
-                <h4 className="font-display text-lg font-bold text-slate-800 border-l-3 border-[#00E5FF] pl-3">Day-Wise Itinerary Plan</h4>
+                <h4 className="font-display text-lg font-bold text-slate-800 border-l-3 border-accent pl-3">Day-Wise Itinerary Plan</h4>
                 <div className="space-y-3 max-h-60 overflow-y-auto pr-2 text-left">
                   {selectedPackage.itinerary.map((dayObj) => (
                     <div key={dayObj.day} className="rounded-xl border border-slate-150 p-4 bg-slate-50/20">

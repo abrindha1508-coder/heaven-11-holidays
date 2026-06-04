@@ -1,25 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useMemo } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Clock, Star, Search, ChevronRight, X, MessageSquare, Check } from 'lucide-react';
+import { Clock, Star, ChevronRight, X, MessageSquare, Check } from 'lucide-react';
 import { destinations } from '../data/destinations';
 import { packages } from '../data/packages';
 import type { TourPackage } from '../types/package';
 import { PageHero } from '../components/PageHero';
 
 export const DomesticTours: React.FC = () => {
-  const [searchParams] = useSearchParams();
-  const destParam = searchParams.get('dest');
-  
-  const [searchQuery, setSearchQuery] = useState('');
-  const [selectedSeason, setSelectedSeason] = useState('');
-  const [activeDestinationId, setActiveDestinationId] = useState<string | null>(null);
-
-  useEffect(() => {
-    if (destParam) {
-      setActiveDestinationId(destParam);
-    }
-  }, [destParam]);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const activeDestinationId = searchParams.get('dest');
 
   // Selected package modal state
   const [selectedPkg, setSelectedPkg] = useState<TourPackage | null>(null);
@@ -33,15 +23,66 @@ export const DomesticTours: React.FC = () => {
   };
 
   // Filter domestic destinations
-  const domesticDestinations = destinations.filter(dest => {
-    if (dest.type !== 'domestic') return false;
-    if (searchQuery && !dest.name.toLowerCase().includes(searchQuery.toLowerCase())) return false;
-    if (selectedSeason && !dest.bestTime?.toLowerCase().includes(selectedSeason.toLowerCase())) return false;
-    return true;
-  });
+  const domesticDestinations = destinations.filter(dest => dest.type === 'domestic');
 
   const activeDestination = destinations.find(d => d.id === activeDestinationId);
-  const activePackages = packages.filter(p => p.destinationId === activeDestinationId);
+  
+  const displayPackages = useMemo(() => {
+    if (!activeDestinationId || !activeDestination) return [];
+    const destPackages = packages.filter(p => p.destinationId === activeDestinationId);
+    if (destPackages.length > 0) return destPackages;
+    
+    return [{
+      id: `${activeDestination.id}-default`,
+      title: `${activeDestination.name} Deluxe Getaway`,
+      destinationId: activeDestination.id,
+      destinationName: activeDestination.name,
+      duration: activeDestination.duration || '4 Days / 3 Nights',
+      price: activeDestination.price || 9999,
+      discountPrice: Math.round((activeDestination.price || 9999) * 1.25),
+      rating: activeDestination.rating || 4.7,
+      reviewsCount: 54,
+      image: activeDestination.image,
+      highlights: activeDestination.highlights || [],
+      inclusions: [
+        'Premium Hotel Accommodations',
+        'Daily Buffet Breakfast at Hotels',
+        'Sightseeing Tours in Private Vehicles',
+        'Direct Airport/Station Pickups & Drops',
+        'All Taxes, Parking, and Driver Fees'
+      ],
+      exclusions: [
+        'Flights, Train, or Intercity Transport',
+        'Entry tickets to monuments & activity charges',
+        'Lunches, Dinners, and personal expenses',
+        'Anything not listed under inclusions'
+      ],
+      itinerary: [
+        { 
+          day: 1, 
+          title: `Welcome to ${activeDestination.name} & Check-in`, 
+          description: `Upon arrival at the airport or railway station, meet our representative and get transferred to your premium hotel. After check-in, rest and spend a peaceful evening exploring ${activeDestination.highlights[0] || 'local landmarks'}.` 
+        },
+        { 
+          day: 2, 
+          title: `Full-Day Local Sightseeing Tour`, 
+          description: `Enjoy a wholesome breakfast at your hotel. Embark on a comprehensive tour of ${activeDestination.name}, visiting highlights like ${activeDestination.highlights.slice(1, 3).join(', ') || 'top scenic spots'}. Overnight stay at your hotel.` 
+        },
+        { 
+          day: 3, 
+          title: 'Explore local valleys & viewpoints', 
+          description: `After breakfast, explore the beauty of ${activeDestination.highlights[3] || 'other popular spots'}. Enjoy local shopping and street food in the evening.` 
+        },
+        { 
+          day: 4, 
+          title: 'Departure Flight / Train', 
+          description: 'Savor breakfast at the hotel, check out, and transfer back to the airport or railway station for your journey home.' }
+      ],
+      type: activeDestination.type === 'domestic' ? 'domestic' : 'international',
+      popular: activeDestination.popular,
+      featured: false
+    }] as TourPackage[];
+  }, [activeDestinationId, activeDestination]);
 
   const handleBookingSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -76,44 +117,10 @@ export const DomesticTours: React.FC = () => {
 
       {/* Main Content */}
       <div id="domestic-content" className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 mt-12 pt-8">
-        {/* Filters Panel */}
-        <motion.div 
-          initial={{ opacity: 0, y: -15 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4 }}
-          className="rounded-2xl bg-white p-5 shadow-xs border border-slate-100 flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-8"
-        >
-          <div className="relative flex-1">
-            <Search className="absolute left-4 top-3 h-4 w-4 text-slate-400" />
-            <input
-              type="text"
-              placeholder="Search domestic destinations..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full rounded-xl border border-slate-200/80 bg-slate-50/30 pl-11 pr-4 py-2.5 text-sm focus:border-primary-light focus:outline-none"
-            />
-          </div>
-          <div className="flex gap-2">
-            {['March', 'October', 'November', 'September'].map((season) => (
-              <button
-                key={season}
-                onClick={() => setSelectedSeason(selectedSeason === season ? '' : season)}
-                className={`px-4 py-2 rounded-xl text-xs font-semibold border transition-all cursor-pointer ${
-                  selectedSeason === season
-                    ? 'bg-primary-dark border-primary-dark text-white'
-                    : 'border-slate-200 bg-white text-slate-600 hover:bg-slate-50'
-                }`}
-              >
-                {season} Season
-              </button>
-            ))}
-          </div>
-        </motion.div>
 
         {/* Grid List */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {domesticDestinations.map((dest, index) => {
-            const destPackages = packages.filter(p => p.destinationId === dest.id);
             return (
               <motion.div
                 key={dest.id}
@@ -121,8 +128,8 @@ export const DomesticTours: React.FC = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.4, delay: index * 0.05 }}
                 whileHover={{ y: -6 }}
-                onClick={() => setActiveDestinationId(dest.id)}
-                className="group rounded-2xl bg-white overflow-hidden shadow-xs hover:shadow-lg border border-slate-100 cursor-pointer transition-all duration-300 flex flex-col h-[380px]"
+                onClick={() => setSearchParams({ dest: dest.id })}
+                className="group rounded-2xl bg-white overflow-hidden shadow-xs hover:shadow-lg border border-slate-100 cursor-pointer transition-all duration-300 flex flex-col h-[340px]"
               >
                 <div className="relative h-48 overflow-hidden">
                   <img
@@ -130,13 +137,9 @@ export const DomesticTours: React.FC = () => {
                     alt={dest.name}
                     className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                   />
-                  <span className="absolute bottom-3 left-3 rounded-lg bg-slate-900/80 px-2.5 py-1 text-[9px] font-bold text-accent uppercase tracking-wider">
-                    {dest.weather}
-                  </span>
                 </div>
                 <div className="p-5 flex-1 flex flex-col justify-between">
                   <div className="space-y-1.5">
-                    <span className="text-[10px] font-bold tracking-widest text-primary-light uppercase">Best: {dest.bestTime}</span>
                     <h3 className="font-display font-bold text-slate-800 text-lg leading-tight group-hover:text-primary-light transition-all">
                       {dest.name}
                     </h3>
@@ -144,8 +147,7 @@ export const DomesticTours: React.FC = () => {
                       {dest.description}
                     </p>
                   </div>
-                  <div className="pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
-                    <span>{destPackages.length} Tour Packages</span>
+                  <div className="pt-3 border-t border-slate-100 flex items-center justify-end text-xs text-slate-500">
                     <span className="font-bold text-slate-800 flex items-center gap-0.5">
                       View Packages <ChevronRight className="h-4 w-4 text-primary-light shrink-0" />
                     </span>
@@ -160,85 +162,280 @@ export const DomesticTours: React.FC = () => {
       {/* PACKAGES DRAWER MODAL */}
       {activeDestinationId && activeDestination && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-          <div onClick={() => setActiveDestinationId(null)} className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm" />
+          <div onClick={() => setSearchParams({})} className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm" />
           <div className="relative z-10 w-full max-w-4xl transform rounded-2xl bg-white p-6 shadow-2xl transition-all overflow-y-auto max-h-[85vh]">
             <button
-              onClick={() => setActiveDestinationId(null)}
+              onClick={() => setSearchParams({})}
               className="absolute top-4 right-4 rounded-full p-1.5 text-slate-400 hover:bg-slate-100"
             >
               <X className="h-5 w-5" />
             </button>
 
-            <div className="mb-6 space-y-1.5">
-              <span className="text-xs font-bold text-primary-light tracking-widest uppercase">Select Tour Plan</span>
-              <h3 className="font-display text-2xl font-bold text-primary-dark">
-                Packages in {activeDestination.name}
-              </h3>
-              <p className="text-xs text-slate-500">
-                Found {activePackages.length} luxury tours for {activeDestination.name}. Select a tour to view itinerary or secure bookings.
-              </p>
-            </div>
+            {displayPackages.length === 1 ? (
+              // DIRECT FULL DETAILS VIEW FOR SINGLE PACKAGE
+              <div className="space-y-6 text-left">
+                {/* Hero Image Banner */}
+                <div className="relative h-60 w-full overflow-hidden rounded-xl">
+                  <img
+                    src={displayPackages[0].image || activeDestination.image}
+                    alt={displayPackages[0].title}
+                    className="h-full w-full object-cover"
+                  />
+                  <div className="absolute inset-0 bg-linear-to-t from-slate-950/60 to-transparent" />
+                  <div className="absolute bottom-4 left-4">
+                    <span className="text-[10px] font-bold text-accent tracking-widest uppercase bg-slate-950/40 backdrop-blur-xs px-2.5 py-1 rounded-md border border-white/10">
+                      {activeDestination.type === 'domestic' ? 'Domestic Tour' : 'International Tour'}
+                    </span>
+                  </div>
+                </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {activePackages.map((pkg) => (
-                <div key={pkg.id} className="rounded-xl border border-slate-100 p-5 bg-slate-50/50 flex flex-col justify-between h-[280px]">
-                  <div className="space-y-2">
-                    <div className="flex items-center justify-between text-xs text-slate-400">
-                      <span className="flex items-center gap-1"><Clock className="h-3.5 w-3.5" /> {pkg.duration}</span>
-                      <span className="flex items-center gap-0.5 text-amber-500 font-bold"><Star className="h-3.5 w-3.5 fill-current" /> {pkg.rating}</span>
+                {/* Header Section */}
+                <div className="border-b border-slate-100 pb-4">
+                  <h3 className="font-display text-2xl font-bold text-primary-dark mt-0.5">
+                    {displayPackages[0].title}
+                  </h3>
+                  <div className="flex flex-wrap items-center gap-4 mt-3 text-xs text-slate-500">
+                    <span className="flex items-center gap-1.5 bg-slate-50 px-2.5 py-1 rounded-lg">
+                      <Clock className="h-3.5 w-3.5 text-primary-light" /> {displayPackages[0].duration}
+                    </span>
+                    <span className="flex items-center gap-1 bg-slate-50 px-2.5 py-1 rounded-lg">
+                      <Star className="h-3.5 w-3.5 text-amber-500 fill-current" /> {displayPackages[0].rating} ({displayPackages[0].reviewsCount} Reviews)
+                    </span>
+                  </div>
+                </div>
+
+                {/* Content Body Grid */}
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                  {/* Left Side: Highlights, Inclusions, Exclusions */}
+                  <div className="lg:col-span-5 space-y-6">
+                    <div className="space-y-2">
+                      <h4 className="text-xs font-bold text-slate-800 uppercase tracking-wider">Tour Highlights</h4>
+                      <div className="flex flex-wrap gap-1.5">
+                        {displayPackages[0].highlights.map((h, i) => (
+                          <span key={i} className="text-[10px] font-semibold bg-primary-light/5 text-primary-light border border-primary-light/10 px-2.5 py-1 rounded-lg">
+                            {h}
+                          </span>
+                        ))}
+                      </div>
                     </div>
-                    <h4 className="font-display font-bold text-slate-800 text-base leading-snug line-clamp-1">{pkg.title}</h4>
-                    <p className="text-xs text-slate-500 line-clamp-2 leading-relaxed">
-                      Highlights: {pkg.highlights.join(', ')}
-                    </p>
+
+                    {displayPackages[0].inclusions && displayPackages[0].inclusions.length > 0 && (
+                      <div className="space-y-2">
+                        <h4 className="text-xs font-bold text-slate-800 uppercase tracking-wider">Inclusions</h4>
+                        <ul className="space-y-1.5">
+                          {displayPackages[0].inclusions.map((inc, i) => (
+                            <li key={i} className="flex items-start gap-2 text-xs text-slate-600">
+                              <Check className="h-4 w-4 text-emerald-500 shrink-0 mt-0.5" />
+                              <span>{inc}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
+
+                    {displayPackages[0].exclusions && displayPackages[0].exclusions.length > 0 && (
+                      <div className="space-y-2">
+                        <h4 className="text-xs font-bold text-slate-800 uppercase tracking-wider">Exclusions</h4>
+                        <ul className="space-y-1.5">
+                          {displayPackages[0].exclusions.map((exc, i) => (
+                            <li key={i} className="flex items-start gap-2 text-xs text-slate-600">
+                              <X className="h-4 w-4 text-rose-500 shrink-0 mt-0.5" />
+                              <span>{exc}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
+
+                    <button
+                      onClick={() => handleOpenBooking(displayPackages[0])}
+                      className="w-full py-3.5 rounded-xl bg-gradient-premium text-white font-bold text-xs uppercase tracking-wider shadow-md hover:shadow-lg transition-all cursor-pointer mt-4"
+                    >
+                      Book Tour Package
+                    </button>
                   </div>
 
-                  <div className="pt-4 border-t border-slate-150 flex items-center justify-end mt-4">
-                    <div className="flex gap-2">
-                      <button
-                        onClick={() => setSelectedPkg(pkg)}
-                        className="rounded-lg bg-white border border-slate-200 text-slate-700 px-3.5 py-2 text-xs font-semibold hover:bg-slate-100 cursor-pointer"
-                      >
-                        Itinerary
-                      </button>
-                      <button
-                        onClick={() => handleOpenBooking(pkg)}
-                        className="rounded-lg bg-gradient-premium text-white px-4 py-2 text-xs font-semibold shadow-xs hover:shadow-md cursor-pointer"
-                      >
-                        Book Tour
-                      </button>
+                  {/* Right Side: Itinerary */}
+                  <div className="lg:col-span-7 space-y-3">
+                    <h4 className="text-xs font-bold text-slate-800 uppercase tracking-wider mb-2">Detailed Itinerary</h4>
+                    <div className="space-y-3.5 max-h-[360px] overflow-y-auto pl-3 pr-3">
+                      {displayPackages[0].itinerary.map((dayObj) => (
+                        <div key={dayObj.day} className="relative pl-6 pb-2 border-l border-slate-100 last:border-0 last:pb-0">
+                          <span className="absolute left-[-5px] top-1.5 h-2.5 w-2.5 rounded-full bg-primary-light" />
+                          <div>
+                            <span className="text-[10px] font-bold text-primary-light uppercase tracking-wider">
+                              Day {dayObj.day}: {dayObj.title}
+                            </span>
+                            <p className="text-xs text-slate-600 mt-1 leading-relaxed">
+                              {dayObj.description}
+                            </p>
+                          </div>
+                        </div>
+                      ))}
                     </div>
                   </div>
                 </div>
-              ))}
-            </div>
+              </div>
+            ) : (
+              // MULTIPLE PACKAGES LIST VIEW
+              <>
+                <div className="mb-6 space-y-1.5 text-left">
+                  <span className="text-xs font-bold text-primary-light tracking-widest uppercase">Select Tour Plan</span>
+                  <h3 className="font-display text-2xl font-bold text-primary-dark">
+                    Packages in {activeDestination.name}
+                  </h3>
+                  <p className="text-xs text-slate-500">
+                    Found {displayPackages.length} luxury tours for {activeDestination.name}. Select a tour to view itinerary or secure bookings.
+                  </p>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  {displayPackages.map((pkg) => (
+                    <div key={pkg.id} className="rounded-xl border border-slate-100 p-5 bg-slate-50/50 flex flex-col justify-between h-[280px] text-left">
+                      <div className="space-y-2">
+                        <div className="flex items-center justify-between text-xs text-slate-400">
+                          <span className="flex items-center gap-1"><Clock className="h-3.5 w-3.5" /> {pkg.duration}</span>
+                          <span className="flex items-center gap-0.5 text-amber-500 font-bold"><Star className="h-3.5 w-3.5 fill-current" /> {pkg.rating}</span>
+                        </div>
+                        <h4 className="font-display font-bold text-slate-800 text-base leading-snug line-clamp-1">{pkg.title}</h4>
+                        <p className="text-xs text-slate-500 line-clamp-2 leading-relaxed">
+                          Highlights: {pkg.highlights.join(', ')}
+                        </p>
+                      </div>
+
+                      <div className="pt-4 border-t border-slate-150 flex items-center justify-end mt-4">
+                        <div className="flex gap-2">
+                          <button
+                            onClick={() => setSelectedPkg(pkg)}
+                            className="rounded-lg bg-white border border-slate-200 text-slate-700 px-3.5 py-2 text-xs font-semibold hover:bg-slate-100 cursor-pointer"
+                          >
+                            Itinerary
+                          </button>
+                          <button
+                            onClick={() => handleOpenBooking(pkg)}
+                            className="rounded-lg bg-gradient-premium text-white px-4 py-2 text-xs font-semibold shadow-xs hover:shadow-md cursor-pointer"
+                          >
+                            Book Tour
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </>
+            )}
           </div>
         </div>
       )}
 
-      {/* ITINERARY VIEW */}
+      {/* DETAILED PACKAGE DETAILS VIEW (used when a package is selected from a multi-package list) */}
       {selectedPkg && !isBookingOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
           <div onClick={() => setSelectedPkg(null)} className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm" />
-          <div className="relative z-10 w-full max-w-2xl transform rounded-2xl bg-white p-6 shadow-2xl transition-all overflow-y-auto max-h-[80vh]">
+          <div className="relative z-10 w-full max-w-4xl transform rounded-2xl bg-white p-6 shadow-2xl transition-all overflow-y-auto max-h-[85vh]">
             <button onClick={() => setSelectedPkg(null)} className="absolute top-4 right-4 rounded-full p-1.5 text-slate-400 hover:bg-slate-100"><X className="h-5 w-5" /></button>
-            <div className="space-y-4">
-              <h3 className="font-display text-xl font-bold text-primary-dark">{selectedPkg.title}</h3>
-              <div className="space-y-3 max-h-60 overflow-y-auto">
-                {selectedPkg.itinerary.map(dayObj => (
-                  <div key={dayObj.day} className="p-3.5 rounded-xl bg-slate-50 border border-slate-100">
-                    <span className="text-xs font-bold text-primary-light">Day {dayObj.day}: {dayObj.title}</span>
-                    <p className="text-xs text-slate-600 mt-1">{dayObj.description}</p>
-                  </div>
-                ))}
+            
+            <div className="space-y-6 text-left">
+              {/* Hero Image Banner */}
+              <div className="relative h-60 w-full overflow-hidden rounded-xl">
+                <img
+                  src={selectedPkg.image || activeDestination?.image || ''}
+                  alt={selectedPkg.title}
+                  className="h-full w-full object-cover"
+                />
+                <div className="absolute inset-0 bg-linear-to-t from-slate-950/60 to-transparent" />
+                <div className="absolute bottom-4 left-4">
+                  <span className="text-[10px] font-bold text-accent tracking-widest uppercase bg-slate-950/40 backdrop-blur-xs px-2.5 py-1 rounded-md border border-white/10">
+                    {selectedPkg.type === 'domestic' ? 'Domestic Tour' : 'International Tour'}
+                  </span>
+                </div>
               </div>
-              <div className="flex justify-end gap-2 pt-4 border-t border-slate-100">
-                <button
-                  onClick={() => handleOpenBooking(selectedPkg)}
-                  className="rounded-xl bg-gradient-premium px-6 py-2.5 text-xs font-semibold text-white shadow-md cursor-pointer"
-                >
-                  Book Package Now
-                </button>
+
+              {/* Header Section */}
+              <div className="border-b border-slate-100 pb-4">
+                <h3 className="font-display text-2xl font-bold text-primary-dark mt-0.5">
+                  {selectedPkg.title}
+                </h3>
+                <div className="flex flex-wrap items-center gap-4 mt-3 text-xs text-slate-500">
+                  <span className="flex items-center gap-1.5 bg-slate-50 px-2.5 py-1 rounded-lg">
+                    <Clock className="h-3.5 w-3.5 text-primary-light" /> {selectedPkg.duration}
+                  </span>
+                  <span className="flex items-center gap-1 bg-slate-50 px-2.5 py-1 rounded-lg">
+                    <Star className="h-3.5 w-3.5 text-amber-500 fill-current" /> {selectedPkg.rating} ({selectedPkg.reviewsCount} Reviews)
+                  </span>
+                </div>
+              </div>
+
+              {/* Content Body Grid */}
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                {/* Left Side */}
+                <div className="lg:col-span-5 space-y-6">
+                  <div className="space-y-2">
+                    <h4 className="text-xs font-bold text-slate-800 uppercase tracking-wider">Tour Highlights</h4>
+                    <div className="flex flex-wrap gap-1.5">
+                      {selectedPkg.highlights.map((h, i) => (
+                        <span key={i} className="text-[10px] font-semibold bg-primary-light/5 text-primary-light border border-primary-light/10 px-2.5 py-1 rounded-lg">
+                          {h}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+
+                  {selectedPkg.inclusions && selectedPkg.inclusions.length > 0 && (
+                    <div className="space-y-2">
+                      <h4 className="text-xs font-bold text-slate-800 uppercase tracking-wider">Inclusions</h4>
+                      <ul className="space-y-1.5">
+                        {selectedPkg.inclusions.map((inc, i) => (
+                          <li key={i} className="flex items-start gap-2 text-xs text-slate-600">
+                            <Check className="h-4 w-4 text-emerald-500 shrink-0 mt-0.5" />
+                            <span>{inc}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+
+                  {selectedPkg.exclusions && selectedPkg.exclusions.length > 0 && (
+                    <div className="space-y-2">
+                      <h4 className="text-xs font-bold text-slate-800 uppercase tracking-wider">Exclusions</h4>
+                      <ul className="space-y-1.5">
+                        {selectedPkg.exclusions.map((exc, i) => (
+                          <li key={i} className="flex items-start gap-2 text-xs text-slate-600">
+                            <X className="h-4 w-4 text-rose-500 shrink-0 mt-0.5" />
+                            <span>{exc}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+
+                  <button
+                    onClick={() => handleOpenBooking(selectedPkg)}
+                    className="w-full py-3.5 rounded-xl bg-gradient-premium text-white font-bold text-xs uppercase tracking-wider shadow-md hover:shadow-lg transition-all cursor-pointer mt-4"
+                  >
+                    Book Tour Package
+                  </button>
+                </div>
+
+                {/* Right Side */}
+                <div className="lg:col-span-7 space-y-3">
+                  <h4 className="text-xs font-bold text-slate-800 uppercase tracking-wider mb-2">Detailed Itinerary</h4>
+                  <div className="space-y-3.5 max-h-[360px] overflow-y-auto pl-3 pr-3">
+                    {selectedPkg.itinerary.map((dayObj) => (
+                      <div key={dayObj.day} className="relative pl-6 pb-2 border-l border-slate-100 last:border-0 last:pb-0">
+                        <span className="absolute left-[-5px] top-1.5 h-2.5 w-2.5 rounded-full bg-primary-light" />
+                        <div>
+                          <span className="text-[10px] font-bold text-primary-light uppercase tracking-wider">
+                            Day {dayObj.day}: {dayObj.title}
+                          </span>
+                          <p className="text-xs text-slate-600 mt-1 leading-relaxed">
+                            {dayObj.description}
+                          </p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
               </div>
             </div>
           </div>
