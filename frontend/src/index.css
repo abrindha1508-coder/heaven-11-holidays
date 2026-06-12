@@ -1,0 +1,435 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=Dancing+Script:wght@700&family=Great+Vibes&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --color-primary-dark: #0e4d92;
+  --color-primary-light: #1f7ec8;
+  --color-accent: #00E5FF;
+  --color-bg-canvas: #F8FBFF;
+  --color-text-primary: #1A1A1A;
+
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-display: 'Outfit', 'Inter', system-ui, -apple-system, sans-serif;
+  --font-cursive: 'Great Vibes', 'Dancing Script', cursive;
+}
+
+/* Base custom resets */
+html,
+body {
+  background-color: #F8FBFF;
+  color: #1A1A1A;
+  scroll-behavior: smooth;
+  font-family: 'Inter', sans-serif;
+  overflow-x: hidden;
+}
+
+/* Custom Premium Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #F8FBFF;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #CBD5E1;
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #1E8DC5;
+}
+
+
+/* Hide scrollbar utility */
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-none {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+/* Glassmorphism Styles */
+.glass-nav {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.glass-dark {
+  background: rgba(24, 51, 105, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Swiper Controls Custom Styling */
+.swiper {
+  padding-bottom: 40px !important;
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+  color: var(--color-primary-dark) !important;
+  background: rgba(255, 255, 255, 0.9) !important;
+  width: 44px !important;
+  height: 44px !important;
+  border-radius: 50% !important;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05) !important;
+  transition: all 0.3s ease !important;
+  border: 1px solid rgba(255, 255, 255, 0.5) !important;
+}
+
+.swiper-button-next:hover,
+.swiper-button-prev:hover {
+  background: #1E8DC5 !important;
+  color: #FFFFFF !important;
+  transform: scale(1.05);
+}
+
+.swiper-button-next:after,
+.swiper-button-prev:after {
+  font-size: 16px !important;
+  font-weight: 800 !important;
+}
+
+.swiper-pagination-bullet {
+  background: var(--color-primary-dark) !important;
+  opacity: 0.2 !important;
+  width: 8px !important;
+  height: 8px !important;
+  transition: all 0.3s ease !important;
+}
+
+.swiper-pagination-bullet-active {
+  background: #00E5FF !important;
+  opacity: 1 !important;
+  width: 24px !important;
+  border-radius: 9999px !important;
+}
+
+/* Masonry grid support */
+.masonry-grid {
+  display: flex;
+  margin-left: -16px;
+  width: auto;
+}
+
+.masonry-grid_column {
+  padding-left: 16px;
+  background-clip: padding-box;
+}
+
+/* Premium Gradients */
+.bg-gradient-premium {
+  background: linear-gradient(135deg, #0e4d92 0%, #1f7ec8 50%, #0c427f 100%);
+}
+
+.text-gradient-premium {
+  background: linear-gradient(135deg, #0e4d92 0%, #1f7ec8 50%, #0c427f 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Custom Animation Keyframes */
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-8px);
+  }
+
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.animate-float {
+  animation: float 4s ease-in-out infinite;
+}
+
+/* Seamless Horizontal Globe Continent Spin */
+@keyframes spin-globe {
+  0% {
+    transform: translateX(0px);
+  }
+  100% {
+    transform: translateX(-400px);
+  }
+}
+
+.animate-spin-globe {
+  animation: spin-globe 32s linear infinite;
+}
+
+/* Cyan Glowing Light Pulse Under Podium */
+@keyframes pulse-glow {
+  0% {
+    opacity: 0.35;
+    transform: scale(0.95);
+  }
+  50% {
+    opacity: 0.75;
+    transform: scale(1.1);
+  }
+  100% {
+    opacity: 0.35;
+    transform: scale(0.95);
+  }
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 5s ease-in-out infinite;
+}
+
+/* Layered Wave Drifting Animations */
+@keyframes wave-drift-1 {
+  0% {
+    transform: translateX(-1%) translateY(0) scaleY(1);
+  }
+  50% {
+    transform: translateX(2%) translateY(2px) scaleY(1.03);
+  }
+  100% {
+    transform: translateX(-1%) translateY(0) scaleY(1);
+  }
+}
+
+@keyframes wave-drift-2 {
+  0% {
+    transform: translateX(1%) translateY(0) scaleY(1);
+  }
+  50% {
+    transform: translateX(-2%) translateY(-3px) scaleY(0.97);
+  }
+  100% {
+    transform: translateX(1%) translateY(0) scaleY(1);
+  }
+}
+
+@keyframes wave-drift-3 {
+  0% {
+    transform: translateX(-2%) translateY(0) scaleY(1);
+  }
+  50% {
+    transform: translateX(1%) translateY(1px) scaleY(1.02);
+  }
+  100% {
+    transform: translateX(-2%) translateY(0) scaleY(1);
+  }
+}
+
+.animate-wave-drift-1 {
+  animation: wave-drift-1 14s ease-in-out infinite;
+}
+
+.animate-wave-drift-2 {
+  animation: wave-drift-2 18s ease-in-out infinite;
+}
+
+.animate-wave-drift-3 {
+  animation: wave-drift-3 12s ease-in-out infinite;
+}
+
+/* Sunlight Ray Pulse & Warm Glow */
+@keyframes sun-pulse {
+  0% {
+    opacity: 0.35;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.6;
+    transform: scale(1.08);
+  }
+  100% {
+    opacity: 0.35;
+    transform: scale(1);
+  }
+}
+
+.animate-sun-pulse {
+  animation: sun-pulse 8s ease-in-out infinite;
+}
+
+/* Cloud Volumetric Floating */
+@keyframes cloud-float-slow {
+  0% {
+    transform: translateY(0px) translateX(0px);
+  }
+  50% {
+    transform: translateY(-8px) translateX(4px);
+  }
+  100% {
+    transform: translateY(0px) translateX(0px);
+  }
+}
+
+@keyframes cloud-float-fast {
+  0% {
+    transform: translateY(0px) translateX(0px);
+  }
+  50% {
+    transform: translateY(-12px) translateX(-6px);
+  }
+  100% {
+    transform: translateY(0px) translateX(0px);
+  }
+}
+
+.animate-cloud-slow {
+  animation: cloud-float-slow 12s ease-in-out infinite;
+}
+
+.animate-cloud-fast {
+  animation: cloud-float-fast 9s ease-in-out infinite;
+}
+
+/* Floating animation for Globe */
+@keyframes globe-float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.animate-globe-float {
+  animation: globe-float 7s ease-in-out infinite;
+}
+
+/* Ken Burns slow pan and zoom effect for premium background images */
+@keyframes ken-burns {
+  0% {
+    transform: scale(1) translate(0, 0);
+  }
+  50% {
+    transform: scale(1.08) translate(-0.5%, -0.5%);
+  }
+  100% {
+    transform: scale(1) translate(0, 0);
+  }
+}
+
+.animate-ken-burns {
+  animation: ken-burns 30s ease-in-out infinite;
+}
+
+/* Slow zoom animation */
+@keyframes hero-zoom {
+  0% {
+    transform: scale(1.02);
+  }
+  50% {
+    transform: scale(1.10);
+  }
+  100% {
+    transform: scale(1.02);
+  }
+}
+.animate-hero-zoom {
+  animation: hero-zoom 25s ease-in-out infinite;
+}
+
+/* Cloud drift animations */
+@keyframes drift-cloud-1 {
+  0%, 100% {
+    transform: translate(-10%, 0);
+  }
+  50% {
+    transform: translate(30%, -10px);
+  }
+}
+@keyframes drift-cloud-2 {
+  0%, 100% {
+    transform: translate(20%, 0);
+  }
+  50% {
+    transform: translate(-20%, 15px);
+  }
+}
+@keyframes drift-cloud-3 {
+  0%, 100% {
+    transform: translate(-15%, 0);
+  }
+  50% {
+    transform: translate(15%, -8px);
+  }
+}
+
+.animate-drift-cloud-1 {
+  animation: drift-cloud-1 60s ease-in-out infinite;
+}
+.animate-drift-cloud-2 {
+  animation: drift-cloud-2 80s ease-in-out infinite;
+}
+.animate-drift-cloud-3 {
+  animation: drift-cloud-3 70s ease-in-out infinite;
+}
+
+/* Particle float animations */
+@keyframes float-particle-1 {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.15;
+  }
+  50% {
+    transform: translate(30px, -60px) scale(1.3);
+    opacity: 0.6;
+  }
+}
+@keyframes float-particle-2 {
+  0%, 100% {
+    transform: translate(0, 0) scale(1.2);
+    opacity: 0.3;
+  }
+  50% {
+    transform: translate(-40px, -40px) scale(0.8);
+    opacity: 0.7;
+  }
+}
+@keyframes float-particle-3 {
+  0%, 100% {
+    transform: translate(0, 0) scale(0.9);
+    opacity: 0.2;
+  }
+  50% {
+    transform: translate(25px, -30px) scale(1.1);
+    opacity: 0.5;
+  }
+}
+
+.animate-float-particle-1 {
+  animation: float-particle-1 12s ease-in-out infinite;
+}
+.animate-float-particle-2 {
+  animation: float-particle-2 16s ease-in-out infinite;
+}
+.animate-float-particle-3 {
+  animation: float-particle-3 14s ease-in-out infinite;
+}
+
+/* Flight dotted path dash animation */
+@keyframes flight-dash {
+  to {
+    stroke-dashoffset: -32;
+  }
+}
+.animate-flight-dash {
+  animation: flight-dash 1.2s linear infinite;
+}
