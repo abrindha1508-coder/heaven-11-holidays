@@ -1,0 +1,13 @@
+{
+  "name": "heaven-11-holidays-workspace",
+  "private": true,
+  "scripts": {
+    "frontend:build": "npm run build --prefix frontend",
+    "frontend:dev": "npm run dev --prefix frontend",
+    "backend:start": "npm start --prefix backend",
+    "backend:dev": "npm run dev --prefix backend",
+    "build": "npm run build --prefix frontend",
+    "dev": "npm run dev --prefix frontend",
+    "start": "npm run build --prefix frontend && npm start --prefix backend"
+  }
+}
