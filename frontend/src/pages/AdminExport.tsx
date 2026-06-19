@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { Shield, Lock, Unlock, Download, RefreshCw, AlertCircle, CheckCircle, Database } from 'lucide-react';
 import axios from 'axios';
 
@@ -33,7 +33,7 @@ export const AdminExport: React.FC = () => {
 
     try {
       // Connect to verify endpoint
-      const backendUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+      const backendUrl = import.meta.env.VITE_API_URL || 'https://heaven11holidays.in';
       const response = await axios.post(`${backendUrl}/api/admin/verify`, {
         adminKey: adminKey.trim()
       });
@@ -67,7 +67,7 @@ export const AdminExport: React.FC = () => {
     setSuccessMsg(null);
 
     try {
-      const backendUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+      const backendUrl = import.meta.env.VITE_API_URL || 'https://heaven11holidays.in';
       const response = await axios.get(`${backendUrl}/api/admin/export/${type}`, {
         headers: {
           'x-admin-key': adminKey.trim()
@@ -126,30 +126,30 @@ export const AdminExport: React.FC = () => {
 
         {/* Messaging Box */}
         {error && (
-          <motion.div 
+          <m.div 
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             className="mb-6 rounded-xl bg-rose-50 border border-rose-100 p-4 text-xs font-semibold text-rose-600 flex items-center gap-3 max-w-md mx-auto text-left shadow-sm"
           >
             <AlertCircle className="h-5 w-5 shrink-0 text-rose-500" />
             <span>{error}</span>
-          </motion.div>
+          </m.div>
         )}
 
         {successMsg && (
-          <motion.div 
+          <m.div 
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             className="mb-6 rounded-xl bg-emerald-50 border border-emerald-100 p-4 text-xs font-semibold text-emerald-600 flex items-center gap-3 max-w-md mx-auto text-left shadow-sm"
           >
             <CheckCircle className="h-5 w-5 shrink-0 text-emerald-500" />
             <span>{successMsg}</span>
-          </motion.div>
+          </m.div>
         )}
 
         {/* Verification View */}
         {!isVerified ? (
-          <motion.div 
+          <m.div 
             initial={{ opacity: 0, scale: 0.96 }}
             animate={{ opacity: 1, scale: 1 }}
             className="max-w-md mx-auto rounded-3xl bg-white border border-slate-100 shadow-xl p-8 text-center space-y-6"
@@ -195,9 +195,9 @@ export const AdminExport: React.FC = () => {
                 )}
               </button>
             </form>
-          </motion.div>
+          </m.div>
         ) : (
-          <motion.div
+          <m.div
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             className="space-y-6"
@@ -295,7 +295,7 @@ export const AdminExport: React.FC = () => {
               </div>
 
             </div>
-          </motion.div>
+          </m.div>
         )}
 
       </div>

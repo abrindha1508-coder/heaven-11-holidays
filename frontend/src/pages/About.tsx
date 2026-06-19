@@ -1,11 +1,54 @@
 import { Shield, Sparkles, Compass, Check } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { PageHero } from '../components/PageHero';
-import aboutHeroImg from '../assets/aboutpagehrimg.jpeg';
+import { SEO } from '../components/SEO';
+import aboutHeroImg from '../assets/aboutpagehrimg.webp';
 
 export const About: React.FC = () => {
+  const aboutKeywords = "About Heaven11 Holidays, Heaven11 team, travel agency profile, travel curators India, custom holiday coordinators, Heaven11 history, best travel company India, premium holidays team";
+
+  const aboutSchema = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebPage",
+        "@id": "https://heaven11holidays.in/about#webpage",
+        "url": "https://heaven11holidays.in/about",
+        "name": "About Heaven11 Holidays - Our Story & Mission",
+        "description": "Fulfilling luxury global itineraries since 2018. Learn about Heaven11 Holidays' story, mission, vision, core values, and why travelers trust us.",
+        "isPartOf": {
+          "@id": "https://heaven11holidays.in/#website"
+        }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": "https://heaven11holidays.in/about#breadcrumb",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://heaven11holidays.in/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "About Us",
+            "item": "https://heaven11holidays.in/about"
+          }
+        ]
+      }
+    ]
+  };
+
   return (
     <div className="relative min-h-screen bg-slate-50/50 pb-20">
+      <SEO
+        title="About Heaven11 Holidays | Trusted Premium Travel curating Agency"
+        description="Fulfilling luxury global itineraries since 2018. Discover our story, mission, and how we curate safe, uncompromised premium holiday packages."
+        keywords={aboutKeywords}
+        schemaData={aboutSchema}
+      />
       <PageHero
         title="About Heaven11 Holidays"
         subtitle="Since 2018"
@@ -17,7 +60,7 @@ export const About: React.FC = () => {
 
       <div id="about-content" className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 mt-16 pt-8 space-y-20">
         {/* Intro */}
-        <motion.div 
+        <m.div 
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -36,12 +79,13 @@ export const About: React.FC = () => {
           </div>
           <div className="rounded-3xl overflow-hidden shadow-md h-80">
             <img 
-              src="/travel_curation.png" 
+              src="/travel_curation.webp" 
               alt="About Travel Curation" 
+              loading="lazy"
               className="w-full h-full object-cover" 
             />
           </div>
-        </motion.div>
+        </m.div>
 
         {/* Mission, Vision, Values */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -62,7 +106,7 @@ export const About: React.FC = () => {
               desc: 'Pristine transparency (no hidden markups), safety-first chauffeured transport, strict quality audits, and 24x7 guest support.'
             }
           ].map((val, idx) => (
-            <motion.div 
+            <m.div 
               key={idx} 
               initial={{ opacity: 0, y: 25 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -76,12 +120,12 @@ export const About: React.FC = () => {
               </div>
               <h3 className="font-display font-bold text-slate-800 text-lg">{val.title}</h3>
               <p className="text-xs text-slate-500 leading-relaxed">{val.desc}</p>
-            </motion.div>
+            </m.div>
           ))}
         </div>
 
         {/* Why Trust Us Factors */}
-        <motion.div 
+        <m.div 
           initial={{ opacity: 0, scale: 0.95 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
@@ -126,7 +170,7 @@ export const About: React.FC = () => {
               ))}
             </div>
           </div>
-        </motion.div>
+        </m.div>
       </div>
     </div>
   );

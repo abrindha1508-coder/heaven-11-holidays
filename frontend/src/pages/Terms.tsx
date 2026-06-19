@@ -1,9 +1,52 @@
 import React from 'react';
 import { FileText } from 'lucide-react';
+import { SEO } from '../components/SEO';
 
 export const Terms: React.FC = () => {
+  const termsKeywords = "Terms and conditions, booking policy, travel terms, Heaven11 Holidays terms, payment guidelines, cancellation rules, Heaven11 Holidays";
+
+  const termsSchema = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebPage",
+        "@id": "https://heaven11holidays.in/terms-conditions#webpage",
+        "url": "https://heaven11holidays.in/terms-conditions",
+        "name": "Terms & Conditions | Heaven11 Holidays",
+        "description": "Review the terms and conditions of Heaven11 Holidays. Learn about booking rules, payment options, and travel guidelines.",
+        "isPartOf": {
+          "@id": "https://heaven11holidays.in/#website"
+        }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": "https://heaven11holidays.in/terms-conditions#breadcrumb",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://heaven11holidays.in/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Terms & Conditions",
+            "item": "https://heaven11holidays.in/terms-conditions"
+          }
+        ]
+      }
+    ]
+  };
+
   return (
     <div className="relative pt-24 min-h-screen bg-slate-50/50 pb-20">
+      <SEO
+        title="Terms & Conditions | Heaven11 Holidays"
+        description="Review the terms and conditions of Heaven11 Holidays. Learn about booking rules, payment options, and travel guidelines."
+        keywords={termsKeywords}
+        schemaData={termsSchema}
+      />
       <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 mt-12">
         <div className="rounded-3xl bg-white p-6 md:p-10 shadow-xs border border-slate-100 space-y-6">
           <div className="space-y-2 border-b border-slate-100 pb-5 flex items-center gap-3">

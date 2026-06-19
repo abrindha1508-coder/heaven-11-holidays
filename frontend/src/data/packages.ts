@@ -1,20 +1,15 @@
 import type { TourPackage } from '../types/package';
 
 // Import local assets for packages
-import dubaiPkgImg from '../assets/International Tour Packages/Dubai/Burj Khalifa.jpg';
-import thailandPkgImg from '../assets/International Tour Packages/Thailand/Pattaya.jpg';
-import singaporePkgImg from '../assets/International Tour Packages/Singapore/Marina Bay Sands.jpg';
-import baliPkgImg from '../assets/International Tour Packages/Bali/Nusa Penida.jpeg';
-import maldivesPkgImg from '../assets/International Tour Packages/Maldives/Water Villas.jpg';
-import europePkgImg from '../assets/International Tour Packages/Paris/Eiffel Tower.jpeg';
-import vietnamPkgImg from '../assets/International Tour Packages/Vietnam/Halong Bay1.jpg';
-import malaysiaPkgImg from '../assets/International Tour Packages/Malaysia/Petronas Towers.jpg';
+import dubaiPkgImg from '../assets/International Tour Packages/Dubai/Burj Khalifa.webp';
+import thailandPkgImg from '../assets/International Tour Packages/Thailand/Pattaya.webp';
+import singaporePkgImg from '../assets/International Tour Packages/Singapore/Marina Bay Sands.webp';
+import baliPkgImg from '../assets/International Tour Packages/Bali/Nusa Penida.webp';
+import maldivesPkgImg from '../assets/International Tour Packages/Maldives/Water Villas.webp';
+import europePkgImg from '../assets/International Tour Packages/Paris/Eiffel Tower.webp';
+import vietnamPkgImg from '../assets/International Tour Packages/Vietnam/Halong Bay1.webp';
+import malaysiaPkgImg from '../assets/International Tour Packages/Malaysia/Petronas Towers.webp';
 
-// Honeymoon package assets
-import maldivesHoneyImg from '../assets/International Tour Packages/Maldives/Water Villas.jpeg';
-import baliHoneyImg from '../assets/International Tour Packages/Bali/Ubud.jpeg';
-import kashmirHoneyImg from '../assets/domestic tour Packages/Kashmir/srinagar.jpeg';
-import switzerlandHoneyImg from '../assets/International Tour Packages/Switzerland/Interlaken.jpg';
 
 export const packages: TourPackage[] = [
   // Trending Tour Packages
@@ -187,94 +182,8 @@ export const packages: TourPackage[] = [
     featured: true
   },
 
-  // Honeymoon Packages
-  {
-    id: 'maldives-honeymoon',
-    title: 'Maldives Honeymoon',
-    destinationId: 'maldives',
-    destinationName: 'Maldives',
-    duration: '4 Days / 3 Nights',
-    price: 54999,
-    discountPrice: 59999,
-    rating: 4.9,
-    reviewsCount: 142,
-    image: maldivesHoneyImg,
-    highlights: ['Private Overwater Villa Stay', 'Speedboat Transfers', 'Romantic Floating Breakfast'],
-    inclusions: ['Romantic Villa Decor', 'Complimentary Champagne & Cake', 'Beachfront Candlelit Dinner'],
-    exclusions: ['Airfare'],
-    itinerary: [
-      { day: 1, title: 'Romantic Welcome at Maldives', description: 'Check into your overwater pool villa with special honeymoon decoration.' }
-    ],
-    type: 'honeymoon',
-    popular: true,
-    featured: true
-  },
-  {
-    id: 'bali-honeymoon',
-    title: 'Bali Honeymoon',
-    destinationId: 'bali',
-    destinationName: 'Bali',
-    duration: '5 Days / 4 Nights',
-    price: 24999,
-    discountPrice: 28999,
-    rating: 4.9,
-    reviewsCount: 164,
-    image: baliHoneyImg,
-    highlights: ['Seminyak Pool Villa', 'Ubud Jungle Swing couple pass', 'Jimbaran Candlelight BBQ'],
-    inclusions: ['Couple Floating Breakfast', 'Complimentary Honeymoon Cake', 'All entry fees'],
-    exclusions: ['Airfare & Personal expenses'],
-    itinerary: [
-      { day: 1, title: 'Seminyak Pool Villa welcome', description: 'Check into Seminyak pool villa. Evening romantic dinner.' }
-    ],
-    type: 'honeymoon',
-    popular: true,
-    featured: true
-  },
-  {
-    id: 'kashmir-honeymoon',
-    title: 'Kashmir Honeymoon',
-    destinationId: 'kashmir',
-    destinationName: 'Kashmir',
-    duration: '5 Days / 4 Nights',
-    price: 18999,
-    discountPrice: 21999,
-    rating: 4.9,
-    reviewsCount: 96,
-    image: kashmirHoneyImg,
-    highlights: ['Dal Lake Houseboat night', 'Gulmarg Snow Gondola Ride', 'Betaab Valley Couple Safari'],
-    inclusions: ['1 Night Luxury Houseboat', 'Shikara Ride flowers block', 'AC Vehicle with Driver'],
-    exclusions: ['Airfare'],
-    itinerary: [
-      { day: 1, title: 'Dal Lake shikara welcome', description: 'Board the houseboat in Dal Lake. Enjoy a romantic Shikara ride.' }
-    ],
-    type: 'honeymoon',
-    popular: true,
-    featured: true
-  },
-  {
-    id: 'switzerland-honeymoon',
-    title: 'Switzerland Honeymoon',
-    destinationId: 'switzerland',
-    destinationName: 'Switzerland',
-    duration: '6 Days / 5 Nights',
-    price: 118999,
-    discountPrice: 129999,
-    rating: 4.9,
-    reviewsCount: 84,
-    image: switzerlandHoneyImg,
-    highlights: ['Lucerne Lake Cruise couple pass', 'Interlaken Chalet stay', 'Mount Titlis Snow Gondola'],
-    inclusions: ['Alpine Scenic Resorts', 'Eurail Passes', 'Cable car tickets'],
-    exclusions: ['Schengen Visa fees & Flights'],
-    itinerary: [
-      { day: 1, title: 'Lucerne lake welcome', description: 'Arrive in Lucerne, check into lakefront hotel, enjoy evening sunset cruise.' }
-    ],
-    type: 'honeymoon',
-    popular: true,
-    featured: true
-  }
 ];
 
-export const honeymoonPackages = ['maldives-honeymoon', 'bali-honeymoon', 'kashmir-honeymoon', 'switzerland-honeymoon'];
 export const groupTours = ['dubai-explorer', 'europe-marvels', 'thailand-getaway', 'malaysia-tour'];
 export const tourPackages = packages;
 export const familyPackages = { enabled: true };

@@ -4,7 +4,6 @@ export interface Destination {
   image: string;
   description: string;
   type: 'domestic' | 'international';
-  isHoneymoon: boolean;
   price: number;
   rating: number;
   duration: string;

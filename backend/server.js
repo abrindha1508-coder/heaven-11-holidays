@@ -9,10 +9,10 @@ const adminRoutes = require('./routes/adminRoutes');
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-// CORS setup to allow React frontend (default local ports)
+// CORS setup to allow React frontend
 const allowedOrigins = [
-  'http://localhost:5173', // Vite default React dev port
-  'http://localhost:3000', // Create-React-App default port
+  'https://heaven11holidays.in',
+  'https://www.heaven11holidays.in',
   process.env.FRONTEND_URL  // Dynamically set production / staging URL
 ].filter(Boolean);
 
@@ -75,5 +75,5 @@ app.use((err, req, res, next) => {
 
 // Start Server
 app.listen(PORT, () => {
-  console.log(`🚀 Server is running on http://localhost:${PORT}`);
+  console.log(`🚀 Server is running on port ${PORT}`);
 });

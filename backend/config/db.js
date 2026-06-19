@@ -6,7 +6,7 @@ const pool = new Pool({
   host: process.env.DB_HOST || 'localhost',
   user: process.env.DB_USER || 'postgres',
   password: process.env.DB_PASSWORD || 'postgres',
-  database: process.env.DB_NAME || 'haven11_holidays',
+  database: process.env.DB_NAME || 'heaven11_holidays',
   port: process.env.DB_PORT || 5432,
   // Recommended settings for production/resilience
   max: 20, // Max number of clients in the pool

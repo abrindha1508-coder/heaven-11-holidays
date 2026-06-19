@@ -1,45 +1,45 @@
 import type { Destination } from '../types/destination';
 
 // Domestic Tour Images
-import kashmirImg from '../assets/domestic tour Packages/Kashmir/srinagar.jpeg';
-import keralaImg from '../assets/domestic tour Packages/Alleppey/Houseboat.jpg';
-import ootyImg from '../assets/domestic tour Packages/ooty/Ooty Lake.jpg';
-import kodaikanalImg from '../assets/domestic tour Packages/Kodaikanal/Kodai Lake.jpg';
+import kashmirImg from '../assets/domestic tour Packages/Kashmir/srinagar.webp';
+import keralaImg from '../assets/domestic tour Packages/Alleppey/Houseboat.webp';
+import ootyImg from '../assets/domestic tour Packages/ooty/Ooty Lake.webp';
+import kodaikanalImg from '../assets/domestic tour Packages/Kodaikanal/Kodai Lake.webp';
 import goaImg from '../assets/domestic tour Packages/Goa/Calangute Beach.webp';
-import andamanImg from '../assets/domestic tour Packages/Andaman/Radhanagar Beach.jpg';
-import rajasthanImg from '../assets/domestic tour Packages/Jaipur/Hawa Mahal.jpg';
-import himachalImg from '../assets/domestic tour Packages/Shimla/Shimla.jpg';
+import andamanImg from '../assets/domestic tour Packages/Andaman/Radhanagar Beach.webp';
+import rajasthanImg from '../assets/domestic tour Packages/Jaipur/Hawa Mahal.webp';
+import himachalImg from '../assets/domestic tour Packages/Shimla/Shimla.webp';
 
-import agraImg from '../assets/domestic tour Packages/Agra/Taj Mahal.jpeg';
-import alleppeyImg from '../assets/domestic tour Packages/Alleppey/Houseboat.jpg';
+import agraImg from '../assets/domestic tour Packages/Agra/Taj Mahal.webp';
+import alleppeyImg from '../assets/domestic tour Packages/Alleppey/Houseboat.webp';
 import amritsarImg from '../assets/domestic tour Packages/Amritsar/Golden Temple.avif';
-import coorgImg from '../assets/domestic tour Packages/Coorg/Abbey Falls.jpg';
+import coorgImg from '../assets/domestic tour Packages/Coorg/Abbey Falls.webp';
 import delhiImg from '../assets/domestic tour Packages/Delhi/India Gate.avif';
-import hampiImg from '../assets/domestic tour Packages/Hampi/Stone Chariot.jpg';
-import kanyakumariImg from '../assets/domestic tour Packages/Kanyakumari/Vivekananda Rock.jpeg';
-import lehLadakhImg from '../assets/domestic tour Packages/Leh Ladakh/Pangong Lake.jpg';
-import manaliImg from '../assets/domestic tour Packages/Manali/Solang Valley.jpg';
-import munnarImg from '../assets/domestic tour Packages/Munnar/Tea Gardens.jpg';
-import mysoreImg from '../assets/domestic tour Packages/Mysore/Mysore Palace.jpg';
-import pondicherryImg from '../assets/domestic tour Packages/Pondicherry/Rock Beach.jpg';
-import rameswaramImg from '../assets/domestic tour Packages/Rameswaram/Dhanushkodi.jpg';
-import rishikeshImg from '../assets/domestic tour Packages/Rishikesh/Ram Jhula.jpeg';
-import varanasiImg from '../assets/domestic tour Packages/Varanasi/Varanasi.jpg';
+import hampiImg from '../assets/domestic tour Packages/Hampi/Stone Chariot.webp';
+import kanyakumariImg from '../assets/domestic tour Packages/Kanyakumari/Vivekananda Rock.webp';
+import lehLadakhImg from '../assets/domestic tour Packages/Leh Ladakh/Pangong Lake.webp';
+import manaliImg from '../assets/domestic tour Packages/Manali/Solang Valley.webp';
+import munnarImg from '../assets/domestic tour Packages/Munnar/Tea Gardens.webp';
+import mysoreImg from '../assets/domestic tour Packages/Mysore/Mysore Palace.webp';
+import pondicherryImg from '../assets/domestic tour Packages/Pondicherry/Rock Beach.webp';
+import rameswaramImg from '../assets/domestic tour Packages/Rameswaram/Dhanushkodi.webp';
+import rishikeshImg from '../assets/domestic tour Packages/Rishikesh/Ram Jhula.webp';
+import varanasiImg from '../assets/domestic tour Packages/Varanasi/Varanasi.webp';
 import wayanadImg from '../assets/domestic tour Packages/Wayanad/Edakkal Caves.webp';
-import yercaudImg from '../assets/domestic tour Packages/Yercaud/Yercaud - Yercaud Lake.jpg';
+import yercaudImg from '../assets/domestic tour Packages/Yercaud/Yercaud - Yercaud Lake.webp';
 
 // International Tour Images
-import dubaiImg from '../assets/International Tour Packages/Dubai/Burj Khalifa.jpg';
-import thailandImg from '../assets/International Tour Packages/Thailand/Phuket-1.jpg';
-import singaporeImg from '../assets/International Tour Packages/Singapore/Marina Bay Sands.jpg';
-import malaysiaImg from '../assets/International Tour Packages/Malaysia/Petronas Towers.jpg';
-import baliImg from '../assets/International Tour Packages/Bali/Nusa Penida.jpeg';
-import maldivesImg from '../assets/International Tour Packages/Maldives/Water Villas.jpg';
-import vietnamImg from '../assets/International Tour Packages/Vietnam/Halong Bay1.jpg';
-import europeImg from '../assets/International Tour Packages/Paris/Eiffel Tower.jpeg';
-import sriLankaImg from '../assets/International Tour Packages/Sri Lanka/Sigiriya.jpg';
-import switzerlandImg from '../assets/International Tour Packages/Switzerland/Interlaken.jpg';
-import turkeyImg from '../assets/International Tour Packages/Turkey/Cappadocia.jpeg';
+import dubaiImg from '../assets/International Tour Packages/Dubai/Burj Khalifa.webp';
+import thailandImg from '../assets/International Tour Packages/Thailand/Phuket-1.webp';
+import singaporeImg from '../assets/International Tour Packages/Singapore/Marina Bay Sands.webp';
+import malaysiaImg from '../assets/International Tour Packages/Malaysia/Petronas Towers.webp';
+import baliImg from '../assets/International Tour Packages/Bali/Nusa Penida.webp';
+import maldivesImg from '../assets/International Tour Packages/Maldives/Water Villas.webp';
+import vietnamImg from '../assets/International Tour Packages/Vietnam/Halong Bay1.webp';
+import europeImg from '../assets/International Tour Packages/Paris/Eiffel Tower.webp';
+import sriLankaImg from '../assets/International Tour Packages/Sri Lanka/Sigiriya.webp';
+import switzerlandImg from '../assets/International Tour Packages/Switzerland/Interlaken.webp';
+import turkeyImg from '../assets/International Tour Packages/Turkey/Cappadocia.webp';
 
 export const destinations: Destination[] = [
   // Domestic Destinations
@@ -49,7 +49,6 @@ export const destinations: Destination[] = [
     image: kashmirImg,
     description: 'The Paradise on Earth. Experience snow-capped mountains, Shikara rides on Dal Lake, and breathtaking valleys.',
     type: 'domestic',
-    isHoneymoon: true,
     price: 15999,
     rating: 4.9,
     duration: '5 Nights / 6 Days',
@@ -65,7 +64,6 @@ export const destinations: Destination[] = [
     image: keralaImg,
     description: 'God\'s Own Country. Famous for serene backwaters, houseboats, spice plantations, and lush tea gardens.',
     type: 'domestic',
-    isHoneymoon: true,
     price: 12999,
     rating: 4.8,
     duration: '6 Nights / 7 Days',
@@ -81,7 +79,6 @@ export const destinations: Destination[] = [
     image: ootyImg,
     description: 'The Queen of Hill Stations. Nested in Nilgiri Hills, offering panoramic views, botanical gardens, and toy train rides.',
     type: 'domestic',
-    isHoneymoon: false,
     price: 9999,
     rating: 4.6,
     duration: '3 Nights / 4 Days',
@@ -97,7 +94,6 @@ export const destinations: Destination[] = [
     image: kodaikanalImg,
     description: 'The Gift of the Forest. Beautiful misty hills, pine forests, pristine lakes, and tranquil walking trails.',
     type: 'domestic',
-    isHoneymoon: true,
     price: 8999,
     rating: 4.7,
     duration: '3 Nights / 4 Days',
@@ -113,7 +109,6 @@ export const destinations: Destination[] = [
     image: goaImg,
     description: 'The Land of Sun, Sand, and Spices. Famous for golden sand beaches, historic churches, and thrilling water sports.',
     type: 'domestic',
-    isHoneymoon: false,
     price: 10999,
     rating: 4.7,
     duration: '4 Nights / 5 Days',
@@ -129,7 +124,6 @@ export const destinations: Destination[] = [
     image: andamanImg,
     description: 'Tropical Paradise. Crystal clear blue waters, exquisite coral reefs, and tranquil private beaches.',
     type: 'domestic',
-    isHoneymoon: true,
     price: 18999,
     rating: 4.9,
     duration: '5 Nights / 6 Days',
@@ -145,7 +139,6 @@ export const destinations: Destination[] = [
     image: rajasthanImg,
     description: 'The Land of Kings. Explore glorious heritage palaces, golden desert safaris, and colorful cultural festivals.',
     type: 'domestic',
-    isHoneymoon: false,
     price: 13999,
     rating: 4.8,
     duration: '6 Nights / 7 Days',
@@ -161,7 +154,6 @@ export const destinations: Destination[] = [
     image: himachalImg,
     description: 'The Snowy Splendor. Magnificent valleys, adventure sports, paragliding in Solang Valley, and spiritual retreats.',
     type: 'domestic',
-    isHoneymoon: false,
     price: 11999,
     rating: 4.7,
     duration: '5 Nights / 6 Days',
@@ -177,7 +169,6 @@ export const destinations: Destination[] = [
     image: agraImg,
     description: 'Home of the Taj Mahal. Witness the grand Mughal architecture, historic Agra Fort, and the rich legacy of historic India.',
     type: 'domestic',
-    isHoneymoon: false,
     price: 7999,
     rating: 4.8,
     duration: '2 Nights / 3 Days',
@@ -193,7 +184,6 @@ export const destinations: Destination[] = [
     image: alleppeyImg,
     description: 'Venice of the East. Float along palm-fringed backwaters in luxury houseboats and see scenic village life.',
     type: 'domestic',
-    isHoneymoon: true,
     price: 10999,
     rating: 4.8,
     duration: '3 Nights / 4 Days',
@@ -209,7 +199,6 @@ export const destinations: Destination[] = [
     image: amritsarImg,
     description: 'The Spiritual Hub. Visit the majestic Golden Temple, witness the Wagah Border Ceremony, and taste Punjabi cuisine.',
     type: 'domestic',
-    isHoneymoon: false,
     price: 8999,
     rating: 4.9,
     duration: '3 Nights / 4 Days',
@@ -225,7 +214,6 @@ export const destinations: Destination[] = [
     image: coorgImg,
     description: 'The Scotland of India. Rich coffee plantations, mist-covered green hills, cascading waterfalls, and scenic trails.',
     type: 'domestic',
-    isHoneymoon: true,
     price: 9999,
     rating: 4.7,
     duration: '3 Nights / 4 Days',
@@ -241,7 +229,6 @@ export const destinations: Destination[] = [
     image: delhiImg,
     description: 'The Historic Capital. Explore the blend of old and new: historic red sandstone monuments, bazaars, and modern structures.',
     type: 'domestic',
-    isHoneymoon: false,
     price: 6999,
     rating: 4.6,
     duration: '3 Nights / 4 Days',
@@ -257,7 +244,6 @@ export const destinations: Destination[] = [
     image: hampiImg,
     description: 'Ruins of Vijayanagara. Step back in time among ancient stone temples, rock-cut monuments, and bouldered valleys.',
     type: 'domestic',
-    isHoneymoon: false,
     price: 8999,
     rating: 4.8,
     duration: '3 Nights / 4 Days',
@@ -273,7 +259,6 @@ export const destinations: Destination[] = [
     image: kanyakumariImg,
     description: 'The Lands End. See the spectacular sunset and sunrise over the confluence of three oceans at India\'s southern tip.',
     type: 'domestic',
-    isHoneymoon: false,
     price: 5999,
     rating: 4.7,
     duration: '2 Nights / 3 Days',
@@ -289,7 +274,6 @@ export const destinations: Destination[] = [
     image: lehLadakhImg,
     description: 'Land of High Passes. Stunning blue lakes, cold desert landscapes, ancient monasteries, and thrill-seeking motor tracks.',
     type: 'domestic',
-    isHoneymoon: false,
     price: 24999,
     rating: 4.9,
     duration: '6 Nights / 7 Days',
@@ -305,7 +289,6 @@ export const destinations: Destination[] = [
     image: manaliImg,
     description: 'The Adventure Haven. Snow-capped valleys, river rafting, paragliding in Solang, and majestic Himalayan views.',
     type: 'domestic',
-    isHoneymoon: true,
     price: 11999,
     rating: 4.8,
     duration: '4 Nights / 5 Days',
@@ -321,7 +304,6 @@ export const destinations: Destination[] = [
     image: munnarImg,
     description: 'The Tea Paradise. Vast rolling green tea plantations, misty valleys, scenic lakes, and refreshing cool breeze.',
     type: 'domestic',
-    isHoneymoon: true,
     price: 9999,
     rating: 4.8,
     duration: '3 Nights / 4 Days',
@@ -337,7 +319,6 @@ export const destinations: Destination[] = [
     image: mysoreImg,
     description: 'The Palace City. Witness the grand heritage of Mysore Palace, explore Chamundi Hills, and buy royal sandalwood products.',
     type: 'domestic',
-    isHoneymoon: false,
     price: 6999,
     rating: 4.7,
     duration: '2 Nights / 3 Days',
@@ -353,7 +334,6 @@ export const destinations: Destination[] = [
     image: pondicherryImg,
     description: 'French Riviera of India. Enjoy relaxing Rock Beach, stroll French Quarter lanes, and experience spiritual Auroville.',
     type: 'domestic',
-    isHoneymoon: false,
     price: 7999,
     rating: 4.7,
     duration: '3 Nights / 4 Days',
@@ -369,7 +349,6 @@ export const destinations: Destination[] = [
     image: rameswaramImg,
     description: 'The Sacred Island. Stroll through the corridors of Ramanathaswamy Temple, view Pamban Bridge, and visit ghost town Dhanushkodi.',
     type: 'domestic',
-    isHoneymoon: false,
     price: 6999,
     rating: 4.8,
     duration: '2 Nights / 3 Days',
@@ -385,7 +364,6 @@ export const destinations: Destination[] = [
     image: rishikeshImg,
     description: 'Yoga Capital of the World. Go river rafting, visit ancient ashrams, and watch Ganga Aarti at Triveni Ghat.',
     type: 'domestic',
-    isHoneymoon: false,
     price: 9999,
     rating: 4.8,
     duration: '3 Nights / 4 Days',
@@ -401,7 +379,6 @@ export const destinations: Destination[] = [
     image: varanasiImg,
     description: 'The Eternal Holy City. Spiritual morning boat rides, grand Ganga Aarti rituals, and ancient riverbank temples.',
     type: 'domestic',
-    isHoneymoon: false,
     price: 8999,
     rating: 4.9,
     duration: '3 Nights / 4 Days',
@@ -417,7 +394,6 @@ export const destinations: Destination[] = [
     image: wayanadImg,
     description: 'The Green Retreat. Hike up to ancient Edakkal Caves, see waterfalls, and explore cardamom forests.',
     type: 'domestic',
-    isHoneymoon: true,
     price: 8999,
     rating: 4.7,
     duration: '3 Nights / 4 Days',
@@ -433,7 +409,6 @@ export const destinations: Destination[] = [
     image: yercaudImg,
     description: 'Jewel of the South. Serene Eastern Ghats hill station famous for orange orchards, lakes, and panoramic viewpoints.',
     type: 'domestic',
-    isHoneymoon: false,
     price: 5999,
     rating: 4.5,
     duration: '2 Nights / 3 Days',
@@ -451,7 +426,6 @@ export const destinations: Destination[] = [
     image: dubaiImg,
     description: 'The Golden City. Ultramodern skyscrapers, luxury shopping, thrilling desert safaris, and futuristic attractions.',
     type: 'international',
-    isHoneymoon: false,
     price: 39999,
     rating: 4.9,
     duration: '4 Nights / 5 Days',
@@ -467,7 +441,6 @@ export const destinations: Destination[] = [
     image: thailandImg,
     description: 'The Land of Smiles. Glittering Buddhist temples, vibrant street markets, tropical beaches, and active nightlife.',
     type: 'international',
-    isHoneymoon: false,
     price: 29999,
     rating: 4.7,
     duration: '4 Nights / 5 Days',
@@ -483,7 +456,6 @@ export const destinations: Destination[] = [
     image: singaporeImg,
     description: 'The Garden City. Futuristic supertrees, top-notch amusement parks, and multi-cultural gourmet dining.',
     type: 'international',
-    isHoneymoon: false,
     price: 34999,
     rating: 4.8,
     duration: '4 Nights / 5 Days',
@@ -499,7 +471,6 @@ export const destinations: Destination[] = [
     image: malaysiaImg,
     description: 'Truly Asia. Iconic Petronas twin towers, colonial architecture, rainforests, and stunning tropical islands.',
     type: 'international',
-    isHoneymoon: false,
     price: 25999,
     rating: 4.6,
     duration: '4 Nights / 5 Days',
@@ -515,7 +486,6 @@ export const destinations: Destination[] = [
     image: baliImg,
     description: 'The Island of Gods. A magical mix of volcanic mountains, sandy beaches, cliffside temples, and rice terraces.',
     type: 'international',
-    isHoneymoon: true,
     price: 32999,
     rating: 4.9,
     duration: '5 Nights / 6 Days',
@@ -531,7 +501,6 @@ export const destinations: Destination[] = [
     image: maldivesImg,
     description: 'The Ultimate Luxury Escape. Secluded overwater villas, gorgeous coral reefs, private white-sand lagoons.',
     type: 'international',
-    isHoneymoon: true,
     price: 49999,
     rating: 4.9,
     duration: '3 Nights / 4 Days',
@@ -547,7 +516,6 @@ export const destinations: Destination[] = [
     image: vietnamImg,
     description: 'Timeless Charm. Cruising Halong Bay, traversing French-colonial lanes in Hanoi, and tasting delectable street food.',
     type: 'international',
-    isHoneymoon: false,
     price: 27999,
     rating: 4.8,
     duration: '5 Nights / 6 Days',
@@ -563,7 +531,6 @@ export const destinations: Destination[] = [
     image: europeImg,
     description: 'Dream Continent Tour. Experience the Eiffel Tower in Paris, scenic Swiss Alps train rides, and canals of Venice.',
     type: 'international',
-    isHoneymoon: true,
     price: 89999,
     rating: 4.9,
     duration: '9 Nights / 10 Days',
@@ -579,7 +546,6 @@ export const destinations: Destination[] = [
     image: sriLankaImg,
     description: 'The Pearl of the Indian Ocean. Beautiful golden beaches, historic Sigiriya rock fortress, and lush tea estates in Ella.',
     type: 'international',
-    isHoneymoon: true,
     price: 24999,
     rating: 4.7,
     duration: '4 Nights / 5 Days',
@@ -595,7 +561,6 @@ export const destinations: Destination[] = [
     image: switzerlandImg,
     description: 'The Alpine Paradise. Ride scenic trains through snow-capped Swiss Alps, explore Interlaken, and view Zurich lakes.',
     type: 'international',
-    isHoneymoon: true,
     price: 99999,
     rating: 4.9,
     duration: '6 Nights / 7 Days',
@@ -611,7 +576,6 @@ export const destinations: Destination[] = [
     image: turkeyImg,
     description: 'Where East Meets West. Fly in a hot air balloon over Cappadocia, visit historic Istanbul mosques, and explore ancient ruins.',
     type: 'international',
-    isHoneymoon: false,
     price: 45999,
     rating: 4.8,
     duration: '5 Nights / 6 Days',

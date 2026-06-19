@@ -7,7 +7,7 @@ const db = require('../config/db');
  */
 const submitContact = async (req, res) => {
   try {
-    const { name, phone, email, destination, message, travel_date, adults, children, infants, seniors } = req.body;
+    const { name, phone, email, destination, message, travel_date, total_travelers } = req.body;
 
     // Basic Input Validation
     if (!name || !phone || !email || !message) {
@@ -26,19 +26,10 @@ const submitContact = async (req, res) => {
       });
     }
 
-    // Calculate total travelers if any traveler category is filled
-    let total_travelers = null;
-    if (adults !== undefined || children !== undefined || infants !== undefined || seniors !== undefined) {
-      total_travelers = (adults ? parseInt(adults, 10) : 0) + 
-                        (children ? parseInt(children, 10) : 0) + 
-                        (infants ? parseInt(infants, 10) : 0) + 
-                        (seniors ? parseInt(seniors, 10) : 0);
-    }
-
     // Insert into PostgreSQL database
     const queryText = `
-      INSERT INTO contacts (name, phone, email, destination, message, travel_date, adults, children, infants, seniors, total_travelers)
-      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)
+      INSERT INTO contacts (name, phone, email, destination, message, travel_date, total_travelers)
+      VALUES ($1, $2, $3, $4, $5, $6, $7)
       RETURNING *
     `;
     const values = [
@@ -48,11 +39,7 @@ const submitContact = async (req, res) => {
       destination ? destination.trim() : null,
       message.trim(),
       travel_date || null,
-      adults ? parseInt(adults, 10) : null,
-      children ? parseInt(children, 10) : null,
-      infants ? parseInt(infants, 10) : null,
-      seniors ? parseInt(seniors, 10) : null,
-      total_travelers
+      total_travelers !== undefined && total_travelers !== null ? parseInt(total_travelers, 10) : null
     ];
 
     const result = await db.query(queryText, values);

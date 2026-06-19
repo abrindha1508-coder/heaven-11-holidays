@@ -1,9 +1,52 @@
 import React from 'react';
 import { BadgePercent } from 'lucide-react';
+import { SEO } from '../components/SEO';
 
 export const Refund: React.FC = () => {
+  const refundKeywords = "Refund policy, cancellation charges, tour cancellation, refund timeline, Heaven11 refund schedules, Heaven11 Holidays";
+
+  const refundSchema = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebPage",
+        "@id": "https://heaven11holidays.in/refund-policy#webpage",
+        "url": "https://heaven11holidays.in/refund-policy",
+        "name": "Refund & Cancellation Policy | Heaven11 Holidays",
+        "description": "Read the refund and cancellation policy of Heaven11 Holidays. Details on cancellation schedules, booking refunds, and timelines.",
+        "isPartOf": {
+          "@id": "https://heaven11holidays.in/#website"
+        }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": "https://heaven11holidays.in/refund-policy#breadcrumb",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://heaven11holidays.in/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Refund Policy",
+            "item": "https://heaven11holidays.in/refund-policy"
+          }
+        ]
+      }
+    ]
+  };
+
   return (
     <div className="relative pt-24 min-h-screen bg-slate-50/50 pb-20">
+      <SEO
+        title="Refund & Cancellation Policy | Heaven11 Holidays"
+        description="Read the refund and cancellation policy of Heaven11 Holidays. Details on cancellation schedules, booking refunds, and timelines."
+        keywords={refundKeywords}
+        schemaData={refundSchema}
+      />
       <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 mt-12">
         <div className="rounded-3xl bg-white p-6 md:p-10 shadow-xs border border-slate-100 space-y-6">
           <div className="space-y-2 border-b border-slate-100 pb-5 flex items-center gap-3">

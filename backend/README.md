@@ -74,7 +74,7 @@ The server should output:
 ## 4. API Documentation
 
 ### Contact / Custom Quote Form API
-- **Endpoint**: `POST http://localhost:5000/api/contacts`
+- **Endpoint**: `POST https://heaven11holidays.in/api/contacts` (or `http://localhost:5000/api/contacts` for local testing)
 - **Request Body**:
   ```json
   {
@@ -95,7 +95,7 @@ The server should output:
   ```
 
 ### Enquiry / Booking Form API
-- **Endpoint**: `POST http://localhost:5000/api/enquiries`
+- **Endpoint**: `POST https://heaven11holidays.in/api/enquiries` (or `http://localhost:5000/api/enquiries` for local testing)
 - **Request Body**:
   ```json
   {

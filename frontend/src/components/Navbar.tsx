@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Menu, X, Phone, MessageSquare, Send, Sparkles } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { m, AnimatePresence } from 'framer-motion';
 import { useScrollPosition } from '../hooks/useScrollPosition';
 import { Logo } from './Logo';
 
@@ -51,6 +51,7 @@ export const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isQuoteOpen, setIsQuoteOpen] = useState(false);
   const [quoteSubmitted, setQuoteSubmitted] = useState(false);
+  const [quoteError, setQuoteError] = useState<string | null>(null);
   const [isDomesticOpen, setIsDomesticOpen] = useState(false);
   const [isInternationalOpen, setIsInternationalOpen] = useState(false);
   const [mobileDomesticOpen, setMobileDomesticOpen] = useState(false);
@@ -79,6 +80,7 @@ export const Navbar: React.FC = () => {
   const handleQuoteSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setQuoteSubmitted(true);
+    setQuoteError(null);
     setTimeout(() => {
       setQuoteSubmitted(false);
       setIsQuoteOpen(false);
@@ -97,8 +99,14 @@ export const Navbar: React.FC = () => {
   };
 
   const triggerWhatsAppQuote = () => {
+    if (!formData.name.trim() || !formData.phone.trim()) {
+      setQuoteError("Please enter your Name and Phone Number before contacting via WhatsApp.");
+      return;
+    }
+    setQuoteError(null);
     const text = `Hi Heaven11 Holidays! I want to request a custom travel quote:
-- *Name*: ${formData.name || 'Client'}
+- *Name*: ${formData.name}
+- *Phone*: ${formData.phone}
 - *Destination*: ${formData.destination || 'Not Specified'}
 - *Date*: ${formData.travelDate || 'Plan Soon'}
 - *Duration*: ${formData.duration || 'Flexible'}
@@ -177,7 +185,7 @@ export const Navbar: React.FC = () => {
 
                         <AnimatePresence>
                           {((item.type === 'domestic' && isDomesticOpen) || (item.type === 'international' && isInternationalOpen)) && (
-                            <motion.div
+                            <m.div
                               initial={{ opacity: 0, y: 8, scale: 0.95 }}
                               animate={{ opacity: 1, y: 0, scale: 1 }}
                               exit={{ opacity: 0, y: 8, scale: 0.95 }}
@@ -225,7 +233,7 @@ export const Navbar: React.FC = () => {
                               >
                                 VIEW ALL {item.name.toUpperCase()} →
                               </Link>
-                            </motion.div>
+                            </m.div>
                           )}
                         </AnimatePresence>
                       </div>
@@ -267,6 +275,7 @@ export const Navbar: React.FC = () => {
                 <button
                   onClick={() => navigate('/contact')}
                   className="px-4 py-2 text-[11px] font-black text-slate-900 bg-accent hover:bg-white hover:text-slate-900 rounded-full shadow-lg shadow-accent/10 hover:shadow-accent/20 transition-all duration-300 cursor-pointer"
+                  aria-label="Get a Free Quote"
                 >
                   Get a Free Quote
                 </button>
@@ -278,12 +287,14 @@ export const Navbar: React.FC = () => {
               <button
                 onClick={() => navigate('/contact')}
                 className="px-3 py-1.5 text-[11px] font-extrabold text-slate-900 bg-accent rounded-full shadow-md cursor-pointer"
+                aria-label="Get a Free Quote"
               >
                 Quote
               </button>
               <button
                 onClick={() => setIsOpen(!isOpen)}
                 className="inline-flex items-center justify-center rounded-lg p-1.5 text-white hover:bg-white/10 transition-all duration-300"
+                aria-label="Toggle navigation menu"
               >
                 {isOpen ? <X className="h-5.5 w-5.5" /> : <Menu className="h-5.5 w-5.5" />}
               </button>
@@ -301,6 +312,7 @@ export const Navbar: React.FC = () => {
             <button
               onClick={() => setIsOpen(false)}
               className="rounded-lg p-2 text-white/70 hover:text-white hover:bg-white/10 transition-all cursor-pointer"
+              aria-label="Close navigation menu"
             >
               <X className="h-5 w-5" />
             </button>
@@ -326,6 +338,8 @@ export const Navbar: React.FC = () => {
                           ? 'bg-accent/10 text-accent font-bold'
                           : 'text-white/80 hover:text-white hover:bg-white/5'
                         }`}
+                      aria-label={`Toggle ${item.name} submenu`}
+                      aria-expanded={isSubmenuOpen}
                     >
                       <span>{item.name}</span>
                       <svg
@@ -347,7 +361,7 @@ export const Navbar: React.FC = () => {
 
                     <AnimatePresence>
                       {isSubmenuOpen && (
-                        <motion.div
+                        <m.div
                           initial={{ height: 0, opacity: 0 }}
                           animate={{ height: 'auto', opacity: 1 }}
                           exit={{ height: 0, opacity: 0 }}
@@ -372,7 +386,7 @@ export const Navbar: React.FC = () => {
                               <span className="text-xs text-slate-500">{sub.description}</span>
                             </Link>
                           ))}
-                        </motion.div>
+                        </m.div>
                       )}
                     </AnimatePresence>
                   </div>
@@ -436,6 +450,7 @@ export const Navbar: React.FC = () => {
                   navigate('/contact');
                 }}
                 className="rounded-xl bg-linear-to-r from-accent to-[#1E8DC5] py-3 font-extrabold text-slate-900 shadow-md hover:shadow-lg transition-all cursor-pointer text-xs tracking-wider"
+                aria-label="Request free quote"
               >
                 REQUEST FREE QUOTE
               </button>
@@ -462,6 +477,7 @@ export const Navbar: React.FC = () => {
             <button
               onClick={() => setIsQuoteOpen(false)}
               className="absolute top-4 right-4 rounded-full p-1.5 text-slate-400 hover:bg-slate-100 hover:text-slate-700"
+              aria-label="Close quote modal"
             >
               <X className="h-5 w-5" />
             </button>
@@ -478,6 +494,7 @@ export const Navbar: React.FC = () => {
                 <button
                   onClick={triggerWhatsAppQuote}
                   className="mt-6 flex items-center gap-2 rounded-xl bg-emerald-500 px-6 py-3 font-semibold text-white shadow-md hover:bg-emerald-600 transition-all cursor-pointer"
+                  aria-label="Reach us on WhatsApp"
                 >
                   <MessageSquare className="h-5 w-5 fill-current" /> Reach Us on WhatsApp
                 </button>
@@ -600,6 +617,7 @@ export const Navbar: React.FC = () => {
                             ? 'bg-primary-dark border-primary-dark text-white'
                             : 'border-slate-200 bg-slate-50 text-slate-600 hover:bg-slate-100'
                           }`}
+                        aria-label={`Select budget level: ${level}`}
                       >
                         {level}
                       </button>
@@ -619,10 +637,17 @@ export const Navbar: React.FC = () => {
                   />
                 </div>
 
+                {quoteError && (
+                  <div className="text-xs font-semibold text-rose-600 bg-rose-50 border border-rose-100 rounded-xl p-3 text-left">
+                    {quoteError}
+                  </div>
+                )}
+
                 <div className="pt-2 flex gap-3">
                   <button
                     type="submit"
                     className="flex-1 rounded-xl bg-gradient-premium py-3 text-sm font-semibold text-white shadow-md hover:shadow-lg hover:scale-102 active:scale-98 transition-all cursor-pointer"
+                    aria-label="Submit quotation form"
                   >
                     Submit Quotation Form
                   </button>
@@ -631,6 +656,7 @@ export const Navbar: React.FC = () => {
                     onClick={triggerWhatsAppQuote}
                     className="rounded-xl border border-emerald-500 bg-emerald-50 text-emerald-600 px-4 hover:bg-emerald-500 hover:text-white transition-all cursor-pointer"
                     title="Send via WhatsApp"
+                    aria-label="Submit query via WhatsApp"
                   >
                     <MessageSquare className="h-5 w-5 fill-current" />
                   </button>

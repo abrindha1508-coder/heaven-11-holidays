@@ -1,13 +1,62 @@
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { Mail, Phone, MapPin, CheckCircle, Clock, Sparkles, MessageSquare } from 'lucide-react';
 import { PageHero } from '../components/PageHero';
+import { SEO } from '../components/SEO';
 import { submitContactForm } from '../services/api';
-import { TravelersSelector } from '../components/TravelersSelector';
-import type { TravellersState } from '../components/TravelersSelector';
-import contactHeroImg from '../assets/contactheroimg.jpeg';
+import contactHeroImg from '../assets/contactheroimg.webp';
 
 export const Contact: React.FC = () => {
+  const contactKeywords = "Contact Heaven11 Holidays, Heaven11 office Trichy, travel agency contact number, customized quote inquiry, travel support hotline, email Heaven11, business operating hours";
+
+  const contactSchema = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebPage",
+        "@id": "https://heaven11holidays.in/contact#webpage",
+        "url": "https://heaven11holidays.in/contact",
+        "name": "Contact Heaven11 Holidays - Inquire Custom Quotes",
+        "description": "Reach out to Heaven11 Holidays for customized holiday quotes, flight booking tickets, or visa assistance. Available 24x7 on emergency hotline.",
+        "isPartOf": {
+          "@id": "https://heaven11holidays.in/#website"
+        }
+      },
+      {
+        "@type": "TravelAgency",
+        "@id": "https://heaven11holidays.in/#agency",
+        "name": "Heaven11 Holidays",
+        "telephone": "+91-91599-96556",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "5th Floor, SBRR Square, Anna Nagar",
+          "addressLocality": "Trichy",
+          "addressRegion": "Tamil Nadu",
+          "postalCode": "620017",
+          "addressCountry": "IN"
+        }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": "https://heaven11holidays.in/contact#breadcrumb",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://heaven11holidays.in/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Contact Us",
+            "item": "https://heaven11holidays.in/contact"
+          }
+        ]
+      }
+    ]
+  };
+
   const [submitted, setSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
@@ -17,13 +66,8 @@ export const Contact: React.FC = () => {
     email: '',
     destination: '',
     travel_date: '',
+    total_travelers: '1',
     message: ''
-  });
-  const [travellers, setTravellers] = useState<TravellersState>({
-    adults: 1,
-    children: 0,
-    infants: 0,
-    seniors: 0
   });
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -41,6 +85,7 @@ export const Contact: React.FC = () => {
       !formData.email.trim() ||
       !formData.destination.trim() ||
       !formData.travel_date.trim() ||
+      !formData.total_travelers.trim() ||
       !formData.message.trim()
     ) {
       setErrorMsg('All fields are required. Please fill in all details.');
@@ -64,8 +109,13 @@ export const Contact: React.FC = () => {
     setErrorMsg(null);
     try {
       await submitContactForm({
-        ...formData,
-        ...travellers
+        name: formData.name,
+        phone: formData.phone,
+        email: formData.email,
+        destination: formData.destination,
+        travel_date: formData.travel_date,
+        message: formData.message,
+        total_travelers: parseInt(formData.total_travelers, 10)
       });
       setSubmitted(true);
       setErrorMsg(null);
@@ -77,13 +127,8 @@ export const Contact: React.FC = () => {
           email: '',
           destination: '',
           travel_date: '',
+          total_travelers: '1',
           message: ''
-        });
-        setTravellers({
-          adults: 1,
-          children: 0,
-          infants: 0,
-          seniors: 0
         });
       }, 5000);
     } catch (err: any) {
@@ -101,6 +146,7 @@ export const Contact: React.FC = () => {
       !formData.email.trim() ||
       !formData.destination.trim() ||
       !formData.travel_date.trim() ||
+      !formData.total_travelers.trim() ||
       !formData.message.trim()
     ) {
       setErrorMsg('Please fill in all details before contacting on WhatsApp.');
@@ -122,8 +168,7 @@ export const Contact: React.FC = () => {
 
     setErrorMsg(null);
 
-    const totalCount = travellers.adults + travellers.children + travellers.infants + travellers.seniors;
-    const travellersText = `${totalCount} (${travellers.adults} Adults, ${travellers.children} Children, ${travellers.infants} Infants, ${travellers.seniors} Seniors)`;
+    const travellersText = `${formData.total_travelers} Travelers`;
     const text = `Hi Heaven11 Holidays! I want to submit a general travel inquiry:
 - *Name*: ${formData.name.trim()}
 - *Phone*: ${formData.phone.trim()}
@@ -137,6 +182,12 @@ export const Contact: React.FC = () => {
 
   return (
     <div className="relative min-h-screen bg-slate-50/50 pb-20">
+      <SEO
+        title="Contact Heaven11 Holidays | 24x7 Travel support desk & Quotes"
+        description="Get in touch with Heaven11 Holidays travel specialists. Submit custom holiday quote forms, visa queries, and flight ticket assistance."
+        keywords={contactKeywords}
+        schemaData={contactSchema}
+      />
       <PageHero
         title="Contact Our Team"
         subtitle="We Are Here For You"
@@ -149,7 +200,7 @@ export const Contact: React.FC = () => {
 
       <div id="contact-content" className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 mt-12 pt-8 grid grid-cols-1 lg:grid-cols-3 gap-8">
         {/* Contact info cards (Col 1) */}
-        <motion.div 
+        <m.div
           initial={{ opacity: 0, x: -30 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
@@ -177,7 +228,7 @@ export const Contact: React.FC = () => {
             },
             {
               icon: <Mail className="h-6 w-6 text-accent" />,
-              title: 'Email Correspondence',
+              title: 'Email Address',
               lines: [
                 'heaven11holidays@gmail.com'
               ]
@@ -210,8 +261,8 @@ export const Contact: React.FC = () => {
               </p>
             </div>
           </div>
-        </motion.div>        {/* Lead Form (Col 2) */}
-        <motion.div 
+        </m.div>        {/* Lead Form (Col 2) */}
+        <m.div
           initial={{ opacity: 0, x: 30 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
@@ -314,10 +365,20 @@ export const Contact: React.FC = () => {
                   </div>
                 </div>
 
-                <TravelersSelector
-                  value={travellers}
-                  onChange={setTravellers}
-                />
+                <div className="grid grid-cols-1 gap-4 text-xs">
+                  <div>
+                    <label className="block font-bold text-slate-700 mb-1.5 uppercase">Total Travelers</label>
+                    <input
+                      type="number"
+                      name="total_travelers"
+                      min="1"
+                      required
+                      value={formData.total_travelers}
+                      onChange={handleInputChange}
+                      className="w-full rounded-xl border border-slate-200 px-4 py-2.5 focus:border-primary-light focus:outline-none bg-white"
+                    />
+                  </div>
+                </div>
 
                 <div className="text-xs">
                   <label className="block font-bold text-slate-700 mb-1.5 uppercase">Detailed Travel Query</label>
@@ -357,7 +418,7 @@ export const Contact: React.FC = () => {
               </form>
             )}
           </div>
-        </motion.div>
+        </m.div>
       </div>
     </div>
   );

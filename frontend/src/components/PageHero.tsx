@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from 'react';
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { Sparkles } from 'lucide-react';
 
 interface PageHeroProps {
@@ -51,16 +51,17 @@ export const PageHero: React.FC<PageHeroProps> = ({
   }, []);
 
   return (
-    <motion.div 
+    <m.div 
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.3 }}
       onMouseMove={handleMouseMove}
       className="relative h-[100vh] w-full flex items-center justify-center overflow-hidden bg-black font-sans select-none"
     >
+      <link rel="preload" href={backgroundImage} as="image" fetchPriority="high" />
       {/* ================= BACKGROUND ZOOM DRONE SHOT ================= */}
       <div className="absolute inset-0 z-0">
-        <motion.div
+        <m.div
           initial={{ opacity: 0, scale: 1.05, rotate: -0.5 }}
           animate={{ 
             opacity: 1.0, 
@@ -120,7 +121,7 @@ export const PageHero: React.FC<PageHeroProps> = ({
 
       {/* ================= TWINKLING STAR PARTICLES EFFECT ================= */}
       {particles.map((p) => (
-        <motion.div
+        <m.div
           key={p.id}
           className="absolute pointer-events-none z-1 flex items-center justify-center"
           style={{
@@ -150,7 +151,7 @@ export const PageHero: React.FC<PageHeroProps> = ({
               boxShadow: '0 0 8px rgba(0, 229, 255, 0.4)'
             }}
           />
-        </motion.div>
+        </m.div>
       ))}
 
       {/* ================= CORE CONTENT WRAPPER ================= */}
@@ -161,7 +162,7 @@ export const PageHero: React.FC<PageHeroProps> = ({
         {/* Hero Headlines */}
         <div className="max-w-3xl space-y-6 md:space-y-8 select-none text-left flex flex-col items-start">
           {/* Subtitle / Badge with Sparkles (fade pop) */}
-          <motion.div
+          <m.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.2, type: "spring", stiffness: 100 }}
@@ -171,11 +172,11 @@ export const PageHero: React.FC<PageHeroProps> = ({
             <span className="text-[10px] sm:text-xs font-bold uppercase tracking-widest text-[#00E5FF]">
               {subtitle}
             </span>
-          </motion.div>
+          </m.div>
 
           {/* Title Staggered Reveal Slide-up */}
           <div className="overflow-hidden py-1">
-            <motion.h1 
+            <m.h1 
               initial={{ y: "100%", opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: 0.3 }}
@@ -184,11 +185,11 @@ export const PageHero: React.FC<PageHeroProps> = ({
               }`}
             >
               {title}
-            </motion.h1>
+            </m.h1>
           </div>
 
           {/* Description Fade Pop */}
-          <motion.div
+          <m.div
             initial={{ opacity: 0, y: 15, scale: 0.98 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             transition={{ duration: 1.0, delay: 0.5 }}
@@ -199,10 +200,10 @@ export const PageHero: React.FC<PageHeroProps> = ({
             }`}>
               {description}
             </p>
-          </motion.div>
+          </m.div>
 
           {/* Action scroll trigger button */}
-          <motion.div
+          <m.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.7 }}
@@ -211,15 +212,16 @@ export const PageHero: React.FC<PageHeroProps> = ({
             <button
               onClick={handleScrollClick}
               className="group px-8 py-3.5 rounded-full bg-[#00E5FF] text-primary-dark font-bold text-xs tracking-wider uppercase shadow-xl shadow-[#00E5FF]/10 hover:shadow-[#00E5FF]/20 hover:bg-white hover:text-primary-dark transition-all duration-300 transform hover:scale-105 cursor-pointer"
+              aria-label={buttonText}
             >
               {buttonText}
             </button>
-          </motion.div>
+          </m.div>
         </div>
 
         {/* Empty flex spacer */}
         <div className="flex-grow flex-shrink flex-1" />
       </div>
-    </motion.div>
+    </m.div>
   );
 };

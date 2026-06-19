@@ -24,18 +24,6 @@ export const testimonials: Testimonial[] = [
     type: 'google',
     tourName: 'Malaysia Trip',
     date: '2 weeks ago'
-  },
-  {
-    id: 'test-3',
-    name: 'Arun & Divya',
-    location: 'India',
-    role: 'Bali Honeymoon',
-    avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&h=150&q=80',
-    rating: 5,
-    comment: 'Our honeymoon was magical, thanks to Heaven11 Holidays!',
-    type: 'google',
-    tourName: 'Bali Honeymoon',
-    date: '3 weeks ago'
   }
 ];
 export const testimonialsList = testimonials;

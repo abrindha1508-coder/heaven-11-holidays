@@ -1,9 +1,52 @@
 import React from 'react';
 import { Shield } from 'lucide-react';
+import { SEO } from '../components/SEO';
 
 export const PrivacyPolicy: React.FC = () => {
+  const privacyKeywords = "Privacy Policy, Heaven11 Holidays privacy, data protection, secure travel booking, Heaven11 customer privacy policy, Heaven11 Holidays";
+  
+  const privacySchema = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebPage",
+        "@id": "https://heaven11holidays.in/privacy-policy#webpage",
+        "url": "https://heaven11holidays.in/privacy-policy",
+        "name": "Privacy Policy | Heaven11 Holidays",
+        "description": "Read the privacy policy of Heaven11 Holidays. We detail how we collect, store, and utilize visitor and guest credentials securely.",
+        "isPartOf": {
+          "@id": "https://heaven11holidays.in/#website"
+        }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": "https://heaven11holidays.in/privacy-policy#breadcrumb",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://heaven11holidays.in/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Privacy Policy",
+            "item": "https://heaven11holidays.in/privacy-policy"
+          }
+        ]
+      }
+    ]
+  };
+
   return (
     <div className="relative pt-24 min-h-screen bg-slate-50/50 pb-20">
+      <SEO
+        title="Privacy Policy | Heaven11 Holidays"
+        description="Read the privacy policy of Heaven11 Holidays. We detail how we collect, store, and utilize visitor and guest credentials securely."
+        keywords={privacyKeywords}
+        schemaData={privacySchema}
+      />
       <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 mt-12">
         <div className="rounded-3xl bg-white p-6 md:p-10 shadow-xs border border-slate-100 space-y-6">
           <div className="space-y-2 border-b border-slate-100 pb-5 flex items-center gap-3">

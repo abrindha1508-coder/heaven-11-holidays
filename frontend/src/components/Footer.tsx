@@ -93,10 +93,10 @@ export const Footer: React.FC = () => {
           SECTION 2 — MAIN FOOTER CONTENT
       ══════════════════════════════════════════════ */}
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-14 pb-4">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
+        <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
 
           {/* Col 1 — Brand + Socials */}
-          <div className="space-y-5">
+          <div className="col-span-2 md:col-span-1 space-y-5">
             <Link to="/" className="inline-block" title="Heaven11 Holidays">
               <Logo className="h-9 sm:h-11 w-auto" />
             </Link>
@@ -129,7 +129,7 @@ export const Footer: React.FC = () => {
           </div>
 
           {/* Col 2 — Contact */}
-          <div className="space-y-4">
+          <div className="col-span-2 md:col-span-1 space-y-4">
             <h4 className="font-display text-base font-bold text-white tracking-wide flex items-center gap-2">
               <span className="inline-block w-0.5 h-5 rounded-full" style={{ background: 'linear-gradient(180deg,#00E5FF,#1E8DC5)' }} />
               Contact Agency
@@ -174,7 +174,7 @@ export const Footer: React.FC = () => {
           </div>
 
           {/* Col 3 — Quick Links */}
-          <div className="space-y-4">
+          <div className="col-span-1 space-y-4">
             <h4 className="font-display text-base font-bold text-white tracking-wide flex items-center gap-2">
               <span className="inline-block w-0.5 h-5 rounded-full" style={{ background: 'linear-gradient(180deg,#00E5FF,#1E8DC5)' }} />
               Quick Links
@@ -197,7 +197,7 @@ export const Footer: React.FC = () => {
           </div>
 
           {/* Col 4 — Destinations */}
-          <div className="space-y-4">
+          <div className="col-span-1 space-y-4">
             <h4 className="font-display text-base font-bold text-white tracking-wide flex items-center gap-2">
               <span className="inline-block w-0.5 h-5 rounded-full" style={{ background: 'linear-gradient(180deg,#00E5FF,#1E8DC5)' }} />
               Destinations

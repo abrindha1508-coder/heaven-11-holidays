@@ -8,5 +8,30 @@ export default defineConfig({
     react(),
     tailwindcss(),
   ],
+  build: {
+    cssCodeSplit: true,
+    minify: 'esbuild',
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          if (id.includes('node_modules')) {
+            if (id.includes('react') || id.includes('scheduler') || id.includes('react-dom') || id.includes('react-router')) {
+              return 'vendor-react';
+            }
+            if (id.includes('framer-motion')) {
+              return 'vendor-framer-motion';
+            }
+            if (id.includes('lucide-react')) {
+              return 'vendor-lucide';
+            }
+            if (id.includes('swiper')) {
+              return 'vendor-swiper';
+            }
+            return 'vendor-others';
+          }
+        }
+      }
+    }
+  }
 })
 

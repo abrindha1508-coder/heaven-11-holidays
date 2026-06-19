@@ -6,11 +6,10 @@ import {
   X, MessageSquare, Compass, Mail, Users, Phone,
   Sparkles, Search
 } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { m, AnimatePresence } from 'framer-motion';
 import { PremiumHero } from '../components/PremiumHero';
 import { submitContactForm, submitEnquiryForm } from '../services/api';
-import { TravelersSelector } from '../components/TravelersSelector';
-import type { TravellersState } from '../components/TravelersSelector';
+import { SEO } from '../components/SEO';
 
 // Import databases
 import { packages } from '../data/packages';
@@ -45,13 +44,7 @@ export const Home: React.FC = () => {
     name: '',
     phone: '',
     date: '',
-    travelers: '1'
-  });
-  const [travellers, setTravellers] = useState<TravellersState>({
-    adults: 1,
-    children: 0,
-    infants: 0,
-    seniors: 0,
+    total_travelers: '1'
   });
   const [bookingSubmitted, setBookingSubmitted] = useState(false);
   const [isBookingSubmitting, setIsBookingSubmitting] = useState(false);
@@ -115,16 +108,11 @@ export const Home: React.FC = () => {
     setIsBookingSubmitting(true);
     setBookingError(null);
     try {
-      const totalCount = travellers.adults + travellers.children + travellers.infants + travellers.seniors;
-      const travelersStr = `${totalCount} Travelers (${travellers.adults} Adults, ${travellers.children} Children, ${travellers.infants} Infants, ${travellers.seniors} Seniors)`;
       await submitEnquiryForm({
-        ...bookingFormData,
-        travelers: travelersStr,
-        adults: travellers.adults,
-        children: travellers.children,
-        infants: travellers.infants,
-        seniors: travellers.seniors,
-        total_travelers: totalCount,
+        name: bookingFormData.name,
+        phone: bookingFormData.phone,
+        date: bookingFormData.date,
+        total_travelers: parseInt(bookingFormData.total_travelers, 10),
         packageId: selectedPackage?.id,
         packageTitle: selectedPackage?.title
       });
@@ -134,8 +122,7 @@ export const Home: React.FC = () => {
         setBookingSubmitted(false);
         setIsBookingOpen(false);
         setSelectedPackage(null);
-        setBookingFormData({ name: '', phone: '', date: '', travelers: '1' });
-        setTravellers({ adults: 1, children: 0, infants: 0, seniors: 0 });
+        setBookingFormData({ name: '', phone: '', date: '', total_travelers: '1' });
       }, 5000);
     } catch (err: any) {
       setBookingError(err.message || 'Failed to submit booking enquiry.');
@@ -167,24 +154,32 @@ export const Home: React.FC = () => {
 
   const triggerWhatsAppBooking = () => {
     if (!selectedPackage) return;
-    const totalCount = travellers.adults + travellers.children + travellers.infants + travellers.seniors;
-    const travellersText = `${totalCount} (${travellers.adults} Adults, ${travellers.children} Children, ${travellers.infants} Infants, ${travellers.seniors} Seniors)`;
+    if (!bookingFormData.name.trim() || !bookingFormData.phone.trim()) {
+      setBookingError("Please enter your Name and Contact Number before contacting via WhatsApp.");
+      return;
+    }
+    setBookingError(null);
     const text = `Hi Heaven11 Holidays! I am interested in booking:
 - *Package*: ${selectedPackage.title}
 - *Duration*: ${selectedPackage.duration}
-- *Name*: ${bookingFormData.name || 'Client'}
-- *Phone*: ${bookingFormData.phone || 'N/A'}
+- *Name*: ${bookingFormData.name}
+- *Phone*: ${bookingFormData.phone}
 - *Travel Date*: ${bookingFormData.date || 'Flexible'}
-- *Travelers*: ${travellersText}
+- *Travelers*: ${bookingFormData.total_travelers} Travelers
 Please confirm availability and share details!`;
     const url = `https://wa.me/919159996556?text=${encodeURIComponent(text)}`;
     window.open(url, '_blank');
   };
 
   const triggerWhatsAppContact = () => {
+    if (!contactFormData.name.trim() || !contactFormData.phone.trim()) {
+      setContactError("Please enter your Name and Phone Number before contacting via WhatsApp.");
+      return;
+    }
+    setContactError(null);
     const text = `Hi Heaven11 Holidays! I want to inquire about customized travel packages:
-- *Name*: ${contactFormData.name || 'Client'}
-- *Phone*: ${contactFormData.phone || 'N/A'}
+- *Name*: ${contactFormData.name}
+- *Phone*: ${contactFormData.phone}
 - *Email*: ${contactFormData.email || 'N/A'}
 - *Message*: ${contactFormData.message || 'General Inquiry'}`;
     const url = `https://wa.me/919159996556?text=${encodeURIComponent(text)}`;
@@ -226,8 +221,121 @@ Please confirm availability and share details!`;
     );
   }, [galleryItems, gallerySearchQuery]);
 
+  const homeKeywords = "Heaven11 Holidays, Heaven11, Heaven 11, Heaven11 Holidays Private Limited, premium customized travel agency, best travel agency for international tours, luxury holiday planners, customized tour operators, visa processing services, flight ticket booking online, luxury resort booking, family tour packages, domestic tour packages, international tour packages, travel agency in India, best tour operators in India";
+
+  const homeSchema = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "https://heaven11holidays.in/#website",
+        "url": "https://heaven11holidays.in/",
+        "name": "Heaven11 Holidays",
+        "alternateName": ["Heaven 11 Holidays", "Heaven11"],
+        "description": "Premium customized travel and tourism agency providing domestic and international tour packages.",
+        "publisher": {
+          "@id": "https://heaven11holidays.in/#organization"
+        }
+      },
+      {
+        "@type": "Organization",
+        "@id": "https://heaven11holidays.in/#organization",
+        "name": "Heaven11 Holidays",
+        "url": "https://heaven11holidays.in/",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://heaven11holidays.in/heaven11logo.png",
+          "caption": "Heaven11 Holidays Logo"
+        },
+        "image": "https://heaven11holidays.in/heaven11logo.png",
+        "contactPoint": [
+          {
+            "@type": "ContactPoint",
+            "telephone": "+91-91599-96556",
+            "contactType": "customer service",
+            "areaServed": "IN",
+            "availableLanguage": ["English", "Tamil"]
+          }
+        ]
+      },
+      {
+        "@type": "TravelAgency",
+        "@id": "https://heaven11holidays.in/#agency",
+        "name": "Heaven11 Holidays",
+        "image": "https://heaven11holidays.in/heaven11logo.png",
+        "url": "https://heaven11holidays.in/",
+        "telephone": "+91-91599-96556",
+        "priceRange": "$$",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "5th Floor, SBRR Square, Anna Nagar",
+          "addressLocality": "Trichy",
+          "addressRegion": "Tamil Nadu",
+          "postalCode": "620017",
+          "addressCountry": "IN"
+        },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": "10.8143",
+          "longitude": "78.6865"
+        },
+        "openingHoursSpecification": {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday"
+          ],
+          "opens": "09:00",
+          "closes": "21:00"
+        }
+      },
+      {
+        "@type": "Service",
+        "name": "Customized Tour Packages",
+        "provider": {
+          "@id": "https://heaven11holidays.in/#agency"
+        },
+        "description": "Bespoke holiday planning and customized itineraries for family and group tours."
+      },
+      {
+        "@type": "Service",
+        "name": "Flight Ticket Booking",
+        "provider": {
+          "@id": "https://heaven11holidays.in/#agency"
+        },
+        "description": "Domestic and international flight ticketing services with best price guarantee."
+      },
+      {
+        "@type": "Service",
+        "name": "Visa Processing Assistance",
+        "provider": {
+          "@id": "https://heaven11holidays.in/#agency"
+        },
+        "description": "Expedited visa guidance and processing assistance for international travels."
+      },
+      {
+        "@type": "Service",
+        "name": "Resort & Luxury Hotel Booking",
+        "provider": {
+          "@id": "https://heaven11holidays.in/#agency"
+        },
+        "description": "Affiliations with top premium hotels and luxury resorts worldwide."
+      }
+    ]
+  };
+
   return (
     <div className="relative bg-bg-canvas overflow-x-hidden">
+      <SEO
+        title="Heaven11 Holidays - Experience the World | Premium Customized Travel & Tourism Agency"
+        description="Experience the world in absolute luxury with Heaven11 Holidays. Discover meticulously designed domestic and international tour packages, premium resorts, flights, and expedited visa services."
+        keywords={homeKeywords}
+        schemaData={homeSchema}
+      />
       {/* ================= SECTION 1: PREMIUM DYNAMIC HERO SECTION ================= */}
       <PremiumHero
         searchParams={searchParams}
@@ -239,7 +347,7 @@ Please confirm availability and share details!`;
       {/* ================= SECTION 2: TRUST FEATURES ROW ================= */}
       <section className="bg-white border-b border-slate-100 py-6 lg:pt-14 shadow-xs">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <motion.div
+          <m.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -254,7 +362,7 @@ Please confirm availability and share details!`;
               { icon: <Users className="h-5 w-5 text-[#1E8DC5]" />, title: 'Trusted Travel Partner', subtitle: '1000+ happy travelers' },
               { icon: <Shield className="h-5 w-5 text-[#1E8DC5]" />, title: 'Secure Booking', subtitle: 'Safe & secure payments' }
             ].map((item, index) => (
-              <motion.div
+              <m.div
                 key={index}
                 whileHover={{ scale: 1.05 }}
                 className="flex items-center gap-3.5 px-3 py-2 lg:py-0 text-left first:pl-0 cursor-pointer"
@@ -266,16 +374,16 @@ Please confirm availability and share details!`;
                   <h4 className="text-xs font-bold text-slate-800">{item.title}</h4>
                   <span className="text-[10px] text-slate-400 font-medium">{item.subtitle}</span>
                 </div>
-              </motion.div>
+              </m.div>
             ))}
-          </motion.div>
+          </m.div>
         </div>
       </section>
 
       {/* ================= SECTION 3: POPULAR INTERNATIONAL DESTINATIONS ================= */}
       <section className="py-16 bg-bg-canvas">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <motion.div
+          <m.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -289,11 +397,11 @@ Please confirm availability and share details!`;
             >
               View All
             </button>
-          </motion.div>
+          </m.div>
 
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             {popularIntl.slice(0, 8).map((dest, index) => (
-              <motion.div
+              <m.div
                 key={dest.id}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -306,6 +414,7 @@ Please confirm availability and share details!`;
                 <img
                   src={dest.image}
                   alt={dest.name}
+                  loading="lazy"
                   className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-linear-to-t from-slate-900/90 via-slate-900/10 to-transparent" />
@@ -315,7 +424,7 @@ Please confirm availability and share details!`;
                     Explore Packages →
                   </span>
                 </div>
-              </motion.div>
+              </m.div>
             ))}
           </div>
         </div>
@@ -324,7 +433,7 @@ Please confirm availability and share details!`;
       {/* ================= SECTION 4: POPULAR DOMESTIC DESTINATIONS ================= */}
       <section className="py-8 bg-bg-canvas border-b border-slate-150/40">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <motion.div
+          <m.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -338,11 +447,11 @@ Please confirm availability and share details!`;
             >
               View All
             </button>
-          </motion.div>
+          </m.div>
 
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             {popularDom.slice(0, 8).map((dest, index) => (
-              <motion.div
+              <m.div
                 key={dest.id}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -355,6 +464,7 @@ Please confirm availability and share details!`;
                 <img
                   src={dest.image}
                   alt={dest.name}
+                  loading="lazy"
                   className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-linear-to-t from-slate-900/90 via-slate-900/10 to-transparent" />
@@ -364,7 +474,7 @@ Please confirm availability and share details!`;
                     Explore Packages →
                   </span>
                 </div>
-              </motion.div>
+              </m.div>
             ))}
           </div>
         </div>
@@ -373,7 +483,7 @@ Please confirm availability and share details!`;
       {/* ================= SECTION 5: STATS BANNER ================= */}
       <section className="py-12 bg-bg-canvas px-4">
         <div className="mx-auto max-w-5xl rounded-3xl bg-gradient-premium p-8 md:p-12 text-center space-y-8 shadow-xl text-white">
-          <motion.h2
+          <m.h2
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -381,7 +491,7 @@ Please confirm availability and share details!`;
             className="font-display text-2xl font-bold tracking-tight text-white"
           >
             Why Choose Heaven11 Holidays?
-          </motion.h2>
+          </m.h2>
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-3xl mx-auto">
             {[
@@ -390,7 +500,7 @@ Please confirm availability and share details!`;
               { icon: <Compass className="h-6 w-6 text-accent" />, count: '100+', label: 'Destinations' },
               { icon: <Headset className="h-6 w-6 text-accent" />, count: '24/7', label: 'Customer Support' }
             ].map((stat, index) => (
-              <motion.div
+              <m.div
                 key={index}
                 initial={{ opacity: 0, scale: 0.9 }}
                 whileInView={{ opacity: 1, scale: 1 }}
@@ -406,7 +516,7 @@ Please confirm availability and share details!`;
                   <div className="font-display text-xl font-extrabold text-accent">{stat.count}</div>
                   <div className="text-[10px] font-bold text-slate-350 uppercase tracking-wider">{stat.label}</div>
                 </div>
-              </motion.div>
+              </m.div>
             ))}
           </div>
         </div>
@@ -415,7 +525,7 @@ Please confirm availability and share details!`;
       {/* ================= SECTION 6: TRENDING TOUR PACKAGES ================= */}
       <section id="trending-section" className="py-16 bg-white">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <motion.div
+          <m.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -431,11 +541,11 @@ Please confirm availability and share details!`;
             >
               View All Packages
             </button>
-          </motion.div>
+          </m.div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {trendingPackages.map((pkg, index) => (
-              <motion.div
+              <m.div
                 key={pkg.id}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -448,6 +558,7 @@ Please confirm availability and share details!`;
                   <img
                     src={pkg.image}
                     alt={pkg.title}
+                    loading="lazy"
                     className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                   />
                   <div className="absolute top-3 left-3">
@@ -493,7 +604,7 @@ Please confirm availability and share details!`;
                     </div>
                   </div>
                 </div>
-              </motion.div>
+              </m.div>
             ))}
           </div>
         </div>
@@ -517,7 +628,7 @@ Please confirm availability and share details!`;
             {[
               { img: 'https://images.unsplash.com/photo-1514282401047-d79a71a590e8?auto=format&fit=crop&w=600&q=80', label: 'Maldives' },
               { img: 'https://images.unsplash.com/photo-1573790387438-4da905039392?auto=format&fit=crop&w=600&q=80', label: 'Bali' },
-              { img: '/kashmir.jpg', label: 'Kashmir' },
+              { img: '/kashmir.webp', label: 'Kashmir' },
               { img: 'https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=600&q=80', label: 'Dubai' }
             ].map((item, index) => (
               <div
@@ -527,6 +638,7 @@ Please confirm availability and share details!`;
                 <img
                   src={item.img}
                   alt={item.label}
+                  loading="lazy"
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-linear-to-t from-slate-950/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-all flex items-end p-4">
@@ -560,7 +672,7 @@ Please confirm availability and share details!`;
 
           <div className="shrink-0 relative z-10 w-full md:w-auto">
             <button
-              onClick={() => setIsBookingOpen(true)}
+              onClick={() => navigate('/contact')}
               className="w-full md:w-auto px-8 py-4 rounded-full bg-accent hover:bg-white text-primary-dark font-bold text-sm tracking-wide shadow-xl hover:shadow-accent/20 transition-all duration-300 transform hover:scale-105 cursor-pointer flex items-center justify-center gap-2"
             >
               Book Your Trip
@@ -590,6 +702,7 @@ Please confirm availability and share details!`;
                     <img
                       src={art.image}
                       alt={art.title}
+                      loading="lazy"
                       className="h-16 w-16 rounded-lg object-cover shrink-0 border border-slate-100"
                     />
                     <div className="space-y-1">
@@ -620,6 +733,7 @@ Please confirm availability and share details!`;
                   <img
                     src="https://images.unsplash.com/photo-1514282401047-d79a71a590e8?auto=format&fit=crop&w=600&q=80"
                     alt="Scenic boat view"
+                    loading="lazy"
                     className="w-full h-full object-cover"
                   />
                   <div className="absolute inset-0 bg-slate-900/10" />
@@ -1009,10 +1123,18 @@ Please confirm availability and share details!`;
                     />
                   </div>
 
-                  <TravelersSelector
-                    value={travellers}
-                    onChange={setTravellers}
-                  />
+                  <div>
+                    <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Total Travelers</label>
+                    <input
+                      type="number"
+                      name="total_travelers"
+                      min="1"
+                      required
+                      value={bookingFormData.total_travelers}
+                      onChange={(e) => setBookingFormData({ ...bookingFormData, total_travelers: e.target.value })}
+                      className="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm focus:border-[#1E8DC5] focus:outline-none"
+                    />
+                  </div>
                   {bookingError && (
                     <div className="text-xs font-semibold text-rose-600 bg-rose-50 border border-rose-100 rounded-xl p-3">
                       {bookingError}
@@ -1047,7 +1169,7 @@ Please confirm availability and share details!`;
         {isGalleryOpen && (
           <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
             {/* Dark Backdrop Overlay */}
-            <motion.div
+            <m.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
@@ -1056,7 +1178,7 @@ Please confirm availability and share details!`;
             />
 
             {/* Glass Dialog Box */}
-            <motion.div
+            <m.div
               initial={{ opacity: 0, scale: 0.9, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.9, y: 20 }}
@@ -1117,7 +1239,7 @@ Please confirm availability and share details!`;
                     </p>
                   </div>
                 ) : (
-                  <motion.div
+                  <m.div
                     variants={{
                       hidden: { opacity: 0 },
                       show: {
@@ -1132,7 +1254,7 @@ Please confirm availability and share details!`;
                     className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
                   >
                     {filteredGalleryItems.map((item) => (
-                      <motion.div
+                      <m.div
                         key={item.id}
                         variants={{
                           hidden: { opacity: 0, y: 15 },
@@ -1215,12 +1337,12 @@ Please confirm availability and share details!`;
                               </button>
                             </div>
                           </div>
-                      </motion.div>
+                      </m.div>
                     ))}
-                  </motion.div>
+                  </m.div>
                 )}
               </div>
-            </motion.div>
+            </m.div>
           </div>
         )}
       </AnimatePresence>

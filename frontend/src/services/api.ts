@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 // Base URL for the backend API
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://heaven11holidays.in/api';
 
 // Create an Axios instance
 const api = axios.create({
@@ -18,21 +18,13 @@ export interface ContactData {
   destination?: string;
   message: string;
   travel_date?: string;
-  adults?: number;
-  children?: number;
-  infants?: number;
-  seniors?: number;
+  total_travelers?: number;
 }
 
 export interface EnquiryData {
   name: string;
   phone: string;
   date: string;
-  travelers?: string;
-  adults?: number;
-  children?: number;
-  infants?: number;
-  seniors?: number;
   total_travelers?: number;
   packageId?: string;
   packageTitle?: string;

@@ -1,15 +1,14 @@
 import React, { useState, useMemo } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { Clock, Star, ChevronRight, X, MessageSquare, Check } from 'lucide-react';
 import { destinations } from '../data/destinations';
 import { packages } from '../data/packages';
 import type { TourPackage } from '../types/package';
 import { PageHero } from '../components/PageHero';
+import { SEO } from '../components/SEO';
 import { submitEnquiryForm } from '../services/api';
-import { TravelersSelector } from '../components/TravelersSelector';
-import type { TravellersState } from '../components/TravelersSelector';
-import iternationalHeroImg from '../assets/iternationalheroimg.png';
+import iternationalHeroImg from '../assets/iternationalheroimg.webp';
 
 export const InternationalTours: React.FC = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -18,13 +17,7 @@ export const InternationalTours: React.FC = () => {
   // Selected package modal state
   const [selectedPkg, setSelectedPkg] = useState<TourPackage | null>(null);
   const [isBookingOpen, setIsBookingOpen] = useState(false);
-  const [bookingFormData, setBookingFormData] = useState({ name: '', phone: '', date: '', travelers: '1' });
-  const [travellers, setTravellers] = useState<TravellersState>({
-    adults: 1,
-    children: 0,
-    infants: 0,
-    seniors: 0,
-  });
+  const [bookingFormData, setBookingFormData] = useState({ name: '', phone: '', date: '', total_travelers: '1' });
   const [bookingSubmitted, setBookingSubmitted] = useState(false);
   const [isBookingSubmitting, setIsBookingSubmitting] = useState(false);
   const [bookingError, setBookingError] = useState<string | null>(null);
@@ -102,16 +95,11 @@ export const InternationalTours: React.FC = () => {
     setIsBookingSubmitting(true);
     setBookingError(null);
     try {
-      const totalCount = travellers.adults + travellers.children + travellers.infants + travellers.seniors;
-      const travelersStr = `${totalCount} Travelers (${travellers.adults} Adults, ${travellers.children} Children, ${travellers.infants} Infants, ${travellers.seniors} Seniors)`;
       await submitEnquiryForm({
-        ...bookingFormData,
-        travelers: travelersStr,
-        adults: travellers.adults,
-        children: travellers.children,
-        infants: travellers.infants,
-        seniors: travellers.seniors,
-        total_travelers: totalCount,
+        name: bookingFormData.name,
+        phone: bookingFormData.phone,
+        date: bookingFormData.date,
+        total_travelers: parseInt(bookingFormData.total_travelers, 10),
         packageId: selectedPkg?.id,
         packageTitle: selectedPkg?.title
       });
@@ -121,8 +109,7 @@ export const InternationalTours: React.FC = () => {
         setBookingSubmitted(false);
         setIsBookingOpen(false);
         setSelectedPkg(null);
-        setBookingFormData({ name: '', phone: '', date: '', travelers: '1' });
-        setTravellers({ adults: 1, children: 0, infants: 0, seniors: 0 });
+        setBookingFormData({ name: '', phone: '', date: '', total_travelers: '1' });
       }, 5000);
     } catch (err: any) {
       setBookingError(err.message || 'Failed to submit booking enquiry.');
@@ -133,18 +120,134 @@ export const InternationalTours: React.FC = () => {
 
   const triggerWhatsAppBooking = () => {
     if (!selectedPkg) return;
-    const totalCount = travellers.adults + travellers.children + travellers.infants + travellers.seniors;
-    const travellersText = `${totalCount} (${travellers.adults} Adults, ${travellers.children} Children, ${travellers.infants} Infants, ${travellers.seniors} Seniors)`;
+    if (!bookingFormData.name.trim() || !bookingFormData.phone.trim()) {
+      setBookingError("Please enter your Name and Contact Number before contacting via WhatsApp.");
+      return;
+    }
+    setBookingError(null);
     const text = `Hi Heaven11 Holidays! I want to book:
 - *Package*: ${selectedPkg.title}
-- *Name*: ${bookingFormData.name || 'Client'}
+- *Name*: ${bookingFormData.name}
+- *Phone*: ${bookingFormData.phone}
 - *Date*: ${bookingFormData.date || 'Flexible'}
-- *Travelers*: ${travellersText}`;
+- *Travelers*: ${bookingFormData.total_travelers} Travelers`;
     window.open(`https://wa.me/919159996556?text=${encodeURIComponent(text)}`, '_blank');
   };
 
+  // Dynamic SEO Configuration
+  const internationalKeywords = "Dubai tour package Burj Khalifa, Desert Safari tour package, Thailand tour package Pattaya Bangkok, Singapore Universal Studios package, Malaysia Petronas Towers tour, Bali tour package Kelingking Beach, Maldives luxury water villa package, Vietnam Halong Bay cruise package, Europe scenic tour package, Switzerland alpine train package, Turkey Cappadocia balloon tour, Heaven11 Holidays, international tour packages";
+
+  const seoTitle = activeDestination
+    ? `${activeDestination.name} Tour Packages | Heaven11 Holidays`
+    : "International Tour Packages | Explore the World | Heaven11 Holidays";
+
+  const seoDescription = activeDestination
+    ? `Book a customized travel package to ${activeDestination.name}. Experience highlights like ${activeDestination.highlights.slice(0, 3).join(', ')} with Heaven11 Holidays.`
+    : "Embark on a luxury global adventure. Meticulously designed international holiday packages to Dubai, Bali, Maldives, Thailand, Singapore, Switzerland, and more.";
+
+  const seoKeywords = activeDestination
+    ? `${activeDestination.name} tour package, ${activeDestination.name} trip, ${activeDestination.name} travel plan, ${internationalKeywords}`
+    : internationalKeywords;
+
+  const seoSchema = activeDestination
+    ? {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "TouristTrip",
+            "@id": `https://heaven11holidays.in/international-tours?dest=${activeDestination.id}#trip`,
+            "name": `${activeDestination.name} Tour Package`,
+            "description": activeDestination.description,
+            "touristType": "Leisure, Family, Sightseeing",
+            "offers": {
+              "@type": "Offer",
+              "priceCurrency": "INR",
+              "price": activeDestination.price,
+              "url": `https://heaven11holidays.in/international-tours?dest=${activeDestination.id}`
+            },
+            "itinerary": {
+              "@type": "ItemList",
+              "numberOfItems": activeDestination.highlights.length,
+              "itemListElement": activeDestination.highlights.map((hl, index) => ({
+                "@type": "ListItem",
+                "position": index + 1,
+                "name": hl
+              }))
+            },
+            "provider": {
+              "@type": "TravelAgency",
+              "name": "Heaven11 Holidays",
+              "url": "https://heaven11holidays.in"
+            }
+          },
+          {
+            "@type": "BreadcrumbList",
+            "@id": `https://heaven11holidays.in/international-tours?dest=${activeDestination.id}#breadcrumb`,
+            "itemListElement": [
+              {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Home",
+                "item": "https://heaven11holidays.in/"
+              },
+              {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "International Tours",
+                "item": "https://heaven11holidays.in/international-tours"
+              },
+              {
+                "@type": "ListItem",
+                "position": 3,
+                "name": activeDestination.name,
+                "item": `https://heaven11holidays.in/international-tours?dest=${activeDestination.id}`
+              }
+            ]
+          }
+        ]
+      }
+    : {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "WebPage",
+            "@id": "https://heaven11holidays.in/international-tours#webpage",
+            "url": "https://heaven11holidays.in/international-tours",
+            "name": "International Tour Packages | Explore the World | Heaven11 Holidays",
+            "description": "Discover custom international tour packages. Plan holiday packages to Dubai, Thailand, Singapore, Bali, Maldives, and Europe.",
+            "isPartOf": {
+              "@id": "https://heaven11holidays.in/#website"
+            }
+          },
+          {
+            "@type": "BreadcrumbList",
+            "@id": "https://heaven11holidays.in/international-tours#breadcrumb",
+            "itemListElement": [
+              {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Home",
+                "item": "https://heaven11holidays.in/"
+              },
+              {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "International Tours",
+                "item": "https://heaven11holidays.in/international-tours"
+              }
+            ]
+          }
+        ]
+      };
+
   return (
     <div className="relative min-h-screen bg-slate-50/50 pb-20">
+      <SEO
+        title={seoTitle}
+        description={seoDescription}
+        keywords={seoKeywords}
+        schemaData={seoSchema}
+      />
       <PageHero
         title="International Tour Packages"
         subtitle="Experience the World"
@@ -161,7 +264,7 @@ export const InternationalTours: React.FC = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {internationalDestinations.map((dest, index) => {
             return (
-              <motion.div
+              <m.div
                 key={dest.id}
                 initial={{ opacity: 0, y: 25 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -174,6 +277,7 @@ export const InternationalTours: React.FC = () => {
                   <img
                     src={dest.image}
                     alt={dest.name}
+                    loading="lazy"
                     className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                   />
                 </div>
@@ -192,7 +296,7 @@ export const InternationalTours: React.FC = () => {
                     </span>
                   </div>
                 </div>
-              </motion.div>
+              </m.div>
             );
           })}
         </div>
@@ -225,6 +329,7 @@ export const InternationalTours: React.FC = () => {
                     <img
                       src={displayPackages[0].image || activeDestination.image}
                       alt={displayPackages[0].title}
+                      loading="lazy"
                       className="h-full w-full object-cover"
                     />
                     <div className="absolute inset-0 bg-linear-to-t from-slate-950/60 to-transparent" />
@@ -400,6 +505,7 @@ export const InternationalTours: React.FC = () => {
                   <img
                     src={selectedPkg.image || activeDestination?.image || ''}
                     alt={selectedPkg.title}
+                    loading="lazy"
                     className="h-full w-full object-cover"
                   />
                   <div className="absolute inset-0 bg-linear-to-t from-slate-950/60 to-transparent" />
@@ -545,22 +651,40 @@ export const InternationalTours: React.FC = () => {
                   />
                 </div>
 
-                <TravelersSelector
-                  value={travellers}
-                  onChange={setTravellers}
-                />
+                <div className="text-left">
+                  <label className="block text-xs font-bold text-slate-750 uppercase tracking-wider mb-1">Total Travelers</label>
+                  <input
+                    type="number"
+                    name="total_travelers"
+                    min="1"
+                    required
+                    value={bookingFormData.total_travelers}
+                    onChange={(e) => setBookingFormData(prev => ({ ...prev, total_travelers: e.target.value }))}
+                    className="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm focus:outline-none bg-white"
+                  />
+                </div>
                 {bookingError && (
                   <div className="text-xs font-semibold text-rose-600 bg-rose-50 border border-rose-100 rounded-xl p-3 text-left">
                     {bookingError}
                   </div>
                 )}
-                <button
-                  type="submit"
-                  disabled={isBookingSubmitting}
-                  className="w-full py-3 rounded-xl bg-gradient-premium text-white font-semibold text-sm shadow-md cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
-                >
-                  {isBookingSubmitting ? 'Submitting Booking...' : 'Confirm Custom Quote Booking'}
-                </button>
+                <div className="pt-2 flex gap-3">
+                  <button
+                    type="submit"
+                    disabled={isBookingSubmitting}
+                    className="flex-1 py-3 rounded-xl bg-gradient-premium text-white font-semibold text-sm shadow-md cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
+                    {isBookingSubmitting ? 'Submitting Booking...' : 'Confirm Custom Quote Booking'}
+                  </button>
+                  <button
+                    type="button"
+                    onClick={triggerWhatsAppBooking}
+                    className="rounded-xl border border-emerald-500 bg-emerald-50 text-emerald-600 px-4 hover:bg-emerald-500 hover:text-white transition-all cursor-pointer flex items-center justify-center shrink-0"
+                    title="Book via WhatsApp"
+                  >
+                    <MessageSquare className="h-5 w-5 fill-current" />
+                  </button>
+                </div>
               </form>
             )}
           </div>

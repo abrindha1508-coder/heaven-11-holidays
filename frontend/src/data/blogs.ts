@@ -47,26 +47,6 @@ Don't spend a fortune on high-end restaurants. Thailand's street markets offer t
     `
   },
   {
-    id: 'maldives-guide',
-    title: 'Maldives Honeymoon Guide',
-    slug: 'maldives-honeymoon-guide',
-    summary: 'All you need to know about planning a luxury honeymoon in the Maldives—from choosing overwater villas to booking private beach dinners.',
-    category: 'Honeymoon Packages',
-    author: 'Sarah Jenkins (Honeymoon Curator)',
-    readTime: '7 min read',
-    date: 'May 15, 2024',
-    image: 'https://images.unsplash.com/photo-1514282401047-d79a71a590e8?auto=format&fit=crop&w=800&q=80',
-    tags: ['Maldives', 'Honeymoon', 'Romance', 'Overwater Villa'],
-    content: `
-# Planning Your Dream Maldives Honeymoon
-
-With its turquoise waters, sparkling white sands, and secluded private villas, the Maldives is the world's premier honeymoon destination. Here is our comprehensive guide to curating the perfect romantic trip.
-
-## 1. The Overwater Villa Experience
-Staying in an overwater villa is an absolute must-do. Many luxury resorts feature villas with slides going straight into the ocean, glass-bottom floors to view marine life, and private infinity plunge pools facing the sunset.
-    `
-  },
-  {
     id: 'bali-tips',
     title: 'Bali Travel Tips for First Time Travelers',
     slug: 'bali-travel-tips-first-timers',

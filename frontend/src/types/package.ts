@@ -19,7 +19,7 @@ export interface TourPackage {
   inclusions: string[];
   exclusions: string[];
   itinerary: ItineraryDay[];
-  type: 'domestic' | 'international' | 'honeymoon' | 'family' | 'group';
+  type: 'domestic' | 'international' | 'family' | 'group';
   popular: boolean;
   featured: boolean;
 }

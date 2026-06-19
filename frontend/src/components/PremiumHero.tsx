@@ -1,6 +1,6 @@
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { Plane } from 'lucide-react';
-import homepageHeroImg from '../assets/homepageheroimg.png';
+import homepageHeroImg from '../assets/homepageheroimg.webp';
 
 interface PremiumHeroProps {
   searchParams: {
@@ -20,6 +20,7 @@ export const PremiumHero: React.FC<PremiumHeroProps> = ({
 }) => {
   return (
     <div className="relative min-h-screen w-full flex flex-col justify-between overflow-hidden bg-slate-900 font-sans pt-24 pb-32 sm:pb-40">
+      <link rel="preload" href={homepageHeroImg} as="image" fetchPriority="high" />
 
       {/* ================= BACKGROUND: PREMIUM IMAGE WITH OVERLAYS & ANIMATION ================= */}
       <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
@@ -91,7 +92,7 @@ export const PremiumHero: React.FC<PremiumHeroProps> = ({
         
         <div className="max-w-2xl w-full flex flex-col items-start text-left space-y-6 sm:space-y-8 select-none">
           {/* Tagline Badge */}
-          <motion.div
+          <m.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
@@ -99,11 +100,11 @@ export const PremiumHero: React.FC<PremiumHeroProps> = ({
           >
             <Plane className="h-4.5 w-4.5 rotate-90 text-accent animate-pulse" />
             <span className="drop-shadow-md">Explore. Dream. Discover.</span>
-          </motion.div>
+          </m.div>
 
           {/* Main Heading */}
           <div className="space-y-4 text-left">
-            <motion.h1
+            <m.h1
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
@@ -111,22 +112,22 @@ export const PremiumHero: React.FC<PremiumHeroProps> = ({
             >
               Explore The World <br />
               With <span className="text-accent">Haven11 Holidays</span>
-            </motion.h1>
+            </m.h1>
 
             {/* Subheading */}
-            <motion.p
+            <m.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.3 }}
               className="text-sm sm:text-base text-white/95 font-semibold leading-relaxed max-w-xl drop-shadow-[0_2px_10px_rgba(0,0,0,0.85)] text-left"
             >
               Premium domestic and international tour packages crafted for unforgettable journeys.
-            </motion.p>
+            </m.p>
           </div>
 
           {/* CTA Buttons */}
           <div className="flex flex-wrap items-center justify-start gap-4 pt-2 w-full">
-            <motion.button
+            <m.button
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.4 }}
@@ -141,12 +142,13 @@ export const PremiumHero: React.FC<PremiumHeroProps> = ({
                 if (target) target.scrollIntoView({ behavior: 'smooth' });
               }}
               className="group px-7 py-3.5 rounded-xl bg-[#1e8dc5] hover:bg-[#0e4d92] text-white font-extrabold text-sm tracking-wide shadow-md shadow-[#1e8dc5]/15 transition-all duration-300 cursor-pointer flex items-center gap-2"
+              aria-label="Explore packages"
             >
               Explore Packages
               <span className="inline-block transition-transform duration-300 group-hover:translate-x-1.5">→</span>
-            </motion.button>
+            </m.button>
             
-            <motion.button
+            <m.button
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.5 }}
@@ -158,10 +160,11 @@ export const PremiumHero: React.FC<PremiumHeroProps> = ({
               whileTap={{ scale: 0.98 }}
               onClick={onOpenBooking}
               className="group px-7 py-3.5 rounded-xl border border-white/20 text-white font-extrabold text-sm tracking-wide bg-white/10 backdrop-blur-xs shadow-xs hover:border-accent hover:text-accent hover:bg-white/15 transition-all duration-300 cursor-pointer flex items-center gap-2"
+              aria-label="Get Free Quote"
             >
               Get Free Quote
               <span className="inline-block transition-transform duration-300 group-hover:translate-x-1.5">→</span>
-            </motion.button>
+            </m.button>
           </div>
         </div>
       </div>
